@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "news/index.html",
+    "href": "news/index.html",
+    "title": "News & Events",
+    "section": "",
+    "text": "This section is ready for confirmed QMCPy announcements and event information. No placeholder stories or dates have been added."
+  },
+  {
+    "objectID": "community/index.html",
+    "href": "community/index.html",
+    "title": "Community",
+    "section": "",
+    "text": "QMCPy is developed in the open. For the current contributor information, project governance, and acknowledgements, use these maintained resources:\n\nQMCPy community documentation\nContributing guidelines\nQMCSoftware repository\n\nAdditional public community content will be developed after collaborator review."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About this site",
+    "section": "",
+    "text": "This site is the public-facing home for QMCPy. It is intended to make project news, community information, and learning pathways easier to find.\nThe detailed package documentation is maintained separately in the QMCSoftware repository and published with MkDocs at the QMCPy documentation site. This website links to that documentation rather than duplicating it."
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "The QMCPy blog archive will be added in a later migration phase. Existing posts have not been copied or converted for this prototype.\nIn the meantime, visit the technical documentation for guides and examples."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "QMCPy",
+    "section": "",
+    "text": "An open-source Python library for quasi-Monte Carlo sampling and integration\n\nRead the documentation View QMCPy on GitHub"
+  },
+  {
+    "objectID": "index.html#quasi-monte-carlo-methods-in-python-qmcpy",
+    "href": "index.html#quasi-monte-carlo-methods-in-python-qmcpy",
+    "title": "QMCPy",
+    "section": "",
+    "text": "An open-source Python library for quasi-Monte Carlo sampling and integration\n\nRead the documentation View QMCPy on GitHub"
+  },
+  {
+    "objectID": "index.html#explore-qmcpy",
+    "href": "index.html#explore-qmcpy",
+    "title": "QMCPy",
+    "section": "Explore QMCPy",
+    "text": "Explore QMCPy\n\n\nLearn\nUse the existing technical documentation for installation, examples, demos, and the package reference.\nOpen the documentation →\n\n\nFollow\nThe blog and news and events sections will collect project updates as the site develops.\n\n\nParticipate\nVisit the community page for established ways to learn about and contribute to the project.\n\n\n\n\n\n\n\n\nThis public website is an early prototype. QMCPy’s maintained technical documentation continues to live at the documentation link above."
+  }
+]
