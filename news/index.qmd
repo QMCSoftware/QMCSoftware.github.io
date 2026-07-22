@@ -1,0 +1,7 @@
+---
+title: "News & Events"
+description: "News and events from the QMCPy project."
+---
+
+This section is ready for confirmed QMCPy announcements and event information.
+No placeholder stories or dates have been added.

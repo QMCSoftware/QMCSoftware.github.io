@@ -1,0 +1,128 @@
+/*-- scss:defaults --*/
+
+$primary: #0b6e69;
+$secondary: #415a77;
+$body-color: #24323d;
+$body-bg: #ffffff;
+$link-color: #086a73;
+$navbar-fg: #ffffff;
+$font-family-sans-serif: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+$headings-font-weight: 650;
+$border-radius: 0.4rem;
+
+/*-- scss:rules --*/
+
+.navbar-brand {
+  gap: 0.45rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.375rem;
+}
+
+.navbar-logo {
+  width: 2.2rem;
+  height: 2.2rem;
+  max-height: 2.2rem;
+  object-fit: contain;
+}
+
+main.content {
+  font-size: 1.375rem;
+}
+
+.hero {
+  margin: 0 0 2.5rem;
+  padding: clamp(2rem, 6vw, 4.5rem);
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.24), transparent 30%),
+    linear-gradient(135deg, #073b4c, #0b6e69 62%, #149c91);
+  color: #ffffff;
+}
+
+.hero .grid {
+  row-gap: 2rem;
+}
+
+.hero .grid > div {
+  padding: 0;
+}
+
+.hero h2 {
+  max-width: 16ch;
+  margin-top: 0;
+  font-size: clamp(2.2rem, 6vw, 4.25rem);
+  line-height: 1.05;
+  color: #ffffff;
+}
+
+.hero-copy > p {
+  max-width: 48rem;
+  font-size: 1.375rem;
+}
+
+.hero-mark {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo {
+  display: block;
+  width: clamp(12rem, 24vw, 18rem);
+  height: auto;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1rem 2.5rem rgba(2, 28, 38, 0.2);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.hero .btn {
+  border-color: #ffffff;
+}
+
+.hero .btn-primary {
+  background: #ffffff;
+  color: #075854;
+}
+
+.hero .btn-outline-primary {
+  color: #ffffff;
+}
+
+.grid > div {
+  padding: 1.25rem;
+}
+
+.grid h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 575.98px) {
+  .hero {
+    padding: 2rem 1.35rem;
+  }
+
+  .hero-mark {
+    justify-content: flex-start;
+  }
+
+  .hero-logo {
+    width: 10rem;
+    border-radius: 1rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+}

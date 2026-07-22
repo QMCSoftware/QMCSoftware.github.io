@@ -1,0 +1,11 @@
+---
+title: "Blog"
+description: "QMCPy articles and project updates."
+---
+
+The QMCPy blog archive will be added in a later migration phase. Existing posts
+have not been copied or converted for this prototype.
+
+In the meantime, visit the
+[technical documentation](https://qmcsoftware.github.io/QMCSoftware/) for
+guides and examples.

@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "blog/**/*.qmd"
+    - "news/**/*.qmd"
+    - "community/**/*.qmd"
+  resources:
+    - CNAME
+    - assets/**
+
+website:
+  title: "QMCPy"
+  site-url: https://qmcpy.org
+  description: "Public website for QMCPy, quasi-Monte Carlo community software in Python."
+  navbar:
+    background: "#073b4c"
+    logo: assets/logos/qmcpy_logo.png
+    logo-alt: "QMCPy logo"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: blog/index.qmd
+        text: Blog
+      - href: news/index.qmd
+        text: News & Events
+      - href: community/index.qmd
+        text: Community
+    right:
+      - href: https://qmcsoftware.github.io/QMCSoftware/
+        text: Documentation
+      - href: https://github.com/QMCSoftware/QMCSoftware
+        text: GitHub
+  page-footer:
+    left: "QMCPy — quasi-Monte Carlo community software in Python"
+    right:
+      - href: about.qmd
+        text: About this site
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles/custom.scss]
+    toc: true
+    link-external-newwindow: true
+    smooth-scroll: true
+
+execute:
+  freeze: auto
