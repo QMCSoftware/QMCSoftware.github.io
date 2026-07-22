@@ -1,0 +1,13 @@
+---
+title: "About this site"
+description: "How the QMCPy public website relates to the technical documentation."
+---
+
+This site is the public-facing home for QMCPy. It is intended to make project
+news, community information, and learning pathways easier to find.
+
+The detailed package documentation is maintained separately in the
+[QMCSoftware repository](https://github.com/QMCSoftware/QMCSoftware) and
+published with MkDocs at the
+[QMCPy documentation site](https://qmcsoftware.github.io/QMCSoftware/). This
+website links to that documentation rather than duplicating it.
