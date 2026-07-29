@@ -1,0 +1,28 @@
+name: Build Quarto PR preview
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render website
+        run: quarto render
+
+      - name: Upload rendered website
+        uses: actions/upload-artifact@v4
+        with:
+          name: qmcsoftware-site-pr-${{ github.event.pull_request.number }}
+          path: _site
+          if-no-files-found: error
+          retention-days: 14
