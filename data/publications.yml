@@ -1,0 +1,23 @@
+- key: hickirsor_2026_qmc_tutorial
+  cite: HKS26
+  short: "Hickernell, Kirk, Sorokin (2026)"
+  title: "Quasi-Monte Carlo Methods: What, Why, and How?"
+  authors:
+    - Fred J. Hickernell
+    - Nathan Kirk
+    - Aleksei G. Sorokin
+  year: 2026
+  type: inproceedings
+  venue: "Monte Carlo and Quasi-Monte Carlo 2024"
+  series: "Springer Proceedings in Mathematics & Statistics"
+  volume: 522
+  pages: "3–40"
+  doi: "10.1007/978-3-032-10590-5_1"
+  doi_url: "https://doi.org/10.1007/978-3-032-10590-5_1"
+  arxiv: "arXiv:2502.03644"
+  arxiv_url: "https://arxiv.org/abs/2502.03644"
+  publisher_url: "https://link.springer.com/chapter/10.1007/978-3-032-10590-5_1"
+  tags: [qmc, tutorial]
+  related_projects: [QMCPy, QuasiMC.jl]
+  featured: true
+  description: "A tutorial on what quasi-Monte Carlo is, why it can improve upon ordinary Monte Carlo, and how problems can be formulated to benefit from QMC."

@@ -1,13 +1,16 @@
 ---
 title: "About this site"
-description: "How the QMCPy public website relates to the technical documentation."
+description: "How the QMCSoftware public website relates to its software projects."
 ---
 
-This site is the public-facing home for QMCPy. It is intended to make project
-news, community information, and learning pathways easier to find.
+This site is the public-facing home for the QMCSoftware organization. It
+provides a shared entry point for the organization's open-source quasi-Monte
+Carlo software, publications, news, events, and community information.
 
-The detailed package documentation is maintained separately in the
-[QMCSoftware repository](https://github.com/QMCSoftware/QMCSoftware) and
-published with MkDocs at the
-[QMCPy documentation site](https://qmcsoftware.github.io/QMCSoftware/). This
-website links to that documentation rather than duplicating it.
+Detailed technical documentation remains with each
+[software project](software/index.qmd). This website links to those maintained
+sources rather than duplicating them.
+
+The umbrella prototype is temporarily served at `qmcpy.org` so that the
+existing deployment continues to work while the organization decides its
+long-term domain and redirect strategy.

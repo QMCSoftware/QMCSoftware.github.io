@@ -1,0 +1,25 @@
+---
+title: "Fred Hickernell Named a 2026 SIAM Fellow"
+date: 2026-04-27
+description: "Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership."
+categories:
+  - Recognition
+  - Community
+---
+
+Illinois Tech Professor Fred Hickernell was named to the 2026 class of Fellows
+of the Society for Industrial and Applied Mathematics (SIAM). The distinction
+recognizes his mathematical and statistical innovations in high-dimensional
+integration and approximation, as well as his scientific leadership.
+
+The Illinois Tech article also highlights the open-source software developed by
+Hickernell's research group and collaborators, including
+[QMCPy](../../software/qmcpy.qmd), which makes quasi-Monte Carlo methods
+available in Python.
+
+::: {.callout-note appearance="simple"}
+**Source:** Illinois Institute of Technology, April 27, 2026.
+
+[Read the original Illinois Tech
+article](https://www.iit.edu/news/applied-mathematics-professor-honored-siam-fellow){.btn .btn-primary}
+:::

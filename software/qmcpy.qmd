@@ -1,0 +1,33 @@
+---
+title: "QMCPy"
+description: "Quasi-Monte Carlo community software in Python."
+---
+
+::: {.project-summary}
+QMCPy is a Python framework for quasi-Monte Carlo sampling and integration. Its
+plug-and-play components cover discrete distributions, measure transforms,
+integrands, and stopping criteria.
+:::
+
+:::{.project-links}
+[Documentation](https://qmcsoftware.github.io/QMCSoftware/){.btn .btn-primary}
+[GitHub repository](https://github.com/QMCSoftware/QMCSoftware){.btn .btn-outline-primary}
+:::
+
+## What the project provides
+
+QMCPy is designed around the interacting components of a quasi-Monte Carlo
+integration problem. The shared interfaces allow developers to add sampling
+schemes, integrands, and stopping criteria, while practitioners can combine
+implemented components for applications.
+
+The maintained documentation includes installation instructions, a package
+reference with doctests, mathematical descriptions, and rendered example
+notebooks.
+
+## Start with the maintained resources
+
+- [QMCPy documentation](https://qmcsoftware.github.io/QMCSoftware/)
+- [Installation and quick-start resources](https://qmcsoftware.github.io/QMCSoftware/)
+- [Contributing guidelines](https://qmcsoftware.github.io/QMCSoftware/CONTRIBUTING/)
+- [Citation information](https://github.com/QMCSoftware/QMCSoftware/blob/main/cite_qmcpy.bib)

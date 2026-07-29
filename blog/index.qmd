@@ -1,11 +1,23 @@
 ---
 title: "Blog"
-description: "QMCPy articles and project updates."
+description: "Articles and project updates from QMCSoftware."
+listing:
+  contents:
+    - "*/index.qmd"
+  type: default
+  sort: "date desc"
+  fields:
+    - image
+    - date
+    - title
+    - author
+    - description
+    - categories
 ---
 
-The QMCPy blog archive will be added in a later migration phase. Existing posts
-have not been copied or converted for this prototype.
+The QMCSoftware blog shares accessible introductions, project updates, and
+technical perspectives from across the community.
 
-In the meantime, visit the
-[technical documentation](https://qmcsoftware.github.io/QMCSoftware/) for
-guides and examples.
+This first migrated article establishes the pattern for bringing the earlier
+QMCPy blog archive into the umbrella site. Additional posts will be reviewed
+and migrated incrementally.

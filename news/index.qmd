@@ -1,7 +1,17 @@
 ---
 title: "News & Events"
-description: "News and events from the QMCPy project."
+description: "News and events from the QMCSoftware projects."
+listing:
+  contents:
+    - "*/index.qmd"
+  type: default
+  sort: "date desc"
+  fields:
+    - date
+    - title
+    - description
+    - categories
 ---
 
-This section is ready for confirmed QMCPy announcements and event information.
-No placeholder stories or dates have been added.
+Confirmed announcements, releases, talks, workshops, and events from the
+QMCSoftware community.

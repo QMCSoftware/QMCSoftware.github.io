@@ -1,0 +1,24 @@
+---
+title: "QMCToolsCL"
+description: "Quasi-Monte Carlo sequence generators in OpenCL and C."
+---
+
+::: {.project-summary}
+QMCToolsCL provides quasi-Monte Carlo sequence generators implemented in
+OpenCL and C.
+:::
+
+:::{.project-links}
+[Documentation](https://qmcsoftware.github.io/QMCToolsCL/){.btn .btn-primary}
+[GitHub repository](https://github.com/QMCSoftware/QMCToolsCL){.btn .btn-outline-primary}
+:::
+
+## Maintained resources
+
+The project's technical documentation and source repository are the
+authoritative places for supported generators, interfaces, installation, and
+development information.
+
+- [QMCToolsCL documentation](https://qmcsoftware.github.io/QMCToolsCL/)
+- [Source code](https://github.com/QMCSoftware/QMCToolsCL)
+- [Contributing guidelines](https://github.com/QMCSoftware/QMCToolsCL/blob/main/CONTRIBUTING.md)

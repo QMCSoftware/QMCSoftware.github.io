@@ -6,34 +6,37 @@ project:
     - "blog/**/*.qmd"
     - "news/**/*.qmd"
     - "community/**/*.qmd"
+    - "software/**/*.qmd"
+    - "publications/**/*.qmd"
   resources:
     - CNAME
     - assets/**
+    - data/**
 
 website:
-  title: "QMCPy"
+  title: "QMCSoftware"
   site-url: https://qmcpy.org
-  description: "Public website for QMCPy, quasi-Monte Carlo community software in Python."
+  description: "Open-source software and shared resources for quasi-Monte Carlo methods."
   navbar:
     background: "#073b4c"
-    logo: assets/logos/qmcpy_logo.png
-    logo-alt: "QMCPy logo"
     left:
       - href: index.qmd
         text: Home
+      - href: software/index.qmd
+        text: Software
       - href: blog/index.qmd
         text: Blog
+      - href: publications/index.qmd
+        text: Publications
       - href: news/index.qmd
         text: News & Events
       - href: community/index.qmd
         text: Community
     right:
-      - href: https://qmcsoftware.github.io/QMCSoftware/
-        text: Documentation
-      - href: https://github.com/QMCSoftware/QMCSoftware
+      - href: https://github.com/QMCSoftware
         text: GitHub
   page-footer:
-    left: "QMCPy — quasi-Monte Carlo community software in Python"
+    left: "QMCSoftware — open-source quasi-Monte Carlo software"
     right:
       - href: about.qmd
         text: About this site

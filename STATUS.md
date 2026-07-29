@@ -1,19 +1,33 @@
-# QMCPy Website Status
+# QMCSoftware Website Status
 
 ## Complete
 
 - [x] Confirmed Quarto-on-`main`, `_site/`, `gh-pages`, and `qmcpy.org`
   architecture.
 - [x] Replaced the standalone HTML landing page with one Quarto source site.
-- [x] Added Home, About, Blog, News & Events, and Community source pages.
-- [x] Added the requested navigation and authoritative external links.
+- [x] Converted the QMCPy-only prototype into an umbrella QMCSoftware site.
+- [x] Added Software pages for QMCPy, QMCToolsCL, QuasiMC.jl, and LDData.
+- [x] Added a Publications prototype and organization-wide navigation.
+- [x] Migrated and revised “Why Add Q to MC?” as a living article, preserving
+  its mathematical explanation, figures, captions, and authorship while adding
+  qualified convergence and practical-use guidance.
+- [x] Added a sourced 2026 SIAM Fellow news item.
+- [x] Added a hand-written featured publication and a one-record YAML catalog
+  convention for ordinary publications.
+- [x] Documented the separation between the broad AcademicLib registry,
+  website-curated publication records, and blog-local citations; catalog
+  display order no longer depends on YAML record order.
+- [x] Added working Blog, News & Events, and Publications listings.
+- [x] Preserved Home, About, Blog, News & Events, and Community pages.
+- [x] Added authoritative project documentation and repository links.
 - [x] Added a restrained responsive visual foundation.
-- [x] Integrated the existing QMCPy logo in the navbar and homepage hero with
-  responsive sizing and accessible alternative text.
+- [x] Retained the QMCPy logo asset for possible project-specific use while
+  removing it from organization-level branding.
 - [x] Added GitHub Actions rendering and `gh-pages` publication with explicit
   `CNAME` preservation.
 - [x] Added repository guidance, roadmap, ignore rules, and local instructions.
-- [x] Rendered locally and inspected the generated site structure and links.
+- [x] Rendered the complete 13-page site and verified local link targets and
+  rendered `CNAME` preservation.
 
 ## Underway
 
@@ -24,16 +38,21 @@
 
 ## Next recommended task
 
-- [ ] Review the rendered prototype with QMCPy collaborators and approve the
-  visual direction and public copy before adding content or migrating posts.
+- [ ] Review the rendered umbrella prototype with QMCSoftware collaborators and
+  approve the visual direction and public copy before adding content or
+  migrating posts.
 
 ## Decisions and scope boundaries
 
-- Technical documentation stays in `QMCSoftware` and continues to use MkDocs.
-- The primary GitHub link targets `QMCSoftware/QMCSoftware`; community links
-  may also point to maintained pages within that project.
-- The existing 18 blog posts are not imported in this prototype.
-- No Reveal.js project, repository rename, speculative infrastructure, or
-  Python dependency file is included.
+- Technical documentation stays with each software project.
+- The primary GitHub link targets the QMCSoftware organization; project pages
+  link to their respective repositories and documentation.
+- The site continues to use `qmcpy.org` temporarily; DNS, Pages settings, and
+  redirects have not been changed.
+- One earlier blog post is migrated as a pattern; the remainder of the archive
+  is outside the current prototype.
+- No Reveal.js project, speculative infrastructure, or Python dependency file
+  is included.
 - Generated `_site/` output remains outside the `main` branch.
-- No commit or push is part of the current work.
+- The completed prototype is maintained on a review branch until it is approved
+  for merge into `main`.

@@ -1,0 +1,27 @@
+---
+title: "LDData"
+description: "Low-discrepancy generating vectors, matrices, and file formats."
+---
+
+::: {.project-summary}
+LDData collects low-discrepancy generating vectors and matrices and proposes
+standard text formats for describing lattice rules, polynomial lattice rules,
+digital nets, and Sobol' points.
+:::
+
+:::{.project-links}
+[GitHub repository](https://github.com/QMCSoftware/LDData){.btn .btn-primary}
+:::
+
+## What the project provides
+
+The project aims to make construction data straightforward to share and read
+across programming languages. Its README describes simple, relatively compact
+text formats with human-readable headers and no more than one data line per
+dimension.
+
+The repository is the maintained source for the proposed formats, examples,
+and data files.
+
+- [Format descriptions and data](https://github.com/QMCSoftware/LDData)
+- [Repository contents](https://github.com/QMCSoftware/LDData)

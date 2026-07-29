@@ -5,52 +5,96 @@ toc: false
 ---
 
 ::: {.hero}
-:::: {.grid .align-items-center}
-::: {.g-col-12 .g-col-lg-8 .hero-copy}
-## Quasi-Monte Carlo methods in Python (QMCPy)
+::: {.hero-copy}
+## Open software for quasi-Monte Carlo
 
-An open-source Python library for quasi-Monte Carlo sampling and integration
+QMCSoftware brings together open-source projects for quasi-Monte Carlo methods:
+libraries for Python and Julia, sequence generators in OpenCL and C, and shared
+low-discrepancy construction data.
 
 :::{.hero-actions}
-[Read the documentation](https://qmcsoftware.github.io/QMCSoftware/){.btn .btn-primary}
-[View QMCPy on GitHub](https://github.com/QMCSoftware/QMCSoftware){.btn .btn-outline-primary}
+[Explore the software](software/index.qmd){.btn .btn-primary}
+[Visit QMCSoftware on GitHub](https://github.com/QMCSoftware){.btn .btn-outline-primary}
+:::
 :::
 :::
 
-::: {.g-col-12 .g-col-lg-4 .hero-mark}
-<img src="assets/logos/qmcpy_logo.png" alt="QMCPy logo formed by teal quasi-Monte Carlo sample points" class="hero-logo">
+## The QMCSoftware family
+
+:::: {.software-grid}
+::: {.software-card}
+### QMCPy
+
+Quasi-Monte Carlo community software in Python, with modular point generators,
+measure transforms, integrands, and adaptive stopping criteria.
+
+[Explore QMCPy →](software/qmcpy.qmd)
+:::
+
+::: {.software-card}
+### QMCToolsCL
+
+Quasi-Monte Carlo sequence generators implemented in OpenCL and C.
+
+[Explore QMCToolsCL →](software/qmctoolscl.qmd)
+:::
+
+::: {.software-card}
+### QuasiMC.jl
+
+A Julia port of QMCPy for quasi-Monte Carlo point generation, measure
+transforms, and adaptive high-dimensional integration.
+
+[Explore QuasiMC.jl →](software/quasimc-jl.qmd)
+:::
+
+::: {.software-card}
+### LDData
+
+Low-discrepancy generating vectors and matrices, together with proposed simple
+text formats for sharing them.
+
+[Explore LDData →](software/lddata.qmd)
 :::
 ::::
+
+## Explore the community
+
+:::: {.pathway-grid}
+::: {.pathway-card}
+### Blog
+
+Articles and updates from across the QMCSoftware projects.
+
+[Read the blog →](blog/index.qmd)
 :::
 
-## Explore QMCPy
+::: {.pathway-card}
+### Publications
 
-:::: {.grid}
-::: {.g-col-12 .g-col-md-4}
-### Learn
+A developing guide to publications and software citation resources.
 
-Use the existing technical documentation for installation, examples, demos,
-and the package reference.
-
-[Open the documentation →](https://qmcsoftware.github.io/QMCSoftware/)
+[Browse publications →](publications/index.qmd)
 :::
 
-::: {.g-col-12 .g-col-md-4}
-### Follow
+::: {.pathway-card}
+### News & Events
 
-The [blog](blog/index.qmd) and [news and events](news/index.qmd) sections will
-collect project updates as the site develops.
+Confirmed announcements, releases, talks, workshops, and events.
+
+[See news and events →](news/index.qmd)
 :::
 
-::: {.g-col-12 .g-col-md-4}
-### Participate
+::: {.pathway-card}
+### Community
 
-Visit the [community page](community/index.qmd) for established ways to learn
-about and contribute to the project.
+Find maintained contribution resources and ways to connect with the projects.
+
+[Visit the community page →](community/index.qmd)
 :::
 ::::
 
 ::: {.callout-note appearance="simple"}
-This public website is an early prototype. QMCPy's maintained technical
-documentation continues to live at the documentation link above.
+This umbrella website is an early prototype. Technical documentation remains
+with each software project and is linked from its page.
 :::

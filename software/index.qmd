@@ -1,0 +1,48 @@
+---
+title: "Software"
+description: "Open-source quasi-Monte Carlo software and data from QMCSoftware."
+---
+
+QMCSoftware brings together projects that support quasi-Monte Carlo work
+across programming languages, sequence generation, numerical integration, and
+shared low-discrepancy construction data.
+
+:::: {.software-grid}
+::: {.software-card}
+### QMCPy
+
+Quasi-Monte Carlo community software in Python, with modular point generators,
+measure transforms, integrands, and adaptive stopping criteria.
+
+[Explore QMCPy →](qmcpy.qmd)
+:::
+
+::: {.software-card}
+### QMCToolsCL
+
+Quasi-Monte Carlo sequence generators implemented in OpenCL and C.
+
+[Explore QMCToolsCL →](qmctoolscl.qmd)
+:::
+
+::: {.software-card}
+### QuasiMC.jl
+
+A Julia port of QMCPy for quasi-Monte Carlo point generation, measure
+transforms, and adaptive high-dimensional integration.
+
+[Explore QuasiMC.jl →](quasimc-jl.qmd)
+:::
+
+::: {.software-card}
+### LDData
+
+Low-discrepancy generating vectors and matrices, together with proposed simple
+text formats for sharing them.
+
+[Explore LDData →](lddata.qmd)
+:::
+::::
+
+Technical details, installation instructions, and contribution guidance remain
+with each project and are linked from its page.
