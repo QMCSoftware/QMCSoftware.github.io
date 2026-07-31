@@ -1,0 +1,32 @@
+---
+title: "QuasiMC.jl"
+description: "Quasi-Monte Carlo community software in Julia."
+---
+
+::: {.project-summary}
+QuasiMC.jl is a Julia port of QMCPy. It provides quasi-Monte Carlo point
+generators, measure transforms, integrands, and adaptive stopping criteria for
+high-dimensional numerical integration.
+:::
+
+:::{.project-links}
+[Documentation](https://qmcsoftware.github.io/QuasiMC.jl/){.btn .btn-primary}
+[GitHub repository](https://github.com/QMCSoftware/QuasiMC.jl){.btn .btn-outline-primary}
+:::
+
+## What the project provides
+
+QuasiMC.jl follows the same component model as QMCPy: a discrete distribution,
+a true measure, an integrand, and a stopping criterion. The repository
+describes these as plug-and-play implementations whose components compose
+naturally within the Julia library.
+
+The maintained documentation includes API references, doctests, and rendered
+demo notebooks.
+
+## Start with the maintained resources
+
+- [QuasiMC.jl documentation](https://qmcsoftware.github.io/QuasiMC.jl/)
+- [Source and installation instructions](https://github.com/QMCSoftware/QuasiMC.jl)
+- [Contributing guidelines](https://github.com/QMCSoftware/QuasiMC.jl/blob/develop/CONTRIBUTING.md)
+- [Citation information](https://github.com/QMCSoftware/QuasiMC.jl/blob/develop/cite_quasimcjl.bib)

@@ -2,17 +2,17 @@
 
 ## Repository purpose
 
-This repository contains the public-facing QMCPy website. It is a Quarto
-website intended for project introductions, community information, news and
-events, and blog content.
+This repository contains the public-facing QMCSoftware organization website.
+It is a Quarto website intended for software introductions, publications,
+community information, news and events, and blog content.
 
-QMCPy's technical documentation remains in the `QMCSoftware` repository and
-continues to be built with MkDocs. Link to that documentation; do not migrate,
-duplicate, or replace it from this repository.
+Each project's technical documentation remains with its software repository.
+Link to that documentation; do not migrate, duplicate, or replace it from this
+repository.
 
 ## Repository boundaries
 
-- Write only within `qmcpy-website` unless the user explicitly changes the
+- Write only within `qmcsoftware-website` unless the user explicitly changes the
   scope.
 - `QMCSoftware` may be inspected for authoritative project information,
   existing documentation, and later blog-migration planning, but must not be

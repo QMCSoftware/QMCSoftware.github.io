@@ -1,0 +1,67 @@
+---
+title: "Publications"
+description: "Publication and citation resources for QMCSoftware projects."
+listing:
+  id: publication-catalog
+  contents:
+    - "../data/publications.yml"
+  template: catalog.ejs.md
+  sort:
+    - "year desc"
+    - "title asc"
+  exclude:
+    featured: true
+  sort-ui: false
+  filter-ui: false
+---
+
+This section collects reviewed publications connected with QMCSoftware and
+quasi-Monte Carlo methods. It will grow incrementally rather than attempting
+to infer a complete bibliography.
+
+Each item has a short, original description and links to authoritative
+publication records or accessible preprints. Structured citation metadata is
+kept locally in [`data/publications.yml`](../data/publications.yml), which
+drives the general catalog below.
+
+## Featured introduction
+
+::: {.featured-publication}
+### Quasi-Monte Carlo Methods: What, Why, and How?
+
+**Fred J. Hickernell, Nathan Kirk, and Aleksei G. Sorokin**
+
+*Monte Carlo and Quasi-Monte Carlo 2024*, Springer Proceedings in Mathematics
+& Statistics, volume 522, pages 3–40, 2026.
+
+:::{.project-links}
+[DOI](https://doi.org/10.1007/978-3-032-10590-5_1){.btn .btn-primary}
+[Springer](https://link.springer.com/chapter/10.1007/978-3-032-10590-5_1){.btn .btn-outline-primary}
+[arXiv](https://arxiv.org/abs/2502.03644){.btn .btn-outline-primary}
+:::
+
+This paper is a tutorial on what quasi-Monte Carlo is, why it can improve upon
+ordinary Monte Carlo, and how problems can be formulated to benefit from QMC.
+:::
+
+## Publication catalog
+
+Additional publications will appear here as verified records are added to the
+YAML catalog.
+
+::: {#publication-catalog}
+:::
+
+## Scope
+
+The collection may include publications that describe QMCSoftware projects,
+develop methods implemented in them, or demonstrate relevant applications.
+All metadata should be checked against the publisher or another authoritative
+record before publication.
+
+## Software citation resources
+
+- [QMCPy citation file](https://github.com/QMCSoftware/QMCSoftware/blob/main/cite_qmcpy.bib)
+- [QuasiMC.jl citation file](https://github.com/QMCSoftware/QuasiMC.jl/blob/develop/cite_quasimcjl.bib)
+- [QMCToolsCL repository](https://github.com/QMCSoftware/QMCToolsCL)
+- [LDData repository](https://github.com/QMCSoftware/LDData)

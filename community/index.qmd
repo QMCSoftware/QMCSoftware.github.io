@@ -1,14 +1,16 @@
 ---
 title: "Community"
-description: "Ways to learn about and contribute to QMCPy."
+description: "Ways to learn about and contribute to QMCSoftware projects."
 ---
 
-QMCPy is developed in the open. For the current contributor information,
-project governance, and acknowledgements, use these maintained resources:
+QMCSoftware projects are developed in the open. Each project maintains its own
+technical and contributor information:
 
+- [QMCSoftware organization on GitHub](https://github.com/QMCSoftware)
 - [QMCPy community documentation](https://qmcsoftware.github.io/QMCSoftware/community/)
-- [Contributing guidelines](https://qmcsoftware.github.io/QMCSoftware/CONTRIBUTING/)
-- [QMCSoftware repository](https://github.com/QMCSoftware/QMCSoftware)
+- [QMCPy contributing guidelines](https://qmcsoftware.github.io/QMCSoftware/CONTRIBUTING/)
+- [QMCToolsCL contributing guidelines](https://github.com/QMCSoftware/QMCToolsCL/blob/main/CONTRIBUTING.md)
+- [QuasiMC.jl contributing guidelines](https://github.com/QMCSoftware/QuasiMC.jl/blob/develop/CONTRIBUTING.md)
 
 Additional public community content will be developed after collaborator
 review.

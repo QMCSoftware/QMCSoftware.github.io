@@ -1,12 +1,16 @@
-# QMCPy website
+# QMCSoftware website
 
 This repository contains the public-facing website for
-[QMCPy](https://qmcpy.org), built with [Quarto](https://quarto.org/).
+[QMCSoftware](https://github.com/QMCSoftware), built with
+[Quarto](https://quarto.org/). It is an umbrella site for the organization's
+software, publications, blog, news and events, and community information.
 
-Technical package documentation remains in the
-[QMCSoftware repository](https://github.com/QMCSoftware/QMCSoftware) and is
-published separately with MkDocs at
-[qmcsoftware.github.io/QMCSoftware](https://qmcsoftware.github.io/QMCSoftware/).
+Technical documentation remains with each software repository. The website
+links to maintained project documentation instead of duplicating it.
+
+The existing `https://qmcpy.org` site URL and `CNAME` remain in place
+temporarily while the organization decides its long-term domain and redirect
+strategy.
 
 ## Local preview
 
