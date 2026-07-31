@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="How the QMCPy public website relates to the technical documentation.">
+<meta name="description" content="How the QMCSoftware public website relates to its software projects.">
 
-<title>About this site – QMCPy</title>
+<title>About this site – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -40,10 +43,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b889f57f7a462e4961902844b7b61d8f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3da7144b09487dffbff0c2a60eb41ffc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,12 +86,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/logos/qmcpy_logo.png" alt="QMCPy logo" class="navbar-logo light-content">
-    <img src="./assets/logos/qmcpy_logo.png" alt="QMCPy logo" class="navbar-logo dark-content">
-    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">QMCPy</span>
+    <span class="navbar-title">QMCSoftware</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -102,8 +101,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./software/index.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./blog/index.html"> 
 <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./publications/index.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./news/index.html"> 
@@ -116,11 +123,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://qmcsoftware.github.io/QMCSoftware/"> 
-<span class="menu-text">Documentation</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/QMCSoftware/QMCSoftware"> 
+    <a class="nav-link" href="https://github.com/QMCSoftware"> 
 <span class="menu-text">GitHub</span></a>
   </li>  
 </ul>
@@ -147,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    How the QMCPy public website relates to the technical documentation.
+    How the QMCSoftware public website relates to its software projects.
   </div>
 </div>
 
@@ -164,8 +167,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This site is the public-facing home for QMCPy. It is intended to make project news, community information, and learning pathways easier to find.</p>
-<p>The detailed package documentation is maintained separately in the <a href="https://github.com/QMCSoftware/QMCSoftware">QMCSoftware repository</a> and published with MkDocs at the <a href="https://qmcsoftware.github.io/QMCSoftware/">QMCPy documentation site</a>. This website links to that documentation rather than duplicating it.</p>
+<p>This site is the public-facing home for the QMCSoftware organization. It provides a shared entry point for the organization’s open-source quasi-Monte Carlo software, publications, news, events, and community information.</p>
+<p>Detailed technical documentation remains with each <a href="./software/index.html">software project</a>. This website links to those maintained sources rather than duplicating them.</p>
+<p>The umbrella prototype is temporarily served at <code>qmcpy.org</code> so that the existing deployment continues to work while the organization decides its long-term domain and redirect strategy.</p>
 
 
 
@@ -579,7 +583,7 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>QMCPy — quasi-Monte Carlo community software in Python</p>
+<p>QMCSoftware — open-source quasi-Monte Carlo software</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

@@ -1,51 +1,205 @@
 [
   {
+    "objectID": "software/quasimc-jl.html",
+    "href": "software/quasimc-jl.html",
+    "title": "QuasiMC.jl",
+    "section": "",
+    "text": "QuasiMC.jl is a Julia port of QMCPy. It provides quasi-Monte Carlo point generators, measure transforms, integrands, and adaptive stopping criteria for high-dimensional numerical integration."
+  },
+  {
+    "objectID": "software/quasimc-jl.html#what-the-project-provides",
+    "href": "software/quasimc-jl.html#what-the-project-provides",
+    "title": "QuasiMC.jl",
+    "section": "What the project provides",
+    "text": "What the project provides\nQuasiMC.jl follows the same component model as QMCPy: a discrete distribution, a true measure, an integrand, and a stopping criterion. The repository describes these as plug-and-play implementations whose components compose naturally within the Julia library.\nThe maintained documentation includes API references, doctests, and rendered demo notebooks."
+  },
+  {
+    "objectID": "software/quasimc-jl.html#start-with-the-maintained-resources",
+    "href": "software/quasimc-jl.html#start-with-the-maintained-resources",
+    "title": "QuasiMC.jl",
+    "section": "Start with the maintained resources",
+    "text": "Start with the maintained resources\n\nQuasiMC.jl documentation\nSource and installation instructions\nContributing guidelines\nCitation information"
+  },
+  {
+    "objectID": "software/qmcpy.html",
+    "href": "software/qmcpy.html",
+    "title": "QMCPy",
+    "section": "",
+    "text": "QMCPy is a Python framework for quasi-Monte Carlo sampling and integration. Its plug-and-play components cover discrete distributions, measure transforms, integrands, and stopping criteria."
+  },
+  {
+    "objectID": "software/qmcpy.html#what-the-project-provides",
+    "href": "software/qmcpy.html#what-the-project-provides",
+    "title": "QMCPy",
+    "section": "What the project provides",
+    "text": "What the project provides\nQMCPy is designed around the interacting components of a quasi-Monte Carlo integration problem. The shared interfaces allow developers to add sampling schemes, integrands, and stopping criteria, while practitioners can combine implemented components for applications.\nThe maintained documentation includes installation instructions, a package reference with doctests, mathematical descriptions, and rendered example notebooks."
+  },
+  {
+    "objectID": "software/qmcpy.html#start-with-the-maintained-resources",
+    "href": "software/qmcpy.html#start-with-the-maintained-resources",
+    "title": "QMCPy",
+    "section": "Start with the maintained resources",
+    "text": "Start with the maintained resources\n\nQMCPy documentation\nInstallation and quick-start resources\nContributing guidelines\nCitation information"
+  },
+  {
+    "objectID": "software/index.html",
+    "href": "software/index.html",
+    "title": "Software",
+    "section": "",
+    "text": "QMCSoftware brings together projects that support quasi-Monte Carlo work across programming languages, sequence generation, numerical integration, and shared low-discrepancy construction data.\n\n\nQMCPy\nQuasi-Monte Carlo community software in Python, with modular point generators, measure transforms, integrands, and adaptive stopping criteria.\nExplore QMCPy →\n\n\nQMCToolsCL\nQuasi-Monte Carlo sequence generators implemented in OpenCL and C.\nExplore QMCToolsCL →\n\n\nQuasiMC.jl\nA Julia port of QMCPy for quasi-Monte Carlo point generation, measure transforms, and adaptive high-dimensional integration.\nExplore QuasiMC.jl →\n\n\nLDData\nLow-discrepancy generating vectors and matrices, together with proposed simple text formats for sharing them.\nExplore LDData →\n\n\nTechnical details, installation instructions, and contribution guidance remain with each project and are linked from its page."
+  },
+  {
     "objectID": "news/index.html",
     "href": "news/index.html",
     "title": "News & Events",
     "section": "",
-    "text": "This section is ready for confirmed QMCPy announcements and event information. No placeholder stories or dates have been added."
+    "text": "Confirmed announcements, releases, talks, workshops, and events from the QMCSoftware community.\n\n\n\n\n\n\n\n\n\nFred Hickernell Named a 2026 SIAM Fellow\n\n\n\nRecognition\n\nCommunity\n\n\n\nIllinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.\n\n\n\n\n\nApr 27, 2026\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "community/index.html",
-    "href": "community/index.html",
-    "title": "Community",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "QMCSoftware",
     "section": "",
-    "text": "QMCPy is developed in the open. For the current contributor information, project governance, and acknowledgements, use these maintained resources:\n\nQMCPy community documentation\nContributing guidelines\nQMCSoftware repository\n\nAdditional public community content will be developed after collaborator review."
+    "text": "QMCSoftware brings together open-source projects for quasi-Monte Carlo methods: libraries for Python and Julia, sequence generators in OpenCL and C, and shared low-discrepancy construction data.\n\nExplore the software Visit QMCSoftware on GitHub"
+  },
+  {
+    "objectID": "index.html#open-software-for-quasi-monte-carlo",
+    "href": "index.html#open-software-for-quasi-monte-carlo",
+    "title": "QMCSoftware",
+    "section": "",
+    "text": "QMCSoftware brings together open-source projects for quasi-Monte Carlo methods: libraries for Python and Julia, sequence generators in OpenCL and C, and shared low-discrepancy construction data.\n\nExplore the software Visit QMCSoftware on GitHub"
+  },
+  {
+    "objectID": "index.html#the-qmcsoftware-family",
+    "href": "index.html#the-qmcsoftware-family",
+    "title": "QMCSoftware",
+    "section": "The QMCSoftware family",
+    "text": "The QMCSoftware family\n\n\nQMCPy\nQuasi-Monte Carlo community software in Python, with modular point generators, measure transforms, integrands, and adaptive stopping criteria.\nExplore QMCPy →\n\n\nQMCToolsCL\nQuasi-Monte Carlo sequence generators implemented in OpenCL and C.\nExplore QMCToolsCL →\n\n\nQuasiMC.jl\nA Julia port of QMCPy for quasi-Monte Carlo point generation, measure transforms, and adaptive high-dimensional integration.\nExplore QuasiMC.jl →\n\n\nLDData\nLow-discrepancy generating vectors and matrices, together with proposed simple text formats for sharing them.\nExplore LDData →"
+  },
+  {
+    "objectID": "index.html#explore-the-community",
+    "href": "index.html#explore-the-community",
+    "title": "QMCSoftware",
+    "section": "Explore the community",
+    "text": "Explore the community\n\n\nBlog\nArticles and updates from across the QMCSoftware projects.\nRead the blog →\n\n\nPublications\nA developing guide to publications and software citation resources.\nBrowse publications →\n\n\nNews & Events\nConfirmed announcements, releases, talks, workshops, and events.\nSee news and events →\n\n\nCommunity\nFind maintained contribution resources and ways to connect with the projects.\nVisit the community page →\n\n\n\n\n\n\n\n\nThis umbrella website is an early prototype. Technical documentation remains with each software project and is linked from its page."
+  },
+  {
+    "objectID": "blog/why-add-q-to-mc/index.html",
+    "href": "blog/why-add-q-to-mc/index.html",
+    "title": "Why Add Q to MC?",
+    "section": "",
+    "text": "This post motivates quasi-Monte Carlo by comparing IID sampling with more evenly spread points for numerical integration.\nQuasi-Monte Carlo (QMC) methods can sometimes speed up simple Monte Carlo (MC) calculations by orders of magnitude. What makes them work so well?\nMC methods use computer-generated random numbers to generate various scenarios. When computing financial risk, the scenarios may be possible financial market outcomes. When assessing the resiliency of the power grid, the scenarios represent power demand and power grid failures under different future weather conditions.\nIf \\(Y\\) is the quantity of interest, e.g., profit (or loss) one month from now, and \\(Y_1, \\ldots, Y_n\\) are its possible values under the possible scenarios generated by a stochastic model, then we can estimate the mean or average quantity of interest from these computer-generated data as follows\n\\[\n\\mu = \\mathbb{E}(Y) \\approx \\frac{1}{n} \\bigl ( Y_1 + \\cdots + Y_n \\bigr) = \\hat{\\mu}_n.\n\\]\nThe sample mean based on \\(n\\) scenarios approximates the true mean, which is based on an infinite number of scenarios.\nSimple MC chooses \\(Y_1, \\ldots, Y_n\\) to be independent and identically distributed (IID). Intuitively, this means that any \\(Y_i\\) bears no relationship to any other \\(Y_k\\), and all \\(Y_i\\) come from the same probability distribution or scenario-generating model.\nThis is good, but we can do better. By choosing \\(Y_1, \\ldots, Y_n\\) to be more representative of the infinite number of possible scenarios, we can make \\(\\hat{\\mu}\\) a better estimate of the mean, \\(\\mu\\).\nThe model that generates \\(Y\\) is often written as \\(Y= f(\\boldsymbol{X})\\), where \\(\\boldsymbol{X}\\) is a uniformly distributed vector in the \\(d\\)-dimensional unit cube \\([0,1]^d\\). If \\(Y_i = f(\\boldsymbol{X}_i)\\) for IID \\(\\boldsymbol{X}_i\\), then we have simple MC. Figure 1 shows a picture of IID uniform \\(\\boldsymbol{X}_1, \\ldots, \\boldsymbol{X}_{64}\\) in two dimensions. Because the points are IID, there are gaps and clusters.\nFigure 2 gives an example of \\(\\boldsymbol{X}_1, \\ldots, \\boldsymbol{X}_{64}\\) used in QMC methods. These points are called integration lattice points. Note that they more evenly fill the square than the IID points in Figure 1.\nBecause these QMC points are more even, they can sometimes reduce integration error much faster than IID sampling. In favorable cases, one may observe an error rate near \\(\\mathcal{O}(n^{-1})\\), while the typical statistical error for simple MC decreases like \\(\\mathcal{O}(n^{-1/2})\\). The rate \\(\\mathcal{O}(n^{-1})\\) is an illustration, not a guarantee: actual convergence depends on both the integrand and the QMC construction. That potential improvement is the reason to add Q to MC.\nQMCPy [1] is our open source Python library that implements QMC methods, including point generators, cubatures, and stopping criteria. A tutorial on QMC is given in [2]. This blog introduces you to QMC and QMCPy."
+  },
+  {
+    "objectID": "blog/why-add-q-to-mc/index.html#when-does-qmc-help",
+    "href": "blog/why-add-q-to-mc/index.html#when-does-qmc-help",
+    "title": "Why Add Q to MC?",
+    "section": "When does QMC help?",
+    "text": "When does QMC help?\nMore evenly distributed points can substantially improve integration accuracy, but the size of the improvement depends on the problem. QMC tends to work best when the integrand is sufficiently smooth or regular and when most of its variation is driven by a relatively small number of important variables or low-order interactions—what is often called low effective dimension.\nHow a problem is formulated also matters. Transformations, the ordering of variables, and other modeling choices can make important structure easier or harder for a QMC rule to exploit. The low-discrepancy point set should suit the problem, and randomization is useful when repeated estimates are needed to assess error. Thus, neither even spacing nor a nominal dimension alone determines the convergence rate."
+  },
+  {
+    "objectID": "blog/why-add-q-to-mc/index.html#how-qmcpy-makes-qmc-practical",
+    "href": "blog/why-add-q-to-mc/index.html#how-qmcpy-makes-qmc-practical",
+    "title": "Why Add Q to MC?",
+    "section": "How QMCPy makes QMC practical",
+    "text": "How QMCPy makes QMC practical\nQMCPy brings the pieces of a QMC computation into one framework. It provides:\n\nlow-discrepancy sequences and lattices,\nrandomized constructions,\ntransformations for probability distributions,\nintegrands and applications, and\nstopping criteria and error assessment.\n\nA future revision or companion post will include a short, runnable QMCPy comparison of IID Monte Carlo and randomized QMC."
+  },
+  {
+    "objectID": "blog/why-add-q-to-mc/index.html#references",
+    "href": "blog/why-add-q-to-mc/index.html#references",
+    "title": "Why Add Q to MC?",
+    "section": "References",
+    "text": "References\n\nS.-C. T. Choi, F. J. Hickernell, R. Jagadeeswaran, A. Jain, and A. Sorokin, QMCPy: a quasi-Monte Carlo Python library (version 2.3), DOI: 10.5281/zenodo.20297697\nF. J. Hickernell, N. Kirk, and A. G. Sorokin, Quasi-Monte Carlo methods: what, why, and how? In C. Lemieux and B. Feng, editors, Monte Carlo and quasi-Monte Carlo methods: MCQMC, Waterloo, Canada, August 2024, Springer, Cham, 2026"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About this site",
     "section": "",
-    "text": "This site is the public-facing home for QMCPy. It is intended to make project news, community information, and learning pathways easier to find.\nThe detailed package documentation is maintained separately in the QMCSoftware repository and published with MkDocs at the QMCPy documentation site. This website links to that documentation rather than duplicating it."
+    "text": "This site is the public-facing home for the QMCSoftware organization. It provides a shared entry point for the organization’s open-source quasi-Monte Carlo software, publications, news, events, and community information.\nDetailed technical documentation remains with each software project. This website links to those maintained sources rather than duplicating them.\nThe umbrella prototype is temporarily served at qmcpy.org so that the existing deployment continues to work while the organization decides its long-term domain and redirect strategy."
   },
   {
     "objectID": "blog/index.html",
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "The QMCPy blog archive will be added in a later migration phase. Existing posts have not been copied or converted for this prototype.\nIn the meantime, visit the technical documentation for guides and examples."
+    "text": "The QMCSoftware blog shares accessible introductions, project updates, and technical perspectives from across the community.\nThis first migrated article establishes the pattern for bringing the earlier QMCPy blog archive into the umbrella site. Additional posts will be reviewed and migrated incrementally.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Add Q to MC?\n\n\n\nQuasi-Monte Carlo\n\nMonte Carlo\n\nQMCPy\n\n\n\nWhy more evenly spread quasi-Monte Carlo points can improve numerical integration over IID sampling.\n\n\n\n\n\nJul 29, 2026\n\n\nFred J. Hickernell\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "QMCPy",
+    "objectID": "community/index.html",
+    "href": "community/index.html",
+    "title": "Community",
     "section": "",
-    "text": "An open-source Python library for quasi-Monte Carlo sampling and integration\n\nRead the documentation View QMCPy on GitHub"
+    "text": "QMCSoftware projects are developed in the open. Each project maintains its own technical and contributor information:\n\nQMCSoftware organization on GitHub\nQMCPy community documentation\nQMCPy contributing guidelines\nQMCToolsCL contributing guidelines\nQuasiMC.jl contributing guidelines\n\nAdditional public community content will be developed after collaborator review."
   },
   {
-    "objectID": "index.html#quasi-monte-carlo-methods-in-python-qmcpy",
-    "href": "index.html#quasi-monte-carlo-methods-in-python-qmcpy",
-    "title": "QMCPy",
+    "objectID": "news/fred-hickernell-siam-fellow/index.html",
+    "href": "news/fred-hickernell-siam-fellow/index.html",
+    "title": "Fred Hickernell Named a 2026 SIAM Fellow",
     "section": "",
-    "text": "An open-source Python library for quasi-Monte Carlo sampling and integration\n\nRead the documentation View QMCPy on GitHub"
+    "text": "Illinois Tech Professor Fred Hickernell was named to the 2026 class of Fellows of the Society for Industrial and Applied Mathematics (SIAM). The distinction recognizes his mathematical and statistical innovations in high-dimensional integration and approximation, as well as his scientific leadership.\nThe Illinois Tech article also highlights the open-source software developed by Hickernell’s research group and collaborators, including QMCPy, which makes quasi-Monte Carlo methods available in Python.\n\n\n\n\n\n\nSource: Illinois Institute of Technology, April 27, 2026.\nRead the original Illinois Tech article"
   },
   {
-    "objectID": "index.html#explore-qmcpy",
-    "href": "index.html#explore-qmcpy",
-    "title": "QMCPy",
-    "section": "Explore QMCPy",
-    "text": "Explore QMCPy\n\n\nLearn\nUse the existing technical documentation for installation, examples, demos, and the package reference.\nOpen the documentation →\n\n\nFollow\nThe blog and news and events sections will collect project updates as the site develops.\n\n\nParticipate\nVisit the community page for established ways to learn about and contribute to the project.\n\n\n\n\n\n\n\n\nThis public website is an early prototype. QMCPy’s maintained technical documentation continues to live at the documentation link above."
+    "objectID": "publications/index.html",
+    "href": "publications/index.html",
+    "title": "Publications",
+    "section": "",
+    "text": "This section collects reviewed publications connected with QMCSoftware and quasi-Monte Carlo methods. It will grow incrementally rather than attempting to infer a complete bibliography.\nEach item has a short, original description and links to authoritative publication records or accessible preprints. Structured citation metadata is kept locally in data/publications.yml, which drives the general catalog below."
+  },
+  {
+    "objectID": "publications/index.html#featured-introduction",
+    "href": "publications/index.html#featured-introduction",
+    "title": "Publications",
+    "section": "Featured introduction",
+    "text": "Featured introduction\n\nQuasi-Monte Carlo Methods: What, Why, and How?\nFred J. Hickernell, Nathan Kirk, and Aleksei G. Sorokin\nMonte Carlo and Quasi-Monte Carlo 2024, Springer Proceedings in Mathematics & Statistics, volume 522, pages 3–40, 2026.\n\nDOI Springer arXiv\n\nThis paper is a tutorial on what quasi-Monte Carlo is, why it can improve upon ordinary Monte Carlo, and how problems can be formulated to benefit from QMC."
+  },
+  {
+    "objectID": "publications/index.html#publication-catalog",
+    "href": "publications/index.html#publication-catalog",
+    "title": "Publications",
+    "section": "Publication catalog",
+    "text": "Publication catalog\nAdditional publications will appear here as verified records are added to the YAML catalog.\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "publications/index.html#scope",
+    "href": "publications/index.html#scope",
+    "title": "Publications",
+    "section": "Scope",
+    "text": "Scope\nThe collection may include publications that describe QMCSoftware projects, develop methods implemented in them, or demonstrate relevant applications. All metadata should be checked against the publisher or another authoritative record before publication."
+  },
+  {
+    "objectID": "publications/index.html#software-citation-resources",
+    "href": "publications/index.html#software-citation-resources",
+    "title": "Publications",
+    "section": "Software citation resources",
+    "text": "Software citation resources\n\nQMCPy citation file\nQuasiMC.jl citation file\nQMCToolsCL repository\nLDData repository"
+  },
+  {
+    "objectID": "software/lddata.html",
+    "href": "software/lddata.html",
+    "title": "LDData",
+    "section": "",
+    "text": "LDData collects low-discrepancy generating vectors and matrices and proposes standard text formats for describing lattice rules, polynomial lattice rules, digital nets, and Sobol’ points."
+  },
+  {
+    "objectID": "software/lddata.html#what-the-project-provides",
+    "href": "software/lddata.html#what-the-project-provides",
+    "title": "LDData",
+    "section": "What the project provides",
+    "text": "What the project provides\nThe project aims to make construction data straightforward to share and read across programming languages. Its README describes simple, relatively compact text formats with human-readable headers and no more than one data line per dimension.\nThe repository is the maintained source for the proposed formats, examples, and data files.\n\nFormat descriptions and data\nRepository contents"
+  },
+  {
+    "objectID": "software/qmctoolscl.html",
+    "href": "software/qmctoolscl.html",
+    "title": "QMCToolsCL",
+    "section": "",
+    "text": "QMCToolsCL provides quasi-Monte Carlo sequence generators implemented in OpenCL and C."
+  },
+  {
+    "objectID": "software/qmctoolscl.html#maintained-resources",
+    "href": "software/qmctoolscl.html#maintained-resources",
+    "title": "QMCToolsCL",
+    "section": "Maintained resources",
+    "text": "Maintained resources\nThe project’s technical documentation and source repository are the authoritative places for supported generators, interfaces, installation, and development information.\n\nQMCToolsCL documentation\nSource code\nContributing guidelines"
   }
 ]

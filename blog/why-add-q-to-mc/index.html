@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Articles and project updates from QMCSoftware.">
+<meta name="author" content="Fred J. Hickernell">
+<meta name="dcterms.date" content="2026-07-29">
+<meta name="description" content="Why more evenly spread quasi-Monte Carlo points can improve numerical integration over IID sampling.">
 
-<title>Blog – QMCSoftware</title>
+<title>Why Add Q to MC? – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,25 +32,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-3da7144b09487dffbff0c2a60eb41ffc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-3da7144b09487dffbff0c2a60eb41ffc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,35 +76,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -146,7 +117,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">QMCSoftware</span>
     </a>
   </div>
@@ -157,27 +128,27 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software/index.html"> 
+    <a class="nav-link" href="../../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../blog/index.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications/index.html"> 
+    <a class="nav-link" href="../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../news/index.html"> 
+    <a class="nav-link" href="../../news/index.html"> 
 <span class="menu-text">News &amp; Events</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../community/index.html"> 
+    <a class="nav-link" href="../../community/index.html"> 
 <span class="menu-text">Community</span></a>
   </li>  
 </ul>
@@ -197,27 +168,52 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#when-does-qmc-help" id="toc-when-does-qmc-help" class="nav-link active" data-scroll-target="#when-does-qmc-help">When does QMC help?</a></li>
+  <li><a href="#how-qmcpy-makes-qmc-practical" id="toc-how-qmcpy-makes-qmc-practical" class="nav-link" data-scroll-target="#how-qmcpy-makes-qmc-practical">How QMCPy makes QMC practical</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Blog</h1>
-</div>
+<h1 class="title">Why Add Q to MC?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Quasi-Monte Carlo</div>
+    <div class="quarto-category">Monte Carlo</div>
+    <div class="quarto-category">QMCPy</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    Articles and project updates from QMCSoftware.
+    Why more evenly spread quasi-Monte Carlo points can improve numerical integration over IID sampling.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fred J. Hickernell </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Last revised</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 29, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -227,51 +223,60 @@ window.Quarto = {
 </header>
 
 
-<p>The QMCSoftware blog shares accessible introductions, project updates, and technical perspectives from across the community.</p>
-<p>This first migrated article establishes the pattern for bringing the earlier QMCPy blog archive into the umbrella site. Additional posts will be reviewed and migrated incrementally.</p>
+<p>This post motivates quasi-Monte Carlo by comparing IID sampling with more evenly spread points for numerical integration.</p>
+<p>Quasi-Monte Carlo (QMC) methods can sometimes speed up simple Monte Carlo (MC) calculations by orders of magnitude. What makes them work so well?</p>
+<p>MC methods use computer-generated random numbers to generate various scenarios. When computing financial risk, the scenarios may be possible financial market outcomes. When assessing the resiliency of the power grid, the scenarios represent power demand and power grid failures under different future weather conditions.</p>
+<p>If <span class="math inline">\(Y\)</span> is the quantity of interest, e.g., profit (or loss) one month from now, and <span class="math inline">\(Y_1, \ldots, Y_n\)</span> are its possible values under the possible scenarios generated by a stochastic model, then we can estimate the <em>mean</em> or average quantity of interest from these computer-generated data as follows</p>
+<p><span class="math display">\[
+\mu = \mathbb{E}(Y) \approx \frac{1}{n} \bigl ( Y_1 + \cdots + Y_n \bigr) = \hat{\mu}_n.
+\]</span></p>
+<p>The sample mean based on <span class="math inline">\(n\)</span> scenarios approximates the true mean, which is based on an infinite number of scenarios.</p>
+<p>Simple MC chooses <span class="math inline">\(Y_1, \ldots, Y_n\)</span> to be independent and identically distributed (IID). Intuitively, this means that any <span class="math inline">\(Y_i\)</span> bears no relationship to any other <span class="math inline">\(Y_k\)</span>, and all <span class="math inline">\(Y_i\)</span> come from the same probability distribution or scenario-generating model.</p>
+<p>This is good, but we can do better. By choosing <span class="math inline">\(Y_1, \ldots, Y_n\)</span> to be more representative of the infinite number of possible scenarios, we can make <span class="math inline">\(\hat{\mu}\)</span> a better estimate of the mean, <span class="math inline">\(\mu\)</span>.</p>
+<p>The model that generates <span class="math inline">\(Y\)</span> is often written as <span class="math inline">\(Y= f(\boldsymbol{X})\)</span>, where <span class="math inline">\(\boldsymbol{X}\)</span> is a uniformly distributed vector in the <span class="math inline">\(d\)</span>-dimensional unit cube <span class="math inline">\([0,1]^d\)</span>. If <span class="math inline">\(Y_i = f(\boldsymbol{X}_i)\)</span> for IID <span class="math inline">\(\boldsymbol{X}_i\)</span>, then we have simple MC. Figure 1 shows a picture of IID uniform <span class="math inline">\(\boldsymbol{X}_1, \ldots, \boldsymbol{X}_{64}\)</span> in two dimensions. Because the points are IID, there are gaps and clusters.</p>
+<figure id="fig-iid-uniform-points" class="figure">
+<img src="figures/iid_uniform_pts.png" alt="64 IID standard uniform points in 2 dimensions" style="width:60%" class="figure-img">
+<figcaption>
+Figure 1: 64 IID standard uniform points in 2 dimensions.
+</figcaption>
+</figure>
+<p>Figure 2 gives an example of <span class="math inline">\(\boldsymbol{X}_1, \ldots, \boldsymbol{X}_{64}\)</span> used in QMC methods. These points are called integration lattice points. Note that they more evenly fill the square than the IID points in Figure 1.</p>
+<figure id="fig-lattice-points" class="figure">
+<img src="figures/lattice_pts.png" alt="64 shifted lattice points in 2 dimensions" style="width:60%" class="figure-img">
+<figcaption>
+Figure 2: 64 shifted lattice points in 2 dimensions.
+</figcaption>
+</figure>
+<p>Because these QMC points are more even, they can sometimes reduce integration error much faster than IID sampling. In favorable cases, one may observe an error rate near <span class="math inline">\(\mathcal{O}(n^{-1})\)</span>, while the typical statistical error for simple MC decreases like <span class="math inline">\(\mathcal{O}(n^{-1/2})\)</span>. The rate <span class="math inline">\(\mathcal{O}(n^{-1})\)</span> is an illustration, not a guarantee: actual convergence depends on both the integrand and the QMC construction. That potential improvement is the reason to add Q to MC.</p>
+<p>QMCPy [1] is our open source Python library that implements QMC methods, including point generators, cubatures, and stopping criteria. A tutorial on QMC is given in [2]. This blog introduces you to QMC and QMCPy.</p>
+<section id="when-does-qmc-help" class="level2">
+<h2 class="anchored" data-anchor-id="when-does-qmc-help">When does QMC help?</h2>
+<p>More evenly distributed points can substantially improve integration accuracy, but the size of the improvement depends on the problem. QMC tends to work best when the integrand is sufficiently smooth or regular and when most of its variation is driven by a relatively small number of important variables or low-order interactions—what is often called low <em>effective dimension</em>.</p>
+<p>How a problem is formulated also matters. Transformations, the ordering of variables, and other modeling choices can make important structure easier or harder for a QMC rule to exploit. The low-discrepancy point set should suit the problem, and randomization is useful when repeated estimates are needed to assess error. Thus, neither even spacing nor a nominal dimension alone determines the convergence rate.</p>
+</section>
+<section id="how-qmcpy-makes-qmc-practical" class="level2">
+<h2 class="anchored" data-anchor-id="how-qmcpy-makes-qmc-practical">How QMCPy makes QMC practical</h2>
+<p>QMCPy brings the pieces of a QMC computation into one framework. It provides:</p>
+<ul>
+<li>low-discrepancy sequences and lattices,</li>
+<li>randomized constructions,</li>
+<li>transformations for probability distributions,</li>
+<li>integrands and applications, and</li>
+<li>stopping criteria and error assessment.</li>
+</ul>
+<p>A future revision or companion post will include a short, runnable QMCPy comparison of IID Monte Carlo and randomized QMC.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p>S.-C. T. Choi, F. J. Hickernell, R. Jagadeeswaran, A. Jain, and A. Sorokin, QMCPy: a quasi-Monte Carlo Python library (version 2.3), DOI: 10.5281/zenodo.20297697</p></li>
+<li><p>F. J. Hickernell, N. Kirk, and A. G. Sorokin, Quasi-Monte Carlo methods: what, why, and how? In C. Lemieux and B. Feng, editors, Monte Carlo and quasi-Monte Carlo methods: MCQMC, Waterloo, Canada, August 2024, Springer, Cham, 2026</p></li>
+</ol>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="UXVhc2ktTW9udGUlMjBDYXJsbyUyQ01vbnRlJTIwQ2FybG8lMkNRTUNQeQ==" data-listing-date-sort="1785283200000" data-listing-file-modified-sort="1785510125556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="700">
-<div class="thumbnail"><a href="../blog/why-add-q-to-mc/index.html" class="no-external">
-
-<img loading="lazy" src="../blog/why-add-q-to-mc/figures/lattice_pts.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../blog/why-add-q-to-mc/index.html" class="no-external">Why Add Q to MC?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVhc2ktTW9udGUlMjBDYXJsbw=='); return false;">Quasi-Monte Carlo</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TW9udGUlMjBDYXJsbw=='); return false;">Monte Carlo</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UU1DUHk='); return false;">QMCPy</div>
-
-</div>
-<div class="delink listing-description"><a href="../blog/why-add-q-to-mc/index.html" class="no-external">
-<p>Why more evenly spread quasi-Monte Carlo points can improve numerical integration over IID sampling.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../blog/why-add-q-to-mc/index.html" class="no-external">
-<div class="listing-date">
-Jul 29, 2026
-</div>
-<div class="listing-author">
-Fred J. Hickernell
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -689,7 +694,7 @@ Fred J. Hickernell
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../../about.html">
 <p>About this site</p>
 </a>
   </li>  
@@ -701,5 +706,5 @@ Fred J. Hickernell
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

@@ -1,0 +1,18 @@
+[
+  {
+    "listing": "/news/index.html",
+    "items": [
+      "/news/fred-hickernell-siam-fellow/index.html"
+    ]
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/why-add-q-to-mc/index.html"
+    ]
+  },
+  {
+    "listing": "/publications/index.html",
+    "items": []
+  }
+]

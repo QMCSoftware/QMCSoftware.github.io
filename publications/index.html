@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Articles and project updates from QMCSoftware.">
+<meta name="description" content="Publication and citation resources for QMCSoftware projects.">
 
-<title>Blog – QMCSoftware</title>
+<title>Publications – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -79,20 +79,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-publication-catalog .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-publication-catalog'] = new List('listing-publication-catalog', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -165,11 +165,11 @@ window.Quarto = {
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../blog/index.html" aria-current="page"> 
+    <a class="nav-link" href="../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications/index.html"> 
+    <a class="nav-link active" href="../publications/index.html" aria-current="page"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
@@ -197,20 +197,32 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#featured-introduction" id="toc-featured-introduction" class="nav-link active" data-scroll-target="#featured-introduction">Featured introduction</a>
+  <ul class="collapse">
+  <li><a href="#quasi-monte-carlo-methods-what-why-and-how" id="toc-quasi-monte-carlo-methods-what-why-and-how" class="nav-link" data-scroll-target="#quasi-monte-carlo-methods-what-why-and-how">Quasi-Monte Carlo Methods: What, Why, and How?</a></li>
+  </ul></li>
+  <li><a href="#publication-catalog" id="toc-publication-catalog" class="nav-link" data-scroll-target="#publication-catalog">Publication catalog</a></li>
+  <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope">Scope</a></li>
+  <li><a href="#software-citation-resources" id="toc-software-citation-resources" class="nav-link" data-scroll-target="#software-citation-resources">Software citation resources</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Blog</h1>
+<h1 class="title">Publications</h1>
 </div>
 
 <div>
   <div class="description">
-    Articles and project updates from QMCSoftware.
+    Publication and citation resources for QMCSoftware projects.
   </div>
 </div>
 
@@ -227,51 +239,48 @@ window.Quarto = {
 </header>
 
 
-<p>The QMCSoftware blog shares accessible introductions, project updates, and technical perspectives from across the community.</p>
-<p>This first migrated article establishes the pattern for bringing the earlier QMCPy blog archive into the umbrella site. Additional posts will be reviewed and migrated incrementally.</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="UXVhc2ktTW9udGUlMjBDYXJsbyUyQ01vbnRlJTIwQ2FybG8lMkNRTUNQeQ==" data-listing-date-sort="1785283200000" data-listing-file-modified-sort="1785510125556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="700">
-<div class="thumbnail"><a href="../blog/why-add-q-to-mc/index.html" class="no-external">
-
-<img loading="lazy" src="../blog/why-add-q-to-mc/figures/lattice_pts.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../blog/why-add-q-to-mc/index.html" class="no-external">Why Add Q to MC?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVhc2ktTW9udGUlMjBDYXJsbw=='); return false;">Quasi-Monte Carlo</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TW9udGUlMjBDYXJsbw=='); return false;">Monte Carlo</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UU1DUHk='); return false;">QMCPy</div>
-
+<p>This section collects reviewed publications connected with QMCSoftware and quasi-Monte Carlo methods. It will grow incrementally rather than attempting to infer a complete bibliography.</p>
+<p>Each item has a short, original description and links to authoritative publication records or accessible preprints. Structured citation metadata is kept locally in <a href="../data/publications.yml"><code>data/publications.yml</code></a>, which drives the general catalog below.</p>
+<section id="featured-introduction" class="level2">
+<h2 class="anchored" data-anchor-id="featured-introduction">Featured introduction</h2>
+<section id="quasi-monte-carlo-methods-what-why-and-how" class="level3 featured-publication">
+<h3 class="anchored" data-anchor-id="quasi-monte-carlo-methods-what-why-and-how">Quasi-Monte Carlo Methods: What, Why, and How?</h3>
+<p><strong>Fred J. Hickernell, Nathan Kirk, and Aleksei G. Sorokin</strong></p>
+<p><em>Monte Carlo and Quasi-Monte Carlo 2024</em>, Springer Proceedings in Mathematics &amp; Statistics, volume 522, pages 3–40, 2026.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1007/978-3-032-10590-5_1" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-032-10590-5_1" class="btn btn-outline-primary">Springer</a> <a href="https://arxiv.org/abs/2502.03644" class="btn btn-outline-primary">arXiv</a></p>
 </div>
-<div class="delink listing-description"><a href="../blog/why-add-q-to-mc/index.html" class="no-external">
-<p>Why more evenly spread quasi-Monte Carlo points can improve numerical integration over IID sampling.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../blog/why-add-q-to-mc/index.html" class="no-external">
-<div class="listing-date">
-Jul 29, 2026
-</div>
-<div class="listing-author">
-Fred J. Hickernell
-</div>
-</a>
-</div>
-</div>
+<p>This paper is a tutorial on what quasi-Monte Carlo is, why it can improve upon ordinary Monte Carlo, and how problems can be formulated to benefit from QMC.</p>
+</section>
+</section>
+<section id="publication-catalog" class="level2">
+<h2 class="anchored" data-anchor-id="publication-catalog">Publication catalog</h2>
+<p>Additional publications will appear here as verified records are added to the YAML catalog.</p>
+<div id="listing-publication-catalog" class="quarto-listing quarto-listing-container-custom">
+<div class="publication-catalog">
+
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+</section>
+<section id="scope" class="level2">
+<h2 class="anchored" data-anchor-id="scope">Scope</h2>
+<p>The collection may include publications that describe QMCSoftware projects, develop methods implemented in them, or demonstrate relevant applications. All metadata should be checked against the publisher or another authoritative record before publication.</p>
+</section>
+<section id="software-citation-resources" class="level2">
+<h2 class="anchored" data-anchor-id="software-citation-resources">Software citation resources</h2>
+<ul>
+<li><a href="https://github.com/QMCSoftware/QMCSoftware/blob/main/cite_qmcpy.bib">QMCPy citation file</a></li>
+<li><a href="https://github.com/QMCSoftware/QuasiMC.jl/blob/develop/cite_quasimcjl.bib">QuasiMC.jl citation file</a></li>
+<li><a href="https://github.com/QMCSoftware/QMCToolsCL">QMCToolsCL repository</a></li>
+<li><a href="https://github.com/QMCSoftware/LDData">LDData repository</a></li>
+</ul>
+
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

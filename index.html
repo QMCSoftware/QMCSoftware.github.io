@@ -2,20 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>QMCPy</title>
+<title>QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -39,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b889f57f7a462e4961902844b7b61d8f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3da7144b09487dffbff0c2a60eb41ffc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,12 +85,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/logos/qmcpy_logo.png" alt="QMCPy logo" class="navbar-logo light-content">
-    <img src="./assets/logos/qmcpy_logo.png" alt="QMCPy logo" class="navbar-logo dark-content">
-    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">QMCPy</span>
+    <span class="navbar-title">QMCSoftware</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -101,8 +100,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./software/index.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./blog/index.html"> 
 <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./publications/index.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./news/index.html"> 
@@ -115,11 +122,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://qmcsoftware.github.io/QMCSoftware/"> 
-<span class="menu-text">Documentation</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/QMCSoftware/QMCSoftware"> 
+    <a class="nav-link" href="https://github.com/QMCSoftware"> 
 <span class="menu-text">GitHub</span></a>
   </li>  
 </ul>
@@ -141,34 +144,61 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="hero">
-<div class="grid align-items-center">
-<section id="quasi-monte-carlo-methods-in-python-qmcpy" class="level2 g-col-12 g-col-lg-8 hero-copy">
-<h2 class="anchored" data-anchor-id="quasi-monte-carlo-methods-in-python-qmcpy">Quasi-Monte Carlo methods in Python (QMCPy)</h2>
-<p>An open-source Python library for quasi-Monte Carlo sampling and integration</p>
+<section id="open-software-for-quasi-monte-carlo" class="level2 hero-copy">
+<h2 class="anchored" data-anchor-id="open-software-for-quasi-monte-carlo">Open software for quasi-Monte Carlo</h2>
+<p>QMCSoftware brings together open-source projects for quasi-Monte Carlo methods: libraries for Python and Julia, sequence generators in OpenCL and C, and shared low-discrepancy construction data.</p>
 <div class="hero-actions">
-<p><a href="https://qmcsoftware.github.io/QMCSoftware/" class="btn btn-primary">Read the documentation</a> <a href="https://github.com/QMCSoftware/QMCSoftware" class="btn btn-outline-primary">View QMCPy on GitHub</a></p>
+<p><a href="./software/index.html" class="btn btn-primary">Explore the software</a> <a href="https://github.com/QMCSoftware" class="btn btn-outline-primary">Visit QMCSoftware on GitHub</a></p>
 </div>
 </section>
-<div class="g-col-12 g-col-lg-4 hero-mark">
-<p><img src="assets/logos/qmcpy_logo.png" alt="QMCPy logo formed by teal quasi-Monte Carlo sample points" class="hero-logo"></p>
 </div>
-</div>
-</div>
-<section id="explore-qmcpy" class="level2">
-<h2 class="anchored" data-anchor-id="explore-qmcpy">Explore QMCPy</h2>
-<div class="grid">
-<section id="learn" class="level3 g-col-12 g-col-md-4">
-<h3 class="anchored" data-anchor-id="learn">Learn</h3>
-<p>Use the existing technical documentation for installation, examples, demos, and the package reference.</p>
-<p><a href="https://qmcsoftware.github.io/QMCSoftware/">Open the documentation →</a></p>
+<section id="the-qmcsoftware-family" class="level2">
+<h2 class="anchored" data-anchor-id="the-qmcsoftware-family">The QMCSoftware family</h2>
+<div class="software-grid">
+<section id="qmcpy" class="level3 software-card">
+<h3 class="anchored" data-anchor-id="qmcpy">QMCPy</h3>
+<p>Quasi-Monte Carlo community software in Python, with modular point generators, measure transforms, integrands, and adaptive stopping criteria.</p>
+<p><a href="./software/qmcpy.html">Explore QMCPy →</a></p>
 </section>
-<section id="follow" class="level3 g-col-12 g-col-md-4">
-<h3 class="anchored" data-anchor-id="follow">Follow</h3>
-<p>The <a href="./blog/index.html">blog</a> and <a href="./news/index.html">news and events</a> sections will collect project updates as the site develops.</p>
+<section id="qmctoolscl" class="level3 software-card">
+<h3 class="anchored" data-anchor-id="qmctoolscl">QMCToolsCL</h3>
+<p>Quasi-Monte Carlo sequence generators implemented in OpenCL and C.</p>
+<p><a href="./software/qmctoolscl.html">Explore QMCToolsCL →</a></p>
 </section>
-<section id="participate" class="level3 g-col-12 g-col-md-4">
-<h3 class="anchored" data-anchor-id="participate">Participate</h3>
-<p>Visit the <a href="./community/index.html">community page</a> for established ways to learn about and contribute to the project.</p>
+<section id="quasimc.jl" class="level3 software-card">
+<h3 class="anchored" data-anchor-id="quasimc.jl">QuasiMC.jl</h3>
+<p>A Julia port of QMCPy for quasi-Monte Carlo point generation, measure transforms, and adaptive high-dimensional integration.</p>
+<p><a href="./software/quasimc-jl.html">Explore QuasiMC.jl →</a></p>
+</section>
+<section id="lddata" class="level3 software-card">
+<h3 class="anchored" data-anchor-id="lddata">LDData</h3>
+<p>Low-discrepancy generating vectors and matrices, together with proposed simple text formats for sharing them.</p>
+<p><a href="./software/lddata.html">Explore LDData →</a></p>
+</section>
+</div>
+</section>
+<section id="explore-the-community" class="level2">
+<h2 class="anchored" data-anchor-id="explore-the-community">Explore the community</h2>
+<div class="pathway-grid">
+<section id="blog" class="level3 pathway-card">
+<h3 class="anchored" data-anchor-id="blog">Blog</h3>
+<p>Articles and updates from across the QMCSoftware projects.</p>
+<p><a href="./blog/index.html">Read the blog →</a></p>
+</section>
+<section id="publications" class="level3 pathway-card">
+<h3 class="anchored" data-anchor-id="publications">Publications</h3>
+<p>A developing guide to publications and software citation resources.</p>
+<p><a href="./publications/index.html">Browse publications →</a></p>
+</section>
+<section id="news-events" class="level3 pathway-card">
+<h3 class="anchored" data-anchor-id="news-events">News &amp; Events</h3>
+<p>Confirmed announcements, releases, talks, workshops, and events.</p>
+<p><a href="./news/index.html">See news and events →</a></p>
+</section>
+<section id="community" class="level3 pathway-card">
+<h3 class="anchored" data-anchor-id="community">Community</h3>
+<p>Find maintained contribution resources and ways to connect with the projects.</p>
+<p><a href="./community/index.html">Visit the community page →</a></p>
 </section>
 </div>
 <div class="callout callout-style-simple callout-note">
@@ -177,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>This public website is an early prototype. QMCPy’s maintained technical documentation continues to live at the documentation link above.</p>
+<p>This umbrella website is an early prototype. Technical documentation remains with each software project and is linked from its page.</p>
 </div>
 </div>
 </div>
@@ -595,7 +625,7 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>QMCPy — quasi-Monte Carlo community software in Python</p>
+<p>QMCSoftware — open-source quasi-Monte Carlo software</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
