@@ -8,9 +8,8 @@ software, publications, blog, news and events, and community information.
 Technical documentation remains with each software repository. The website
 links to maintained project documentation instead of duplicating it.
 
-The existing `https://qmcpy.org` site URL and `CNAME` remain in place
-temporarily while the organization decides its long-term domain and redirect
-strategy.
+The site uses `https://qmcsoftware.org` as its canonical URL and GitHub Pages
+custom domain.
 
 ## Local preview
 

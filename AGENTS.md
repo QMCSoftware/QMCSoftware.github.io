@@ -30,7 +30,7 @@ repository.
 - `_site/` and Quarto-generated working files are not committed to `main`.
 - `.github/workflows/quarto-gh-pages.yml` renders on pushes to `main` and
   publishes `_site/` to `gh-pages`.
-- The root `CNAME` must contain exactly `qmcpy.org`, and deployment must retain
+- The root `CNAME` must contain exactly `qmcsoftware.org`, and deployment must retain
   it as `_site/CNAME`.
 - Use `quarto preview` for local authoring and `quarto render` for production
   validation.

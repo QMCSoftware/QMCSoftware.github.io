@@ -4,8 +4,8 @@
 
 This repository will provide the single public-facing website for the
 QMCSoftware organization. Quarto source lives on `main`, renders to `_site/`,
-and is published by GitHub Actions to the `gh-pages` branch. The existing
-custom domain, `qmcpy.org`, remains in place temporarily.
+and is published by GitHub Actions to the `gh-pages` branch. The canonical
+custom domain is `qmcsoftware.org`.
 
 Technical documentation remains with each software repository and is linked
 from this site. The website adds a shared public entry point; it does not
@@ -36,7 +36,7 @@ replace project documentation.
 
 - [x] Replace the standalone `index.html` with Quarto source.
 - [x] Add ignore rules for generated Quarto output.
-- [x] Preserve the root `CNAME` for `qmcpy.org`.
+- [x] Preserve the root `CNAME` during prototype setup.
 - [x] Add repository purpose, local-render instructions, project guidance,
   roadmap, and status documentation.
 - [x] Avoid unnecessary runtime dependencies; no `requirements.txt` is needed
@@ -69,8 +69,9 @@ replace project documentation.
 - [x] Add a Publications prototype without inventing a complete bibliography.
 - [x] Update shared navigation, metadata, footer, and organization-wide copy.
 - [x] Keep each project's detailed documentation in its maintained repository.
-- [x] Retain `qmcpy.org` and the existing `CNAME` during the transition.
-- [ ] Decide the long-term domain, custom-domain settings, and redirects.
+- [x] Retain `qmcpy.org` and the existing `CNAME` during the initial transition.
+- [x] Set `qmcsoftware.org` as the long-term canonical domain and custom domain.
+- [ ] Verify any required redirects from the former domain.
 - [ ] Approve an organization-level visual identity and navbar mark, if any.
 
 ### Phase 4 — Refine the homepage
@@ -155,7 +156,7 @@ replace project documentation.
 - [x] Explicitly preserve `CNAME` in the rendered publish directory.
 - [ ] Review repository Pages settings and workflow permissions.
 - [ ] Trigger the workflow on GitHub and verify the `gh-pages` branch contents.
-- [ ] Verify HTTPS and `qmcpy.org` after deployment.
+- [ ] Verify HTTPS and `qmcsoftware.org` after deployment.
 
 ### Phase 11 — Collaborator review and prototype decision
 

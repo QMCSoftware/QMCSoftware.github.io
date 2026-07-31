@@ -2,7 +2,7 @@
 
 ## Complete
 
-- [x] Confirmed Quarto-on-`main`, `_site/`, `gh-pages`, and `qmcpy.org`
+- [x] Confirmed Quarto-on-`main`, `_site/`, `gh-pages`, and `qmcsoftware.org`
   architecture.
 - [x] Replaced the standalone HTML landing page with one Quarto source site.
 - [x] Converted the QMCPy-only prototype into an umbrella QMCSoftware site.
@@ -25,6 +25,8 @@
   removing it from organization-level branding.
 - [x] Added GitHub Actions rendering and `gh-pages` publication with explicit
   `CNAME` preservation.
+- [x] Set `qmcsoftware.org` as the canonical site URL and GitHub Pages custom
+  domain.
 - [x] Added repository guidance, roadmap, ignore rules, and local instructions.
 - [x] Rendered the complete 13-page site and verified local link targets and
   rendered `CNAME` preservation.
@@ -47,8 +49,8 @@
 - Technical documentation stays with each software project.
 - The primary GitHub link targets the QMCSoftware organization; project pages
   link to their respective repositories and documentation.
-- The site continues to use `qmcpy.org` temporarily; DNS, Pages settings, and
-  redirects have not been changed.
+- The site uses `qmcsoftware.org` as its canonical URL and custom domain;
+  redirect behavior from the former domain still requires verification.
 - One earlier blog post is migrated as a pattern; the remainder of the archive
   is outside the current prototype.
 - No Reveal.js project, speculative infrastructure, or Python dependency file
