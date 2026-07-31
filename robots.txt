@@ -1,1 +1,1 @@
-Sitemap: https://qmcpy.org/sitemap.xml
+Sitemap: https://qmcsoftware.org/sitemap.xml

@@ -350,7 +350,7 @@ Figure 2: 64 shifted lattice points in 2 dimensions.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/qmcpy\.org");
+        var filterRegex = new RegExp("https:\/\/qmcsoftware\.org");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
