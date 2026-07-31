@@ -15,7 +15,7 @@ project:
 
 website:
   title: "QMCSoftware"
-  site-url: https://qmcpy.org
+  site-url: https://qmcsoftware.org
   description: "Open-source software and shared resources for quasi-Monte Carlo methods."
   navbar:
     background: "#073b4c"
