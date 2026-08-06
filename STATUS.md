@@ -11,6 +11,8 @@
 - [x] Migrated and revised “Why Add Q to MC?” as a living article, preserving
   its mathematical explanation, figures, captions, and authorship while adding
   qualified convergence and practical-use guidance.
+- [x] Migrated “A QMCPy Quick Start,” preserving its original authorship, date,
+  Keister example, equations, code, output, references, and figure.
 - [x] Added a sourced 2026 SIAM Fellow news item.
 - [x] Added a hand-written featured publication and a one-record YAML catalog
   convention for ordinary publications.
@@ -51,8 +53,8 @@
   link to their respective repositories and documentation.
 - The site uses `qmcsoftware.org` as its canonical URL and custom domain;
   redirect behavior from the former domain still requires verification.
-- One earlier blog post is migrated as a pattern; the remainder of the archive
-  is outside the current prototype.
+- Two earlier blog posts are migrated as a pattern; the remainder of the
+  archive is outside the current prototype.
 - No Reveal.js project, speculative infrastructure, or Python dependency file
   is included.
 - Generated `_site/` output remains outside the `main` branch.

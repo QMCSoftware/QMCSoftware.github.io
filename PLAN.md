@@ -90,6 +90,9 @@ replace project documentation.
   captions.
 - [x] Revise “Why Add Q to MC?” as a living article with one last-revised date,
   qualified convergence claims, and practical guidance.
+- [x] Migrate “A QMCPy Quick Start” as a self-contained Quarto post, preserving
+  its original authorship, date, Keister example, code, mathematics, output,
+  references, and figure.
 - [x] Establish listing metadata and a discoverable Blog index.
 - [ ] Inventory the existing 18 posts and their assets without modifying the
   source repository.
