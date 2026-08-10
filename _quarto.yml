@@ -12,6 +12,7 @@ project:
     - CNAME
     - assets/**
     - data/**
+    - blog/**/figures/**
 
 website:
   title: "QMCSoftware"

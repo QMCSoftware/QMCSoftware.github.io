@@ -18,6 +18,6 @@ listing:
 The QMCSoftware blog shares accessible introductions, project updates, and
 technical perspectives from across the community.
 
-The migrated articles establish a pattern for bringing the earlier QMCPy blog
-archive into the umbrella site. Additional posts will be reviewed and migrated
-incrementally.
+This archive brings together the QMCPy articles previously maintained with the
+project documentation. Technical documentation and executable notebooks remain
+with QMCPy and are linked from the relevant articles.
