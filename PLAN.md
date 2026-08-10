@@ -94,12 +94,19 @@ replace project documentation.
   its original authorship, date, Keister example, code, mathematics, output,
   references, and figure.
 - [x] Establish listing metadata and a discoverable Blog index.
-- [ ] Inventory the existing 18 posts and their assets without modifying the
+- [x] Inventory the existing 18 posts and their assets without modifying the
   source repository.
-- [ ] Define Quarto post metadata, URL preservation, authorship, categories,
-  and redirect requirements.
-- [ ] Convert and review posts in small batches.
-- [ ] Verify dates, authors, links, code, mathematics, images, and legacy URLs.
+- [x] Define consistent Quarto post metadata, paths, authorship, and categories.
+- [x] Use one `date` value per post as the last-revised date, label it “Last
+  revised,” and sort the archive by that value without separate first-published
+  metadata.
+- [x] Convert the complete 18-post archive, including MkDocs snippets, callouts,
+  image groups, internal links, and mathematical delimiters.
+- [x] Preserve the original visible content of 17 posts and retain the approved
+  living-article revisions to “Why Add Q to MC?”.
+- [x] Verify last-revised dates, authors, local links, code, mathematics, and all
+  48 images in a complete local render and browser review.
+- [ ] Define and verify redirects or canonical handling for legacy URLs.
 - [ ] Publish the complete archive only after collaborator review.
 
 ### Phase 6 — Build news and events
@@ -167,4 +174,5 @@ replace project documentation.
   with QMCSoftware collaborators.
 - [ ] Record requested changes and resolve launch-blocking issues.
 - [ ] Agree on ownership and cadence for blog, news, and community updates.
-- [ ] Approve the prototype before beginning the 18-post blog migration.
+- [x] Authorize and locally validate the 18-post blog migration.
+- [ ] Approve the completed local archive before publishing it for review.

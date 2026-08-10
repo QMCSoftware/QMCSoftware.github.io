@@ -32,19 +32,30 @@
 - [x] Added repository guidance, roadmap, ignore rules, and local instructions.
 - [x] Rendered the complete 13-page site and verified local link targets and
   rendered `CNAME` preservation.
+- [x] Migrated the complete 18-post QMCPy blog archive into self-contained
+  Quarto posts while retaining the technical documentation and notebooks in
+  the QMCPy repository.
+- [x] Standardized blog chronology on one last-revised `date` per post, with no
+  separate first-publication field, and retained the approved revised version
+  of “Why Add Q to MC?”.
+- [x] Preserved and published all 48 blog images in the local render, expanded
+  MkDocs code snippets, converted callouts and image groups, and normalized
+  legacy mathematical delimiters for Quarto.
+- [x] Rendered all 30 site pages and completed local link, desktop, mobile, and
+  per-post browser checks for the 18-post archive.
 
 ## Underway
 
 - [ ] Collaborator review of the information architecture, visual direction,
   and provisional homepage copy.
-- [ ] Browser-based responsive and accessibility review.
+- [ ] Accessibility review beyond the completed desktop and mobile browser
+  checks.
 - [ ] Live GitHub Pages workflow and custom-domain verification.
 
 ## Next recommended task
 
-- [ ] Review the rendered umbrella prototype with QMCSoftware collaborators and
-  approve the visual direction and public copy before adding content or
-  migrating posts.
+- [ ] Review and approve the completed local 18-post archive before any branch
+  is pushed or a pull request is opened.
 
 ## Decisions and scope boundaries
 
@@ -53,8 +64,13 @@
   link to their respective repositories and documentation.
 - The site uses `qmcsoftware.org` as its canonical URL and custom domain;
   redirect behavior from the former domain still requires verification.
-- Two earlier blog posts are migrated as a pattern; the remainder of the
-  archive is outside the current prototype.
+- The complete 18-post QMCPy blog archive is migrated locally; publishing it
+  remains approval-gated.
+- Blog cards and title blocks use each post's last-revised date; the archive is
+  sorted newest revision first and does not carry a separate first-published
+  date.
+- “Why Add Q to MC?” remains the approved living article; the other 17 posts
+  preserve the visible content of their source articles.
 - No Reveal.js project, speculative infrastructure, or Python dependency file
   is included.
 - Generated `_site/` output remains outside the `main` branch.
