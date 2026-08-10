@@ -8,7 +8,24 @@
   {
     "listing": "/blog/index.html",
     "items": [
-      "/blog/why-add-q-to-mc/index.html"
+      "/blog/why-add-q-to-mc/index.html",
+      "/blog/scipywrapper/index.html",
+      "/blog/cubmccltvec-vectorizing-the-cubmcclt-algorithm/index.html",
+      "/blog/visualizing-the-generated-samples-helps/index.html",
+      "/blog/accelerating-qmcpy-notebook-tests-with-parsl/index.html",
+      "/blog/gbm-qmcpy/index.html",
+      "/blog/linear-matrix-scrambling-and-digital-shift-for-halton/index.html",
+      "/blog/analysis-of-qmc-efficiency-for-asian-option-pricing/index.html",
+      "/blog/random-lattice-generators-are-not-bad/index.html",
+      "/blog/accelerating-rare-event-reliability-simulations-for-cerns-large-hadron-collider-using-qmcpy/index.html",
+      "/blog/bayesian-stopping-criteria/index.html",
+      "/blog/digital-sequences-the-niederreiter-construction/index.html",
+      "/blog/speeding-up-qmcpy-with-distributable-c-code/index.html",
+      "/blog/visualizing-the-internals-of-object-classes-in-qmcpy/index.html",
+      "/blog/safe-handling-of-qmc-points/index.html",
+      "/blog/qei-with-qmcpy/index.html",
+      "/blog/what-makes-a-sequence-low-discrepancy/index.html",
+      "/blog/a-qmcpy-quick-start/index.html"
     ]
   },
   {
