@@ -45,6 +45,8 @@
   per-post browser checks for the 18-post archive.
 - [x] Widened the shared blog reading column modestly and made title metadata
   responsive so realistic author names and dates wrap without clipping.
+- [x] Added a responsive, YAML-driven QMC Software Directory under Community,
+  separate from the organization-owned projects in Software.
 
 ## Underway
 
@@ -62,6 +64,9 @@
 ## Decisions and scope boundaries
 
 - Technical documentation stays with each software project.
+- The Website owns the broader community QMC software directory; the Software
+  section remains limited to projects maintained by the QMCSoftware
+  organization.
 - The primary GitHub link targets the QMCSoftware organization; project pages
   link to their respective repositories and documentation.
 - The site uses `qmcsoftware.org` as its canonical URL and custom domain;

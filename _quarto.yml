@@ -31,8 +31,12 @@ website:
         text: Publications
       - href: news/index.qmd
         text: News & Events
-      - href: community/index.qmd
-        text: Community
+      - text: Community
+        menu:
+          - href: community/index.qmd
+            text: Community overview
+          - href: community/software-directory.qmd
+            text: QMC Software Directory
     right:
       - href: https://github.com/QMCSoftware
         text: GitHub

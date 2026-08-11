@@ -1,0 +1,37 @@
+---
+title: "QMC Software Directory"
+description: "A community-maintained directory of software related to quasi-Monte Carlo methods."
+listing:
+  id: qmc-software-directory
+  contents:
+    - "../data/qmc-software.yml"
+  template: software-directory.ejs.md
+  sort-ui: false
+  filter-ui: false
+---
+
+This directory collects software related to quasi-Monte Carlo methods across
+organizations, programming languages, and application areas. It complements
+the [QMCSoftware project pages](../software/index.qmd), which describe software
+maintained by our organization.
+
+The information is community-maintained. Please verify current capabilities,
+support, and licensing with each project. Development status reflects the
+information most recently contributed to this directory.
+
+We use the following abbreviations:
+
+- **LD:** low discrepancy
+- **LDS:** low-discrepancy sequence
+- **QMC:** quasi-Monte Carlo
+
+::: {.column-page}
+::: {#qmc-software-directory}
+:::
+:::
+
+## Corrections and additions
+
+Please submit a pull request to the Website repository with changes to
+[`data/qmc-software.yml`](https://github.com/QMCSoftware/qmcsoftware-website/blob/main/data/qmc-software.yml),
+or email updates to [Fred Hickernell](mailto:hickernell@illinoistech.edu).

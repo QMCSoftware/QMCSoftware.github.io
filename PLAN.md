@@ -121,6 +121,8 @@ replace project documentation.
 ### Phase 7 — Develop community content
 
 - [x] Link to maintained community and contribution resources.
+- [x] Add a Website-owned, community-maintained directory of QMC software
+  across organizations and ecosystems.
 - [ ] Agree on the intended audience and approved community narrative.
 - [ ] Add verified governance, contributor, support, and participation
   information without duplicating maintained technical guidance.
