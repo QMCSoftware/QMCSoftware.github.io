@@ -2,122 +2,126 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://qmcsoftware.org/software/quasimc-jl.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/qmcpy.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/news/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/why-add-q-to-mc/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/visualizing-the-internals-of-object-classes-in-qmcpy/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.940Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/speeding-up-qmcpy-with-distributable-c-code/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.934Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/safe-handling-of-qmc-points/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.919Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/qei-with-qmcpy/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.917Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.914Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/digital-sequences-the-niederreiter-construction/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.910Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/bayesian-stopping-criteria/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.902Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/accelerating-rare-event-reliability-simulations-for-cerns-large-hadron-collider-using-qmcpy/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.899Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/a-qmcpy-quick-start/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.895Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/about.html</loc>
-    <lastmod>2026-08-11T16:01:35.892Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/accelerating-qmcpy-notebook-tests-with-parsl/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.897Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/analysis-of-qmc-efficiency-for-asian-option-pricing/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.902Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/cubmccltvec-vectorizing-the-cubmcclt-algorithm/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.902Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/gbm-qmcpy/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.914Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/linear-matrix-scrambling-and-digital-shift-for-halton/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.916Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/random-lattice-generators-are-not-bad/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.919Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/scipywrapper/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.934Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/visualizing-the-generated-samples-helps/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.936Z</lastmod>
-  </url>
-  <url>
-    <loc>https://qmcsoftware.org/blogs/what-makes-a-sequence-low-discrepancy/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.941Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/community/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.899Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/what-makes-a-sequence-low-discrepancy/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.899Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/visualizing-the-generated-samples-helps/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.893Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/scipywrapper/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.891Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/random-lattice-generators-are-not-bad/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.876Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/linear-matrix-scrambling-and-digital-shift-for-halton/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.874Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/gbm-qmcpy/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.872Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/cubmccltvec-vectorizing-the-cubmcclt-algorithm/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.860Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/analysis-of-qmc-efficiency-for-asian-option-pricing/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.860Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/accelerating-qmcpy-notebook-tests-with-parsl/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.855Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/about.html</loc>
+    <lastmod>2026-08-11T16:37:19.850Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/a-qmcpy-quick-start/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.852Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/accelerating-rare-event-reliability-simulations-for-cerns-large-hadron-collider-using-qmcpy/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.857Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/bayesian-stopping-criteria/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.860Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/digital-sequences-the-niederreiter-construction/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.872Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/qei-with-qmcpy/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.875Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/safe-handling-of-qmc-points/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.876Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/speeding-up-qmcpy-with-distributable-c-code/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.891Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/visualizing-the-internals-of-object-classes-in-qmcpy/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.897Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/blogs/why-add-q-to-mc/index.html</loc>
+    <lastmod>2026-08-11T16:37:19.899Z</lastmod>
+  </url>
+  <url>
+    <loc>https://qmcsoftware.org/community/software-directory.html</loc>
+    <lastmod>2026-08-11T16:37:19.899Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/news/fred-hickernell-siam-fellow/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/publications/index.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/lddata.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/qmctoolscl.html</loc>
-    <lastmod>2026-08-11T16:01:35.942Z</lastmod>
+    <lastmod>2026-08-11T16:37:19.900Z</lastmod>
   </url>
 </urlset>

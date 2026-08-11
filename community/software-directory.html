@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Open-source quasi-Monte Carlo software and data from QMCSoftware.">
+<meta name="description" content="A community-maintained directory of software related to quasi-Monte Carlo methods.">
 
-<title>Software – QMCSoftware</title>
+<title>QMC Software Directory – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -37,6 +37,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -74,8 +76,67 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-qmc-software-directory .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-name','listing-url','listing-related','listing-description','listing-language','listing-status','listing-contact',{ data: ['index'] },{ data: ['categories'] }],
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-name","listing-url","listing-related","listing-description","listing-language","listing-status","listing-contact"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-qmc-software-directory'] = new List('listing-qmc-software-directory', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -101,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../software/index.html" aria-current="page"> 
+    <a class="nav-link" href="../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
@@ -148,20 +209,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#corrections-and-additions" id="toc-corrections-and-additions" class="nav-link active" data-scroll-target="#corrections-and-additions">Corrections and additions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Software</h1>
+<h1 class="title">QMC Software Directory</h1>
 </div>
 
 <div>
   <div class="description">
-    Open-source quasi-Monte Carlo software and data from QMCSoftware.
+    A community-maintained directory of software related to quasi-Monte Carlo methods.
   </div>
 </div>
 
@@ -178,32 +245,488 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>QMCSoftware brings together projects that support quasi-Monte Carlo work across programming languages, sequence generation, numerical integration, and shared low-discrepancy construction data.</p>
-<div class="software-grid">
-<section id="qmcpy" class="level3 software-card">
-<h3 class="anchored" data-anchor-id="qmcpy">QMCPy</h3>
-<p>Quasi-Monte Carlo community software in Python, with modular point generators, measure transforms, integrands, and adaptive stopping criteria.</p>
-<p><a href="../software/qmcpy.html">Explore QMCPy →</a></p>
-</section>
-<section id="qmctoolscl" class="level3 software-card">
-<h3 class="anchored" data-anchor-id="qmctoolscl">QMCToolsCL</h3>
-<p>Quasi-Monte Carlo sequence generators implemented in OpenCL and C.</p>
-<p><a href="../software/qmctoolscl.html">Explore QMCToolsCL →</a></p>
-</section>
-<section id="quasimc.jl" class="level3 software-card">
-<h3 class="anchored" data-anchor-id="quasimc.jl">QuasiMC.jl</h3>
-<p>A Julia port of QMCPy for quasi-Monte Carlo point generation, measure transforms, and adaptive high-dimensional integration.</p>
-<p><a href="../software/quasimc-jl.html">Explore QuasiMC.jl →</a></p>
-</section>
-<section id="lddata" class="level3 software-card">
-<h3 class="anchored" data-anchor-id="lddata">LDData</h3>
-<p>Low-discrepancy generating vectors and matrices, together with proposed simple text formats for sharing them.</p>
-<p><a href="../software/lddata.html">Explore LDData →</a></p>
-</section>
+<p>This directory collects software related to quasi-Monte Carlo methods across organizations, programming languages, and application areas. It complements the <a href="../software/index.html">QMCSoftware project pages</a>, which describe software maintained by our organization.</p>
+<p>The information is community-maintained. Please verify current capabilities, support, and licensing with each project. Development status reflects the information most recently contributed to this directory.</p>
+<p>We use the following abbreviations:</p>
+<ul>
+<li><strong>LD:</strong> low discrepancy</li>
+<li><strong>LDS:</strong> low-discrepancy sequence</li>
+<li><strong>QMC:</strong> quasi-Monte Carlo</li>
+</ul>
+<div class="column-page">
+<div id="listing-qmc-software-directory" class="quarto-listing quarto-listing-container-custom">
+<div class="qmc-software-table-wrap">
+<table class="qmc-software-table">
+<caption class="visually-hidden">
+Community-maintained directory of quasi-Monte Carlo software
+</caption>
+<thead>
+<tr>
+<th scope="col">
+Software
+</th>
+<th scope="col">
+Language
+</th>
+<th scope="col">
+Development status
+</th>
+<th scope="col">
+Contact
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Software">
+<a href="https://www.boost.org/doc/libs/latest/doc/html/boost_random/reference.html#boost_random.reference.concepts.quasi_random_number_generator">Boost Random Number Library</a><span class="software-description">Part of the Boost C++ Libraries, offering a wide range of random number generators, including some LDS </span>
+</td>
+<td data-label="Language">
+C++
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span aria-label="No contact listed">—</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://botorch.org/docs/samplers">BoTorch</a><span class="software-description">Bayesian optimization library that leverages PyTorch’s (Q)MC samplers </span>
+</td>
+<td data-label="Language">
+Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>Meta / BoTorch developers</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://www.broda.co.uk">BRODA</a><span class="software-description">Commercial software offering a range of QMC methods for financial modeling and risk analysis </span>
+</td>
+<td data-label="Language">
+C++ / Fortran
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<a href="mailto:info@broda.co.uk">Sergei Kucherenko</a>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://chaospy.readthedocs.io/en/master/user_guide/fundamentals/quasi_random_samples.html">Chaospy</a><span class="software-description">Python library for uncertainty quantification with quasi-random sampling rules including Halton, Hammersley, Korobov, and Sobol sequences </span>
+</td>
+<td data-label="Language">
+Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>Chaospy developers</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://snl-dakota.github.io/docs/6.19.0/users/usingdakota/reference/method-sampling-sample_type-low_discrepancy.html">Dakota</a><span class="software-description">Software toolkit for optimization and uncertainty quantification, including support for lattices and digital nets </span>
+</td>
+<td data-label="Language">
+C++
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>Pieterjan Robbe</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://people.cs.kuleuven.be/~dirk.nuyens/fast-cbc/">Fast CBC constructions</a><span class="software-description">Matlab/Octave routines for fast component-by-component construction of rank-1 lattice rules, lattice sequences, and polynomial lattice sequences </span>
+</td>
+<td data-label="Language">
+MATLAB / Octave
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>Dirk Nuyens</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://www.mathworks.com/matlabcentral/fileexchange/64375-guaranteed-automatic-integration-library">GAIL</a><span class="software-description">Guaranteed Automatic Integration Library for one-, multi-, and infinite-dimensional integration with rigorous error guarantees </span>
+</td>
+<td data-label="Language">
+MATLAB
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>Sou-Cheng Choi</span><span>Fred Hickernell</span><span>Yuhan Ding</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://www.gnu.org/software/gsl/doc/html/qrng.html">GNU Scientific Library</a><span class="software-description">C library providing quasi-random sequence generators including Niederreiter, Sobol, Halton, and reverse Halton sequences </span>
+</td>
+<td data-label="Language">
+C
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>GSL Team</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://github.com/llxu2017/halton">Halton</a><span class="software-description">Random-start randomly permuted Halton sequences </span>
+</td>
+<td data-label="Language">
+C++
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span aria-label="No contact listed">—</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://oneapi-spec.uxlfoundation.org/specifications/oneapi/v1.1-rev-1/elements/onemkl/source/domains/rng/engines-basic-random-number-generators">Intel oneMKL</a><span class="software-description">High-performance math library whose RNG domain includes Sobol and Niederreiter quasi-random number generators </span>
+</td>
+<td data-label="Language">
+C++ / Data Parallel C++
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>Intel / oneAPI developers</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://github.com/umontreal-simul/latnetbuilder">LatNet Builder</a><span class="software-description">Library for constructing LD lattice rules and digital nets </span>
+</td>
+<td data-label="Language">
+C++ / Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span><span class="software-status">Collaboration welcome</span>
+</td>
+<td data-label="Contact">
+<span>Pierre L’Ecuyer</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://web.maths.unsw.edu.au/~fkuo/lattice/index.html">Lattice</a> / <a href="https://web.maths.unsw.edu.au/~fkuo/sobol/index.html">Sobol’</a><span class="software-description">Generating vectors for Sobol’ sequences and lattice rules </span>
+</td>
+<td data-label="Language">
+plain text
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>Frances Kuo</span><span>Stephen Joe</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://github.com/QMCSoftware/LDData">LDData</a><span class="software-description">Database of LD generators </span>
+</td>
+<td data-label="Language">
+plain text
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span><span class="software-status">Collaboration welcome</span>
+</td>
+<td data-label="Contact">
+<a href="https://alegresor.github.io">Aleksei Sorokin</a>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://people.cs.kuleuven.be/~dirk.nuyens/qmc-generators/">Magic Point Shop</a><span class="software-description">QMC point generators and generating vectors for digital sequences and lattice sequences </span>
+</td>
+<td data-label="Language">
+C++, MATLAB, Python, plain text
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>Dirk Nuyens</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://www.mathworks.com/help/stats/generating-quasi-random-numbers.html">MATLAB Statistics &amp; Machine Learning Toolbox</a><span class="software-description">Produces quasi-random samples in the unit hypercube, including Sobol and Halton sequences</span>
+</td>
+<td data-label="Language">
+MATLAB
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<a href="mailto:lwalsh@mathworks.com">Liam Walsh</a>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://support.nag.com/numeric/nl/nagdoc_latest/clhtml/g05/g05intro.html">NAG Quasi-Random Number Generators</a><span class="software-description">NAG’s implementation of quasi-random number generators for use in Monte Carlo simulations </span>
+</td>
+<td data-label="Language">
+Fortran, C, C++
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span aria-label="No contact listed">—</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://docs.nvidia.com/cuda/curand/index.html">NVIDIA cuRAND</a><span class="software-description">NVIDIA’s library for generating random and quasi-random numbers on GPUs </span>
+</td>
+<td data-label="Language">
+C++ / CUDA
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span aria-label="No contact listed">—</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://openturns.github.io/openturns/latest/user_manual/_generated/openturns.LowDiscrepancySequence.html">OpenTURNS</a><span class="software-description">Open-source uncertainty quantification platform with LDS including Faure, Halton, reverse Halton, Haselgrove, and Sobol sequences </span>
+</td>
+<td data-label="Language">
+Python / C++
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>Michaël Baudin</span><span>Anne Dutfoy</span><span>Bertrand Iooss</span><span>Anne-Laure Popelin</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://artowen.su.domains/code/">Owen’s Scrambled Points</a><span class="software-description">Nested uniform scrambling of Sobol’ sequences and pointer to randomized Halton sequences </span>
+</td>
+<td data-label="Language">
+R
+</td>
+<td data-label="Development status">
+<span class="software-status">Mature</span>
+</td>
+<td data-label="Contact">
+<span>Art Owen</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://pydoe3.readthedocs.io/en/latest/reference/low_discrepancy_sequences/">PyDOE3</a><span class="software-description">Python design-of-experiments package with LD designs including Sukharev grids, Sobol, Halton, rank-1 lattices, Korobov sequences, and Cranley-Patterson randomization </span>
+</td>
+<td data-label="Language">
+Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>PyDOE3 developers</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://pytorch.org/docs/stable/generated/torch.quasirandom.SobolEngine.html">PyTorch Sobol Engine</a><span class="software-description">PyTorch’s implementation of the Sobol sequence for generating LD samples in machine learning applications </span>
+</td>
+<td data-label="Language">
+Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span aria-label="No contact listed">—</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://arxiv.org/abs/2307.15584">QMC Algorithms for Graphics Software</a><span class="software-description">Reference with compact copy-and-paste algorithms for LDS </span>
+</td>
+<td data-label="Language">
+C++ / CUDA-style pseudocode
+</td>
+<td data-label="Development status">
+<span class="software-status">Reference</span>
+</td>
+<td data-label="Contact">
+<span>Alexander Keller; Carsten Wächter; Nikolaus Binder</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://people.cs.kuleuven.be/~dirk.nuyens/qmc4pde/">QMC4PDE</a><span class="software-description">Software for constructing randomly shifted lattice rules and interlaced polynomial lattice rules for elliptic PDEs with random diffusion coefficients </span>
+</td>
+<td data-label="Language">
+Python / MATLAB / C++
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>Frances Y. Kuo; Dirk Nuyens</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://qmcpy.org">QMCPy</a><span class="software-related">Related: <a href="https://github.com/QMCSoftware/QMCToolsCL">QMCToolsCL</a></span><span class="software-description">Multi-purpose library featuring various LDS and data-driven error estimation </span>
+</td>
+<td data-label="Language">
+Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span><span class="software-status">Collaboration welcome</span>
+</td>
+<td data-label="Contact">
+<span>Sou-Cheng Choi</span><a href="https://github.com/fjhickernell">Fred Hickernell</a><a href="https://alegresor.github.io">Aleksei Sorokin</a>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://cran.r-project.org/web/packages/qrng/index.html">qrng</a><span class="software-description">R package for generating LDS, including Sobol and Halton sequences, for statistical computing and data analysis </span>
+</td>
+<td data-label="Language">
+R
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<a href="mailto:mhofert@hku.hk">Marius Hofert</a><span>Christiane Lemieux</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://docs.sciml.ai/QuasiMonteCarlo/stable/">QuasiMonteCarlo.jl</a><span class="software-description">Julia package for generating LDS and performing QMC integration, designed for high-performance scientific computing </span>
+</td>
+<td data-label="Language">
+Julia
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<a href="https://julialang.org/slack/">Chris Rackauckas</a>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://cran.r-project.org/web/packages/randtoolbox/index.html">randtoolbox</a><span class="software-description">R package providing pseudo-random and quasi-random generators, including Torus, Sobol, Halton, and Van der Corput sequences </span>
+</td>
+<td data-label="Language">
+R
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>Christophe Dutang</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://docs.scipy.org/doc/scipy/reference/stats.qmc.html">scipy.stats.qmc</a><span class="software-description">Part of the SciPy library, providing LDS generators and sampling methods for scientific computing in Python </span>
+</td>
+<td data-label="Language">
+Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>Pamphile Roy</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://github.com/umontreal-simul/ssj">Stochastic Simulation in Java (SSJ)</a><span class="software-description">Java library for stochastic simulation, including LDS generators and sampling methods </span>
+</td>
+<td data-label="Language">
+Java
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>Pierre L’Ecuyer</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://www.tensorflow.org/probability/api_docs/python/tfp/mcmc/sample_halton_sequence">TensorFlow Probability</a><span class="software-description">TensorFlow function for generating deterministic or randomized Halton LDS </span>
+</td>
+<td data-label="Language">
+Python
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>TensorFlow Probability developers</span>
+</td>
+</tr>
+<tr>
+<td data-label="Software">
+<a href="https://github.com/UM-Bridge/umbridge">UM-Bridge</a><span class="software-description">Software framework for uncertainty quantification and modeling software packages </span>
+</td>
+<td data-label="Language">
+Multiple
+</td>
+<td data-label="Development status">
+<span class="software-status">Active</span>
+</td>
+<td data-label="Contact">
+<span>UM-Bridge team</span>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>Technical details, installation instructions, and contribution guidance remain with each project and are linked from its page.</p>
+<div class="listing-no-matching d-none">No matching items</div>
+<nav id="qmc-software-directory-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div>
+</div>
+<section id="corrections-and-additions" class="level2">
+<h2 class="anchored" data-anchor-id="corrections-and-additions">Corrections and additions</h2>
+<p>Please submit a pull request to the Website repository with changes to <a href="https://github.com/QMCSoftware/qmcsoftware-website/blob/main/data/qmc-software.yml"><code>data/qmc-software.yml</code></a>, or email updates to <a href="mailto:hickernell@illinoistech.edu">Fred Hickernell</a>.</p>
 
 
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
