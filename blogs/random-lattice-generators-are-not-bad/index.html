@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-04-27">
-<meta name="description" content="Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.">
+<meta name="author" content="Bocheng David Zhang">
+<meta name="dcterms.date" content="2024-05-13">
+<meta name="description" content="Random lattice generating vectors and comparisons of mean, median, and randomly shifted lattice rules.">
 
-<title>Fred Hickernell Named a 2026 SIAM Fellow – QMCSoftware</title>
+<title>Random Lattice Generators are Not Bad – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,6 +28,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -47,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,10 +113,39 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -138,35 +203,53 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mathematics-of-generating-vectors" id="toc-mathematics-of-generating-vectors" class="nav-link active" data-scroll-target="#mathematics-of-generating-vectors">Mathematics of Generating Vectors</a></li>
+  <li><a href="#code-examples" id="toc-code-examples" class="nav-link" data-scroll-target="#code-examples">Code Examples</a></li>
+  <li><a href="#lattice-declaration-and-the-gen_samples-function" id="toc-lattice-declaration-and-the-gen_samples-function" class="nav-link" data-scroll-target="#lattice-declaration-and-the-gen_samples-function">Lattice Declaration and the <code>gen_samples</code> Function</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
+  <li><a href="#comparison-between-lattice-generators" id="toc-comparison-between-lattice-generators" class="nav-link" data-scroll-target="#comparison-between-lattice-generators">Comparison Between Lattice Generators</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Fred Hickernell Named a 2026 SIAM Fellow</h1>
+<h1 class="title">Random Lattice Generators are Not Bad</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Recognition</div>
-    <div class="quarto-category">Community</div>
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Lattice Rules</div>
+    <div class="quarto-category">Quasi-Monte Carlo</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.
+    Random lattice generating vectors and comparisons of mean, median, and randomly shifted lattice rules.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bocheng David Zhang </p>
+          </div>
+  </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Last revised</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 27, 2026</p>
+      <p class="date">May 13, 2024</p>
     </div>
   </div>
   
@@ -178,21 +261,152 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Illinois Tech Professor Fred Hickernell was named to the 2026 class of Fellows of the Society for Industrial and Applied Mathematics (SIAM). The distinction recognizes his mathematical and statistical innovations in high-dimensional integration and approximation, as well as his scientific leadership.</p>
-<p>The Illinois Tech article also highlights the open-source software developed by Hickernell’s research group and collaborators, including <a href="../../software/qmcpy.html">QMCPy</a>, which makes quasi-Monte Carlo methods available in Python.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Source:</strong> Illinois Institute of Technology, April 27, 2026.</p>
-<p><a href="https://www.iit.edu/news/applied-mathematics-professor-honored-siam-fellow" class="btn btn-primary">Read the original Illinois Tech article</a></p>
-</div>
-</div>
-</div>
+<p>This post discusses random lattice generating vectors in QMCPy and compares mean, median, and randomly shifted lattice rules.</p>
+<p>Generating vectors are used by lattice generators to compute point sets. Previous works [1, 2, 3, 4] commonly applied greedy component-by-component (CBC) algorithms to construct generating vectors. However, this process is dependent on weight vectors and the decay of Fourier coefficients. To this end, Takashi Goda and Pierre L’Ecuyer suggested in their work [5] that generating vectors do not require a predetermined weight vector and a measure of the decay of Fourier coefficients to reach high precision; instead, random generators can also achieve desirable results. Recently, we implemented random generating vectors into QMCPy, and the results were quite promising. This blog explores the usage of random generating vectors in QMCPy through code examples. Before that, however, we shall consider some mathematics behind generating vectors.</p>
+<section id="mathematics-of-generating-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="mathematics-of-generating-vectors">Mathematics of Generating Vectors</h2>
+<p>Given <span class="math inline">\(N &gt; 2\)</span> and generating vector <span class="math inline">\(z \in \{1,\dots,N-1\}^d\)</span>, define <span class="math inline">\(P_N := P_{N,z} := \{\boldsymbol{x}_0,\boldsymbol{x}_1,\dots,
+\boldsymbol{x}_{N-1}\} \subset [0,1)^d\)</span>, where</p>
+<p><span class="math display">\[
+x_n = \left\{\frac{nz}{N}\right\},
+\qquad n = 0,1,\dots,N-1,
+\]</span></p>
+<p>and <span class="math inline">\(\{s\} = s-\lfloor s \rfloor\)</span> denotes the fractional part of each component. The significance of the generating vector is that it determines the point set <span class="math inline">\(P_N\)</span>.</p>
+<p>The following are plots of lattices generated by QMCPy when <span class="math inline">\(N\)</span> is a power of 2:</p>
+<figure id="fig-lattice-points" class="figure">
+<img src="figures/lattice-points.png" alt="Lattice point sets generated by random lattice generators" class="figure-img">
+<figcaption>
+Figure 1: Lattices generated using <code>generating_vector=16</code> and <code>seed=136</code>. These plots can be conditionally reproduced in the <a href="https://github.com/QMCSoftware/QMCSoftware/blob/develop/demos/lattice_random_generator.ipynb">lattice random generator notebook</a>.
+</figcaption>
+</figure>
+<p>While samples in [5] were produced by a prime sample size, QMCPy utilizes sample sizes that are powers of 2 due to its expectation of extensible generating vectors. The usage of the generating vector comes from quasi-Monte Carlo integration using a point set <span class="math inline">\(P_N\)</span>:</p>
+<p><span class="math display">\[
+I(f) := \int_{[0,1)^d} f(x) \, \mathrm{d}x
+\approx I(f;P_N) = \frac{1}{N}\sum_{n=0}^{N-1} f(x_n).
+\]</span></p>
+<p>In their work, Goda and L’Ecuyer approximated <span class="math inline">\(I(f)\)</span> by the median rule, <span class="math inline">\(\operatorname{median}(I(f;P_{N,z_1}),\dots,I(f;P_{N,z_r}))\)</span> [5], while QMCPy utilizes mean rules, <span class="math inline">\(\operatorname{mean}(I(f;P_{N,z_1}),\dots,I(f;P_{N,z_r}))\)</span>. We performed numerical experiments in the final section to have a glimpse of the efficiency of both rules.</p>
+</section>
+<section id="code-examples" class="level2">
+<h2 class="anchored" data-anchor-id="code-examples">Code Examples</h2>
+<p>In this section, we will explore the basic features of the <code>Lattice</code> class and the <code>gen_samples</code> method. For further documentation, see the <a href="https://qmcpy.readthedocs.io/en/latest/algorithms.html#module-qmcpy.discrete_distribution.lattice.lattice">QMCPy Lattice documentation</a>.</p>
+<p>The generating vector is the core of the <code>Lattice</code> object. Currently, QMCPy enables the following types of cubature schemes:</p>
+<ol type="1">
+<li>A hard-coded <span class="math inline">\(d\)</span>-dimensional array.</li>
+<li>A file that contains a hard-coded generating vector.</li>
+<li>A totally random generator produced by integer input.</li>
+</ol>
+<p>We will focus on the recently developed third type of generating vector because it is a direct application of the mathematics discussed above.</p>
+</section>
+<section id="lattice-declaration-and-the-gen_samples-function" class="level2">
+<h2 class="anchored" data-anchor-id="lattice-declaration-and-the-gen_samples-function">Lattice Declaration and the <code>gen_samples</code> Function</h2>
+<p>A <code>Lattice</code> object in QMCPy requires the dimension and the generating vector of choice. Other arguments such as <code>randomize</code> or <code>seed</code> are optional.</p>
+<p>The following code is a short example used to illustrate the declaration of a <code>Lattice</code> object and the <code>gen_samples</code> function.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lattice <span class="op">=</span> qp.Lattice(dimension<span class="op">=</span><span class="dv">2</span>, generating_vector<span class="op">=</span><span class="dv">21</span>, seed<span class="op">=</span><span class="dv">120</span>) <span class="co"># intialize the lattice</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lattice) <span class="co"># print information about the lattice</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lattice.gen_samples(n<span class="op">=</span><span class="dv">4</span>)) <span class="co"># print the first 4 points in the lattice</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The output is listed below:</p>
+<pre class="text"><code>Lattice (AbstractLDDiscreteDistribution)
+    d               2^(1)
+    replications    1
+    randomize       SHIFT
+    gen_vec_source  random
+    order           RADICAL INVERSE
+    n_limit         2^(21)
+    entropy         120
+[[0.34548142 0.46736834]
+ [0.84548142 0.96736834]
+ [0.59548142 0.21736834]
+ [0.09548142 0.71736834]]</code></pre>
+</section>
+<section id="integration" class="level2">
+<h2 class="anchored" data-anchor-id="integration">Integration</h2>
+<p>To integrate in QMCPy, one needs to declare the dimension, the tolerance, a low discrepancy sequence, and the true measure used to transform the objective function to the <span class="math inline">\(d\)</span>-dimensional unit cube. In the following example, the Gaussian measure is applied using a lattice as the low discrepancy sequence. The Keister function [6] is used as an example.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>tol <span class="op">=</span> <span class="fl">1E-3</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data_random <span class="op">=</span> qp.CubQMCLatticeG(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    qp.Keister(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        qp.Gaussian(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            qp.Lattice(d, generating_vector<span class="op">=</span><span class="dv">26</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="dv">0</span>, covariance<span class="op">=</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    abs_tol <span class="op">=</span> tol).integrate()[<span class="dv">1</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Integration data from a random lattice generator:"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_random)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>data_default <span class="op">=</span> qp.CubQMCLatticeG(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    qp.Keister(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        qp.Gaussian(</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            qp.Lattice(d),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="dv">0</span>, covariance<span class="op">=</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    abs_tol <span class="op">=</span> tol).integrate()[<span class="dv">1</span>]</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Integration data from the default lattice generator:"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_default)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Abbreviated output is listed below:</p>
+<pre class="text"><code>Integration data from a random lattice generator:
+LDTransformData (AccumulateData Object)
+    solution        1.136
+    comb_bound_low  1.135
+    comb_bound_high 1.137
+    comb_flags      1
+    n_total         2^(17)
+    n               2^(17)
+    time_integrate  0.642
+Lattice (DiscreteDistribution Object)
+    d               5
+    dvec            [0 1 2 3 4]
+    randomize       1
+    order           natural
+    gen_vec         [       1 29661439 12472787 51447409 58451577]
+    entropy         39936265299936103070191134814877412899
+    spawn_key       ()
+
+Integration data from the default lattice generator:
+LDTransformData (AccumulateData Object)
+    solution        1.135
+    comb_bound_low  1.134
+    comb_bound_high 1.135
+    comb_flags      1
+    n_total         2^(17)
+    n               2^(17)
+    time_integrate  0.626
+Lattice (DiscreteDistribution Object)
+    d               5
+    dvec            [0 1 2 3 4]
+    randomize       1
+    order           natural
+    gen_vec         [     1 182667 469891 498753 110745]
+    entropy         230872234427376376523997454058047592711
+    spawn_key       ()</code></pre>
+<p>One can see that the default generator performs slightly better than the random generator, as the time to integrate is about <span class="math inline">\(0.16\)</span> seconds lower.</p>
+</section>
+<section id="comparison-between-lattice-generators" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-between-lattice-generators">Comparison Between Lattice Generators</h2>
+<p>To have a further glimpse into the performance of lattice generators, we compared the error of three types of random generators with respect to the sample size. The blue line depicts a random generator that applies the median rule <span class="math inline">\(\operatorname{median}(I(f;P_{N,z_1}),\dots,I(f;P_{N,z_r}))\)</span>; the orange line depicts a generator that applies the mean rule <span class="math inline">\(\operatorname{mean}(I(f;P_{N,z_1}),\dots,I(f;P_{N,z_r}))\)</span>; the green line is a randomly shifted hard-coded generator.</p>
+<figure id="fig-mean-vs-median" class="figure">
+<img src="figures/mean-vs-median.png" alt="Comparison between lattice generators using mean, median, and random shifts" class="figure-img">
+<figcaption>
+Figure 2: A comparison between lattice generators. This plot can be conditionally reproduced in the <a href="https://github.com/QMCSoftware/QMCSoftware/blob/develop/demos/lattice_random_generator.ipynb">lattice random generator notebook</a>.
+</figcaption>
+</figure>
+<p>Here, we used sample sizes <span class="math inline">\(N\)</span> ranging from <span class="math inline">\(2^6\)</span> to <span class="math inline">\(2^{18}\)</span> and <span class="math inline">\(r = 11\)</span>. We compared the results of integrating the 2-dimensional Keister integral over each sample size using each type of lattice generator. To reduce sampling variance, we repeated the trials <span class="math inline">\(25\)</span> times and computed the averaged result.</p>
+<p>As shown in the plot, the mean of random shifts (green) outperforms the random generator using median rules (blue), which in turn outperforms the random generator using mean rules (orange). These results support findings in [5]. More numerical experiments under different circumstances should be conducted before making a conclusion, but current work suggests that random lattice generators have a lot of potential.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Korobov, N. M. The approximate computation of multiple integrals. <em>Doklady Akademii Nauk SSSR</em> 124, 1207-1210 (1959).</li>
+<li>Sloan, I. H. QMC integration: beating intractability by weighting the coordinate directions. In <em>Monte Carlo and Quasi-Monte Carlo Methods 2000</em> (eds.&nbsp;Fang, K. T., Hickernell, F. J., &amp; Niederreiter, H.) 103-123 (Springer-Verlag, Berlin, 2002).</li>
+<li>Kuo, F. Y. Component-by-component constructions achieve the optimal rate of convergence for multivariate integration in weighted Korobov and Sobolev spaces. <em>Journal of Complexity</em> 19, 301-320 (2003).</li>
+<li>Nuyens, D. &amp; Cools, R. Fast component-by-component construction. In <em>Monte Carlo and Quasi-Monte Carlo Methods 2004</em> (eds.&nbsp;Niederreiter, H. &amp; Talay, D.) 373-387 (Springer-Verlag, Berlin, 2006).</li>
+<li>Goda, T. &amp; L’Ecuyer, P. Construction-free median quasi-Monte Carlo rules for function spaces with unspecified smoothness and general weights. <em>SIAM Journal on Scientific Computing</em> 44, A2765-A2788 (2022). <a href="https://doi.org/10.1137/22M1473625">https://doi.org/10.1137/22M1473625</a></li>
+<li>Keister, B. D. Multidimensional quadrature algorithms. <em>Computers in Physics</em> 10, 119-122 (1996).</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

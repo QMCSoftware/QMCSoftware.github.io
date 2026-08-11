@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Quasi-Monte Carlo sequence generators in OpenCL and C.">
+<meta name="author" content="Fred J. Hickernell">
+<meta name="dcterms.date" content="2020-07-08">
+<meta name="description" content="Discrepancy as a measure of uniformity and why low-discrepancy sequences improve QMC integration.">
 
-<title>QMCToolsCL – QMCSoftware</title>
+<title>What Makes a Sequence Low Discrepancy? – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,23 +32,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,17 +78,46 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">QMCSoftware</span>
     </a>
   </div>
@@ -97,27 +128,27 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software/index.html"> 
+    <a class="nav-link" href="../../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blogs/index.html"> 
+    <a class="nav-link" href="../../blogs/index.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications/index.html"> 
+    <a class="nav-link" href="../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../news/index.html"> 
+    <a class="nav-link" href="../../news/index.html"> 
 <span class="menu-text">News &amp; Events</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../community/index.html"> 
+    <a class="nav-link" href="../../community/index.html"> 
 <span class="menu-text">Community</span></a>
   </li>  
 </ul>
@@ -142,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#maintained-resources" id="toc-maintained-resources" class="nav-link active" data-scroll-target="#maintained-resources">Maintained resources</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -151,19 +182,36 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">QMCToolsCL</h1>
-</div>
+<h1 class="title">What Makes a Sequence Low Discrepancy?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Quasi-Monte Carlo</div>
+    <div class="quarto-category">Low-Discrepancy Sequences</div>
+    <div class="quarto-category">Discrepancy</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    Quasi-Monte Carlo sequence generators in OpenCL and C.
+    Discrepancy as a measure of uniformity and why low-discrepancy sequences improve QMC integration.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fred J. Hickernell </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Last revised</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 8, 2020</p>
+    </div>
+  </div>
   
     
   </div>
@@ -173,20 +221,141 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="project-summary">
-<p>QMCToolsCL provides quasi-Monte Carlo sequence generators implemented in OpenCL and C.</p>
-</div>
-<div class="project-links">
-<p><a href="https://qmcsoftware.github.io/QMCToolsCL/" class="btn btn-primary">Documentation</a> <a href="https://github.com/QMCSoftware/QMCToolsCL" class="btn btn-outline-primary">GitHub repository</a></p>
-</div>
-<section id="maintained-resources" class="level2">
-<h2 class="anchored" data-anchor-id="maintained-resources">Maintained resources</h2>
-<p>The project’s technical documentation and source repository are the authoritative places for supported generators, interfaces, installation, and development information.</p>
-<ul>
-<li><a href="https://qmcsoftware.github.io/QMCToolsCL/">QMCToolsCL documentation</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL">Source code</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL/blob/main/CONTRIBUTING.md">Contributing guidelines</a></li>
-</ul>
+<p>This post introduces discrepancy as a way to measure uniformity and explains why low-discrepancy sequences improve QMC integration.</p>
+<p>The first blog post, <a href="../../blogs/why-add-q-to-mc/index.html">Why Add Q to MC?</a>, introduced the concept of evenly spread points, which are commonly referred to as <em>low discrepancy</em> (LD) points. This is in contrast to independent and identically distributed (IID) points.</p>
+<p>Consider two sequences,</p>
+<p><span class="math display">\[
+\boldsymbol{T}_1, \boldsymbol{T}_2, \ldots
+\overset{\text{IID}}{\sim} \mathcal{U}[0,1]^d,
+\]</span></p>
+<figure id="fig-iid-uniform-points" class="figure">
+<img src="figures/iid_uniform_pts.png" alt="64 IID standard uniform points in two dimensions" class="figure-img">
+<figcaption>
+Figure 1: 64 IID standard uniform points in 2 dimensions.
+</figcaption>
+</figure>
+<p>and</p>
+<p><span class="math display">\[
+\boldsymbol{X}_1, \boldsymbol{X}_2, \ldots
+\overset{\text{LD}}{\sim} \mathcal{U}[0,1]^d.
+\]</span></p>
+<figure id="fig-shifted-lattice-points" class="figure">
+<img src="figures/lattice_pts.png" alt="64 shifted lattice points in two dimensions" class="figure-img">
+<figcaption>
+Figure 2: 64 shifted lattice points in 2 dimensions.
+</figcaption>
+</figure>
+<p>Both sequences are expected to look like points spread uniformly over the unit cube, <span class="math inline">\([0,1]^d\)</span>. The first sequence must be random, or as random looking as our deterministic random number generators can make it. Since the points are independent, the location of any <span class="math inline">\(\boldsymbol{T}_i\)</span> has no bearing on the location of any other <span class="math inline">\(\boldsymbol{T}_j\)</span>. Removing a point at random does not affect the IID property.</p>
+<p>The second sequence may be random or deterministic. Let <span class="math inline">\(F_{\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}}\)</span> denote the empirical distribution function of the first <span class="math inline">\(n\)</span> points of this sequence, i.e., the probability distribution that assigns a probability of <span class="math inline">\(1/n\)</span> to each location <span class="math inline">\(\boldsymbol{X}_i\)</span>. For <span class="math inline">\(\boldsymbol{X}_1, \boldsymbol{X}_2, \ldots\)</span> to be LD, <span class="math inline">\(F_{\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}}\)</span> should be close to the uniform probability distribution, <span class="math inline">\(F_{\text{unif}}: \boldsymbol{x} \mapsto x_1 \cdots x_d\)</span>.</p>
+<p>“Close” implies that we can measure how far apart two distributions are. We call this measure the <em>discrepancy</em>. Just like beauty is in the eye of the beholder, there are different measurements of discrepancy. They tend to take the form of the distance between the empirical distribution of the point set, <span class="math inline">\(F_{\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}}\)</span>, and the target measure, <span class="math inline">\(F_{\text{unif}}\)</span>. An example is the star discrepancy [1, (3.16)]:</p>
+<p><span class="math display">\[
+\operatorname{disc}(\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\})
+:=
+\sup_{\boldsymbol{x} \in [0,1]^d}
+\left|
+F_{\text{unif}}(\boldsymbol{x})
+- F_{\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}}(\boldsymbol{x})
+\right|.
+\]</span></p>
+<p>This quantity is known in the statistics literature as a Kolmogorov-Smirnov goodness-of-fit statistic. This discrepancy is the maximum absolute difference between the volume of the box <span class="math inline">\([\boldsymbol{0}, \boldsymbol{x}]^d\)</span> and the proportion of the points <span class="math inline">\(\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}\)</span> that lie in that box. Ideally, these should be the same, but practically they will be at least a bit different.</p>
+<p>The computational cost of evaluating the star discrepancy can be rather large, typically at least <span class="math inline">\(\mathcal{O}(n^d)\)</span> operations. A family of computationally cheaper discrepancies is defined in terms of a kernel, <span class="math inline">\(K: [0,1]^d \times [0,1]^d \to \mathbb{R}\)</span>, which satisfies two crucial properties:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Symmetry:} \quad&amp;
+K(\boldsymbol{t}, \boldsymbol{x})
+= K(\boldsymbol{x}, \boldsymbol{t})
+\qquad \forall \boldsymbol{t}, \boldsymbol{x} \in [0,1]^d, \\
+\text{Positive definiteness:} \quad&amp;
+\boldsymbol{c}^{\mathsf{T}} \mathsf{K} \boldsymbol{c} &gt; 0,
+\text{ where }
+\mathsf{K}
+= \bigl(K(\boldsymbol{x}_i, \boldsymbol{x}_j)\bigr)_{i,j=1}^n, \\
+&amp; \qquad \qquad
+\forall \boldsymbol{c} \ne \boldsymbol{0},
+\text{ distinct } \boldsymbol{x}_1, \boldsymbol{x}_2, \ldots
+\in [0,1]^d.
+\end{aligned}
+\]</span></p>
+<p>For such a kernel, we may define a discrepancy as</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\operatorname{disc}(\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}) \\
+&amp;\quad :=
+\int_{[0,1]^d \times [0,1]^d}
+K(\boldsymbol{t}, \boldsymbol{x})
+\, \mathrm{d}
+\left(F_{\text{unif}}
+- F_{\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}}\right)
+(\boldsymbol{t})
+\, \mathrm{d}
+\left(F_{\text{unif}}
+- F_{\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\}}\right)
+(\boldsymbol{x}) \\
+&amp;\quad =
+\int_{[0,1]^d \times [0,1]^d}
+K(\boldsymbol{t}, \boldsymbol{x})
+\, \mathrm{d}\boldsymbol{t}\,\mathrm{d}\boldsymbol{x}
+- \frac{2}{n}
+\sum_{i=1}^n
+\int_{[0,1]^d}
+K(\boldsymbol{x}_i, \boldsymbol{x})
+\, \mathrm{d}\boldsymbol{x} \\
+&amp;\qquad
++ \frac{1}{n^2}
+\sum_{i,j=1}^n K(\boldsymbol{x}_i, \boldsymbol{x}_j).
+\end{aligned}
+\]</span></p>
+<p>For example, the centered <span class="math inline">\(L^2\)</span>-discrepancy [2] is defined in terms of the kernel</p>
+<p><span class="math display">\[
+K(\boldsymbol{t}, \boldsymbol{x})
+=
+\prod_{k=1}^d
+\left[
+1
++ \frac{1}{2}|t_k - 1/2|
++ \frac{1}{2}|x_k - 1/2|
+- \frac{1}{2}|t_k - x_k|
+\right].
+\]</span></p>
+<p>After straightforward calculations it becomes</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\operatorname{disc}(\{\boldsymbol{X}_1, \ldots, \boldsymbol{X}_n\})
+=
+\left(\frac{13}{12}\right)^d
+- \frac{2}{n}
+\sum_{i=1}^n
+\prod_{k=1}^d
+\left(
+1
++ \frac{1}{2}|x_{ik} - 1/2|
+- \frac{1}{2}|x_{ik} - 1/2|^2
+\right) \\
+&amp;\qquad
++ \frac{1}{n^2}
+\sum_{i,j=1}^n
+\prod_{k=1}^d
+\left[
+1
++ \frac{1}{2}|x_{ik} - 1/2|
++ \frac{1}{2}|x_{jk} - 1/2|
+- \frac{1}{2}|x_{ik} - x_{jk}|
+\right].
+\end{aligned}
+\]</span></p>
+<p>This discrepancy only requires <span class="math inline">\(\mathcal{O}(dn^2)\)</span> operations to evaluate.</p>
+<p>LD sequences have discrepancies of <span class="math inline">\(\mathcal{O}(n^{-1+\epsilon})\)</span> for the discrepancies illustrated above. IID sequences have root mean square discrepancies of <span class="math inline">\(\mathcal{O}(n^{-1/2})\)</span>. This difference in asymptotic order can translate into orders of magnitude improvements in the accuracy of numerical solutions.</p>
+<p>For problems where <span class="math inline">\(d\)</span> is large, the discrepancies defined above do not decay so quickly. However, if these discrepancy definitions are modified to include <em>coordinate weights</em> [1, Section 4], then they retain their <span class="math inline">\(\mathcal{O}(n^{-1+\epsilon})\)</span> decay. Coordinate weights express the assumption that certain coordinates contribute more to the variation of the function than others.</p>
+<p>Demonstrating that a particular sequence is LD can be done by brute force computation, which requires in general <span class="math inline">\(\mathcal{O}(dn^2)\)</span> operations. For certain sequences matched with certain discrepancy definitions, this can be reduced to <span class="math inline">\(\mathcal{O}(dn)\)</span> operations. If <span class="math inline">\(n\)</span> is small enough, the search for an LD set can be performed using global optimization algorithms [3]. Number theoretic arguments are used to construct certain popular LD sequences [4, 5].</p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Dick, J., Kuo, F., &amp; Sloan, I. H. High dimensional integration: The quasi-Monte Carlo way. <em>Acta Numerica</em>, 22, 133-288 (2013).</li>
+<li>Hickernell, F. J. A generalized discrepancy and quadrature error bound. <em>Mathematics of Computation</em>, 67, 299-322 (1998).</li>
+<li>Winker, P., &amp; Fang, K. T. Application of threshold accepting to the evaluation of the discrepancy of a set of points. <em>SIAM Journal on Numerical Analysis</em>, 34, 2028-2042 (1997).</li>
+<li>Dick, J., &amp; Pillichshammer, F. <em>Digital Nets and Sequences: Discrepancy Theory and Quasi-Monte Carlo Integration</em>. Cambridge University Press, Cambridge (2010).</li>
+<li>Niederreiter, H. <em>Random Number Generation and Quasi-Monte Carlo Methods</em>. SIAM, Philadelphia (1992).</li>
+</ol>
 
 
 </section>
@@ -609,7 +778,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../../about.html">
 <p>About this site</p>
 </a>
   </li>  
@@ -621,5 +790,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

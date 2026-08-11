@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Quasi-Monte Carlo sequence generators in OpenCL and C.">
+<meta name="author" content="Jagadeeswaran Rathinavel and Fred J. Hickernell">
+<meta name="dcterms.date" content="2023-02-06">
+<meta name="description" content="Bayesian stopping criteria for QMC integration and efficient credible-interval computation.">
 
-<title>QMCToolsCL – QMCSoftware</title>
+<title>Bayesian Stopping Criteria – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,26 +29,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,17 +113,46 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">QMCSoftware</span>
     </a>
   </div>
@@ -97,27 +163,27 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software/index.html"> 
+    <a class="nav-link" href="../../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blogs/index.html"> 
+    <a class="nav-link" href="../../blogs/index.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications/index.html"> 
+    <a class="nav-link" href="../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../news/index.html"> 
+    <a class="nav-link" href="../../news/index.html"> 
 <span class="menu-text">News &amp; Events</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../community/index.html"> 
+    <a class="nav-link" href="../../community/index.html"> 
 <span class="menu-text">Community</span></a>
   </li>  
 </ul>
@@ -142,7 +208,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#maintained-resources" id="toc-maintained-resources" class="nav-link active" data-scroll-target="#maintained-resources">Maintained resources</a></li>
+  <li><a href="#the-bayesian-approach" id="toc-the-bayesian-approach" class="nav-link active" data-scroll-target="#the-bayesian-approach">The Bayesian Approach</a></li>
+  <li><a href="#fast-bayesian-cubature" id="toc-fast-bayesian-cubature" class="nav-link" data-scroll-target="#fast-bayesian-cubature">Fast Bayesian Cubature</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -151,19 +219,36 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">QMCToolsCL</h1>
-</div>
+<h1 class="title">Bayesian Stopping Criteria</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Bayesian Methods</div>
+    <div class="quarto-category">Stopping Criteria</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    Quasi-Monte Carlo sequence generators in OpenCL and C.
+    Bayesian stopping criteria for QMC integration and efficient credible-interval computation.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jagadeeswaran Rathinavel and Fred J. Hickernell </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Last revised</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 6, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -173,20 +258,166 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="project-summary">
-<p>QMCToolsCL provides quasi-Monte Carlo sequence generators implemented in OpenCL and C.</p>
-</div>
-<div class="project-links">
-<p><a href="https://qmcsoftware.github.io/QMCToolsCL/" class="btn btn-primary">Documentation</a> <a href="https://github.com/QMCSoftware/QMCToolsCL" class="btn btn-outline-primary">GitHub repository</a></p>
-</div>
-<section id="maintained-resources" class="level2">
-<h2 class="anchored" data-anchor-id="maintained-resources">Maintained resources</h2>
-<p>The project’s technical documentation and source repository are the authoritative places for supported generators, interfaces, installation, and development information.</p>
-<ul>
-<li><a href="https://qmcsoftware.github.io/QMCToolsCL/">QMCToolsCL documentation</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL">Source code</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL/blob/main/CONTRIBUTING.md">Contributing guidelines</a></li>
-</ul>
+<p>This post explains Bayesian stopping criteria for QMC integration and how matching kernels with lattice or digital net designs reduces credible-interval costs.</p>
+<p>The blog <a href="../../blogs/why-add-q-to-mc/index.html">Why Add Q to MC?</a> explained the advantages of carefully chosen, low discrepancy sampling sites for approximating multivariate integrals, or equivalently, expectations of functions of multivariate random variables. This blog post explains a Bayesian approach to determining the sample size required to satisfy the user’s error tolerance.</p>
+<p>Recall that the problem of interest takes the following form:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu
+&amp;:= \int_{[0,1]^d} f(\boldsymbol{x}) \,
+\mathrm{d}\boldsymbol{x}
+= \mathbb{E}[f(\boldsymbol{X})],
+\qquad
+\boldsymbol{X} \sim \mathcal{U}[0,1]^d, \\
+\mu \approx \widehat{\mu}_n
+&amp;:= \frac{1}{n}
+\sum_{i=1}^n f(\boldsymbol{x}_i),
+\qquad
+\boldsymbol{x}_1, \boldsymbol{x}_2, \ldots
+\text{ are the sampling sites or nodes.}
+\end{aligned}
+\]</span></p>
+<p>The question of when enough samples have been taken to satisfy the specified error criterion, <span class="math inline">\(\left|\mu - \widehat{\mu}_n\right| \le \varepsilon\)</span>, is an important one. Stopping criteria based on Bayesian credible intervals are one good way of answering this question.</p>
+<p>Traditionally, Bayesian credible intervals take <span class="math inline">\(\mathcal{O}(n^3)\)</span> operations to construct, where <span class="math inline">\(n\)</span> is the sample size. This is due to the need to invert an <span class="math inline">\(n \times n\)</span> covariance matrix. In contrast, computing <span class="math inline">\(\widehat{\mu}\)</span> requires only <span class="math inline">\(\mathcal{O}(n)\)</span> operations. Fortuitously, there is a way to reduce the computational cost of constructing the Bayesian credible interval to <span class="math inline">\(\mathcal{O}(n \log(n))\)</span> when using lattice or digital net low discrepancy samples. These Bayesian stopping criteria are implemented as <a href="https://qmcsoftware.github.io/QMCSoftware/"><code>CubBayesLatticeG</code></a> and <a href="https://qmcsoftware.github.io/QMCSoftware/"><code>CubBayesNetG</code></a>. This blog explains the key points.</p>
+<section id="the-bayesian-approach" class="level2">
+<h2 class="anchored" data-anchor-id="the-bayesian-approach">The Bayesian Approach</h2>
+<p>The Bayesian approach to approximating integrals assumes that the integrand, <span class="math inline">\(f:[0,1]^d \to \mathbb{R}\)</span>, is drawn from a Gaussian stochastic process parameterized by a constant mean and a covariance function defined by scale and shape parameters. This is denoted <span class="math inline">\(f \sim \mathcal{GP}(m, s^2 C_{\boldsymbol{\theta}})\)</span>, and means that</p>
+<p><span class="math display">\[
+\mathbb{E}[f(\boldsymbol{x})] = m,
+\qquad
+\operatorname{cov}
+\left(f(\boldsymbol{t}), f(\boldsymbol{x})\right)
+=
+\mathbb{E}
+\left[
+\left(f(\boldsymbol{t}) - m\right)
+\left(f(\boldsymbol{x}) - m\right)
+\right]
+=
+s^2 C_{\boldsymbol{\theta}}(\boldsymbol{t}, \boldsymbol{x}),
+\qquad
+\forall \boldsymbol{t}, \boldsymbol{x} \in [0,1]^d.
+\]</span></p>
+<p>Here, <span class="math inline">\(m\)</span>, <span class="math inline">\(s\)</span>, and <span class="math inline">\(C_{\boldsymbol{\theta}}\)</span> must be specified or estimated. Because <span class="math inline">\(f\)</span> is a Gaussian process, the multivariate integral of <span class="math inline">\(f\)</span>, i.e., <span class="math inline">\(\mu\)</span>, has a Gaussian distribution. Automatic Bayesian cubature uses these assumptions to increase <span class="math inline">\(n\)</span> until we reach</p>
+<p><span class="math display">\[
+\mathbb{P}_f
+\left[
+\left| \mu - \widehat{\mu}_n \right|
+\le \varepsilon
+\right]
+\ge 99\%.
+\]</span></p>
+<p>The <a href="https://arxiv.org/abs/1809.09803">Bayesian credible interval</a>, which depends on the sampling nodes and the parameters defining the Gaussian process, is</p>
+<p><span class="math display">\[
+\mathbb{P}_f
+\left[
+\left|\mu - \widehat{\mu}_n\right|
+\le \operatorname{err}_{\operatorname{CI}}
+\right]
+= 99\%,
+\qquad
+\operatorname{err}_{\operatorname{CI}}
+:=
+2.58\,s
+\sqrt{
+c_{0,\boldsymbol{\theta}}
+-
+\boldsymbol{c}_{\boldsymbol{\theta}}(\mathsf{X})^{\mathsf{T}}
+\mathsf{C}_{\boldsymbol{\theta}}(\mathsf{X}, \mathsf{X})^{-1}
+\boldsymbol{c}_{\boldsymbol{\theta}}(\mathsf{X})
+},
+\]</span></p>
+<p>assuming that the mean of the Gaussian process, <span class="math inline">\(m\)</span>, is zero. The formulae for the case of general <span class="math inline">\(m\)</span> are more complicated, but similar. Here,</p>
+<p><span class="math display">\[
+\begin{gathered}
+\mathsf{X}
+=
+\left(
+\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n
+\right)^{\mathsf{T}},
+\qquad
+c_{0,\boldsymbol{\theta}}
+:=
+\int_{[0,1]^d \times [0,1]^d}
+C_{\boldsymbol{\theta}}(\boldsymbol{t}, \boldsymbol{x})
+\, \mathrm{d}\boldsymbol{t}
+\, \mathrm{d}\boldsymbol{x}, \\
+\boldsymbol{c}_{\boldsymbol{\theta}}(\mathsf{X})
+:=
+\left(
+\int_{[0,1]^d}
+C_{\boldsymbol{\theta}}(\boldsymbol{t}, \boldsymbol{x}_i)
+\, \mathrm{d}\boldsymbol{t}
+\right)_{i=1}^n,
+\qquad
+\mathsf{C}_{\boldsymbol{\theta}}(\mathsf{X}, \mathsf{X})
+=
+\left(
+C_{\boldsymbol{\theta}}(\boldsymbol{x}_i, \boldsymbol{x}_j)
+\right)_{i,j=1}^n,
+\end{gathered}
+\]</span></p>
+<p>and <span class="math inline">\(2.58\)</span> represents the <span class="math inline">\(99.5\%\)</span> quantile of the standard Gaussian distribution. Bayesian cubature proceeds by increasing <span class="math inline">\(n\)</span> until <span class="math inline">\(\operatorname{err}_{\operatorname{CI}}\)</span> is no greater than the error tolerance.</p>
+<p>The Bayesian credible interval as a stopping criterion assumes that the integrand, <span class="math inline">\(f\)</span>, is not an outlier with respect to this Gaussian process. To improve the chances that this is the case, the hyperparameters <span class="math inline">\(m\)</span>, <span class="math inline">\(s\)</span>, and <span class="math inline">\(\boldsymbol{\theta}\)</span> should be tuned using the function data. In particular, <span class="math inline">\(s\)</span> should depend on the magnitude of the fluctuations of <span class="math inline">\(f\)</span>. The standard approaches for tuning the hyperparameters require optimization, for which each iteration involves an eigendecomposition of <span class="math inline">\(C_{\boldsymbol{\theta}}(\mathsf{X}, \mathsf{X})\)</span>.</p>
+</section>
+<section id="fast-bayesian-cubature" class="level2">
+<h2 class="anchored" data-anchor-id="fast-bayesian-cubature">Fast Bayesian Cubature</h2>
+<p>The computation of <span class="math inline">\(\operatorname{err}_{\operatorname{CI}}\)</span> for a single <span class="math inline">\(\mathsf{X}\)</span> and <span class="math inline">\(\boldsymbol{\theta}\)</span> requires inversion of the covariance matrix <span class="math inline">\(C_{\boldsymbol{\theta}}(\mathsf{X}, \mathsf{X})\)</span>, which typically costs <span class="math inline">\(\mathcal{O}(n^3)\)</span>. An eigendecomposition of <span class="math inline">\(C_{\boldsymbol{\theta}}(\mathsf{X}, \mathsf{X})\)</span> costs at least this much. The way to overcome this computational burden is to use families of covariance kernels, <span class="math inline">\(C_{\boldsymbol{\theta}}\)</span>, that match the design, <span class="math inline">\(\mathsf{X}\)</span>, in a way that the eigenvectors and eigenvalues of the matrix <span class="math inline">\(C_{\boldsymbol{\theta}}(\mathsf{X}, \mathsf{X})\)</span> can be obtained via fast transforms.</p>
+<p>For <a href="https://global.oup.com/academic/product/lattice-methods-for-multiple-integration-9780198534723?cc=us&amp;lang=en&amp;">integration lattices</a> and kernels <span class="math inline">\(C_{\boldsymbol{\theta}}\)</span> such as</p>
+<p><span class="math display">\[
+C_{\boldsymbol{\theta}}(\boldsymbol{t}, \boldsymbol{x})
+=
+K_{\boldsymbol{\theta}}
+\left(
+\boldsymbol{t} - \boldsymbol{x} \bmod \boldsymbol{1}
+\right),
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+K_{\boldsymbol{\theta}}(\boldsymbol{x})
+=
+\prod_{l=1}^d
+\left[
+1
+- (-1)^r \eta B_{2r}(x_l)
+\right],
+\qquad
+\boldsymbol{\theta} = (r,\eta),
+\quad
+r \in \mathbb{N},
+\quad
+\eta &gt; 0,
+\]</span></p>
+<p>and <span class="math inline">\(B_{2r}\)</span> is an even degree Bernoulli polynomial, the fast transform corresponds to a fast <a href="https://www.ams.org/journals/mcom/1965-19-090/S0025-5718-1965-0178586-1/S0025-5718-1965-0178586-1.pdf">Fourier transform</a>. For digital nets, see the blog <a href="https://qmcpy.org/2021/06/04/digital-sequences-the-niederreiter-construction/">Digital Sequences, the Niederreiter Construction</a>. For <span class="math inline">\(C_{\boldsymbol{\theta}}\)</span> that are <a href="https://repository.iit.edu/islandora/object/islandora%3A1009768">digitally-shift invariant</a>, the fast transform corresponds to a <a href="https://dl.acm.org/doi/abs/10.1109/TC.1976.1674569">fast Walsh transform</a>. In both cases, the computational burden attributable to tuning the hyperparameters and computing the width of the credible interval is a reasonable <span class="math inline">\(\mathcal{O}(n \log(n))\)</span>.</p>
+<p>The following code shows how to use a Bayesian stopping criterion for Keister’s example.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tol <span class="op">=</span> <span class="fl">0.005</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>integrand <span class="op">=</span> qp.Keister(qp.Lattice(dimension<span class="op">=</span><span class="dv">2</span>, order<span class="op">=</span><span class="st">"RADICAL INVERSE"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>keister_2d_exact <span class="op">=</span> integrand.exact_integ(<span class="dv">2</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>solution, data <span class="op">=</span> qp.CubBayesLatticeG(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    integrand,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    abs_tol<span class="op">=</span>tol,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="dv">2</span><span class="op">**</span><span class="dv">5</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>).integrate()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Integration error: "</span>, <span class="bu">abs</span>(solution <span class="op">-</span> keister_2d_exact) <span class="op">&lt;</span> tol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Listing 1: Example usage of the lattice Bayesian cubature algorithm.</p>
+<p>This example can be run in Google Colab without any installation using this <a href="https://github.com/QMCSoftware/QMCSoftware/blob/develop/demos/integration_examples.ipynb">notebook</a>.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Hickernell, F. J. Blog: Why Add Q to MC? <a href="https://qmcpy.org/2020/06/25/why_add_q_to_mc/">https://qmcpy.org/2020/06/25/why_add_q_to_mc/</a>. 2020.</li>
+<li>Choi, S.-C. T., Hickernell, F., McCourt, M., &amp; Sorokin, A. QMCPy: A quasi-Monte Carlo Python Library. <a href="https://qmcsoftware.github.io/QMCSoftware/">https://qmcsoftware.github.io/QMCSoftware/</a>. 2020.</li>
+<li>Rathinavel, J., &amp; Hickernell, F. Fast automatic Bayesian cubature using lattice sampling. <em>Statistics and Computing</em>, 29, 1215-1229 (2019).</li>
+<li>Sloan, I. H., &amp; Joe, S. <em>Lattice Methods for Multiple Integration</em>. Oxford University Press, Oxford (1994).</li>
+<li>Hickernell, F., &amp; Niederreiter, H. The existence of good extensible rank-1 lattices. <em>Journal of Complexity</em>, 19, 286-300 (2003).</li>
+<li>Cooley, J. W., &amp; Tukey, J. W. An algorithm for the machine calculation of complex Fourier series. <em>Mathematics of Computation</em>, 19, 297-301 (1965).</li>
+<li>Ebert, A. Blog: Digital Sequences, the Niederreiter Construction. <a href="https://qmcpy.org/2021/06/04/digital-sequences-the-niederreiter-construction/">https://qmcpy.org/2021/06/04/digital-sequences-the-niederreiter-construction/</a>. 2021.</li>
+<li>Rathinavel, J. <em>Fast Automatic Bayesian Cubature Using Matching Kernels and Designs</em>. PhD thesis, Illinois Institute of Technology (2019).</li>
+<li>Fino, B. J., &amp; Algazi, V. R. Unified matrix treatment of the fast Walsh-Hadamard transform. <em>IEEE Transactions on Computers</em>, C-25, 1142-1146 (1976).</li>
+</ol>
 
 
 </section>
@@ -609,7 +840,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../../about.html">
 <p>About this site</p>
 </a>
   </li>  
@@ -621,5 +852,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

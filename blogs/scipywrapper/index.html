@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-04-27">
-<meta name="description" content="Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.">
+<meta name="author" content="Laasya Priya Vemuri">
+<meta name="dcterms.date" content="2026-04-18">
+<meta name="description" content="Extending SciPyWrapper for dependent joint distributions, custom marginals, and validation warnings.">
 
-<title>Fred Hickernell Named a 2026 SIAM Fellow – QMCSoftware</title>
+<title>Extending QMCPy’s SciPyWrapper to Support Dependent and Custom Distributions – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,6 +28,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -47,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -80,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -146,27 +182,34 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Fred Hickernell Named a 2026 SIAM Fellow</h1>
+<h1 class="title">Extending QMCPy’s <code>SciPyWrapper</code> to Support Dependent and Custom Distributions</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Recognition</div>
-    <div class="quarto-category">Community</div>
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Probability Distributions</div>
+    <div class="quarto-category">SciPy</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.
+    Extending SciPyWrapper for dependent joint distributions, custom marginals, and validation warnings.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Laasya Priya Vemuri </p>
+          </div>
+  </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Last revised</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 27, 2026</p>
+      <p class="date">April 18, 2026</p>
     </div>
   </div>
   
@@ -178,21 +221,192 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Illinois Tech Professor Fred Hickernell was named to the 2026 class of Fellows of the Society for Industrial and Applied Mathematics (SIAM). The distinction recognizes his mathematical and statistical innovations in high-dimensional integration and approximation, as well as his scientific leadership.</p>
-<p>The Illinois Tech article also highlights the open-source software developed by Hickernell’s research group and collaborators, including <a href="../../software/qmcpy.html">QMCPy</a>, which makes quasi-Monte Carlo methods available in Python.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>This post describes the updated <code>SciPyWrapper</code> interface for dependent joint distributions, custom marginals, and validation warnings.</p>
+<section id="introduction" class="level4">
+<h4 class="anchored" data-anchor-id="introduction">Introduction</h4>
+<p><code>SciPyWrapper</code> is one of QMCPy’s most useful interfaces: it maps low-discrepancy samples on <code>[0,1]^d</code> to probability models used in simulation and integration. The original interface served independent univariate marginals from <code>scipy.stats</code> effectively, but many modern workflows require richer structure, including dependence and custom distribution families.</p>
+<p>This work extends <code>qmcpy.true_measure.SciPyWrapper</code> in three directions:</p>
+<ol type="1">
+<li>Support for dependent joint distributions.</li>
+<li>Support for custom univariate distributions with SciPy-like behavior.</li>
+<li>Built-in warnings for clearly problematic custom distribution definitions.</li>
+</ol>
+</section>
+<section id="motivation" class="level4">
+<h4 class="anchored" data-anchor-id="motivation">Motivation</h4>
+<p>Applied uncertainty quantification rarely remains fully independent. In practice, modelers often need to represent correlated random variables, mixture behavior with atoms (such as zero inflation), and distribution families that are not directly available in SciPy. Prior to this extension, handling those cases required workarounds outside the normal <code>SciPyWrapper</code> flow.</p>
+<p>The goal of this work was to remove that gap while preserving backward compatibility for existing code.</p>
+</section>
+<section id="methodology" class="level4">
+<h4 class="anchored" data-anchor-id="methodology">Methodology</h4>
+<p>The updated implementation keeps the original independent-marginal path unchanged and adds a second path for dependent joint models.</p>
+<section id="joint-distribution-mode" class="level5">
+<h5 class="anchored" data-anchor-id="joint-distribution-mode">1. Joint-distribution mode</h5>
+<p>In joint mode, <code>SciPyWrapper</code> accepts an object with:</p>
+<ol type="1">
+<li><code>transform(u)</code> that maps <code>u in [0,1]^d</code> into samples in <code>R^d</code>.</li>
+<li>A dimension descriptor (<code>dim</code> or <code>dimension</code>) for consistency checks.</li>
+<li>Optional <code>logpdf(x)</code> or <code>pdf(x)</code> when weighted evaluations are needed.</li>
+</ol>
+<p>For SciPy-style multivariate normal objects, a lightweight adapter maps low-discrepancy points through <code>norm.ppf</code> and then injects covariance using a Cholesky factorization. This provides a stable, vectorized path for correlated Gaussian sampling.</p>
+</section>
+<section id="custom-univariate-mode-with-sanity-checks" class="level5">
+<h5 class="anchored" data-anchor-id="custom-univariate-mode-with-sanity-checks">2. Custom univariate mode with sanity checks</h5>
+<p>Custom univariate objects are accepted when they follow a SciPy-like interface (<code>ppf</code> and optionally <code>pdf</code>/<code>logpdf</code>). At initialization, lightweight checks help identify common modeling mistakes:</p>
+<ol type="1">
+<li>Non-monotone behavior in <code>ppf</code>.</li>
+<li>Non-finite values in <code>ppf</code>, <code>pdf</code>, or <code>logpdf</code>.</li>
+<li>Negative density values.</li>
+<li>Evidence that density behavior is inconsistent with normalization.</li>
+</ol>
+<p>These checks intentionally produce warnings rather than hard failures, preserving flexibility for advanced users while reducing silent numerical errors.</p>
+</section>
+</section>
+<section id="code-changes-at-a-glance" class="level4">
+<h4 class="anchored" data-anchor-id="code-changes-at-a-glance">Code Changes at a Glance</h4>
+<p>The user-facing interface remains familiar.</p>
+<section id="existing-independent-workflow-unchanged" class="level5">
+<h5 class="anchored" data-anchor-id="existing-independent-workflow-unchanged">Existing independent workflow (unchanged)</h5>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qmcpy.discrete_distribution <span class="im">import</span> DigitalNetB2</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qmcpy.true_measure <span class="im">import</span> SciPyWrapper</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tm <span class="op">=</span> SciPyWrapper(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    sampler<span class="op">=</span>DigitalNetB2(<span class="dv">2</span>, seed<span class="op">=</span><span class="dv">7</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    scipy_distribs<span class="op">=</span>[stats.norm(), stats.gamma(a<span class="op">=</span><span class="fl">3.0</span>)],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> tm(<span class="dv">4096</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="new-dependent-joint-workflow" class="level5">
+<h5 class="anchored" data-anchor-id="new-dependent-joint-workflow">New dependent-joint workflow</h5>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qmcpy.discrete_distribution <span class="im">import</span> DigitalNetB2</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qmcpy.true_measure <span class="im">import</span> SciPyWrapper</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mvn <span class="op">=</span> stats.multivariate_normal(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    mean<span class="op">=</span>[<span class="fl">0.0</span>, <span class="fl">0.0</span>],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    cov<span class="op">=</span>[[<span class="fl">1.0</span>, <span class="fl">0.8</span>], [<span class="fl">0.8</span>, <span class="fl">1.0</span>]],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>tm_joint <span class="op">=</span> SciPyWrapper(DigitalNetB2(<span class="dv">2</span>, seed<span class="op">=</span><span class="dv">7</span>), scipy_distribs<span class="op">=</span>mvn)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>x_joint <span class="op">=</span> tm_joint(<span class="dv">4096</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="new-custom-univariate-workflow" class="level5">
+<h5 class="anchored" data-anchor-id="new-custom-univariate-workflow">New custom-univariate workflow</h5>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qmcpy.discrete_distribution <span class="im">import</span> DigitalNetB2</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qmcpy.true_measure.triangular <span class="im">import</span> TriangularDistribution</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qmcpy.true_measure <span class="im">import</span> SciPyWrapper</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>tri <span class="op">=</span> TriangularDistribution(c<span class="op">=</span><span class="fl">0.3</span>, loc<span class="op">=-</span><span class="fl">1.0</span>, scale<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tm_custom <span class="op">=</span> SciPyWrapper(DigitalNetB2(<span class="dv">1</span>, seed<span class="op">=</span><span class="dv">11</span>), scipy_distribs<span class="op">=</span>tri)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>x_custom <span class="op">=</span> tm_custom(<span class="dv">4096</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="experimental-results" class="level4">
+<h4 class="anchored" data-anchor-id="experimental-results">Experimental Results</h4>
+<p>The following six examples illustrate the new functionality in practice.</p>
+<section id="example-1-independent-vs-dependent-gaussian-behavior" class="level5">
+<h5 class="anchored" data-anchor-id="example-1-independent-vs-dependent-gaussian-behavior">Example 1: Independent vs dependent Gaussian behavior</h5>
+<p>Independent normal marginals are compared against a dependent bivariate normal with target correlation <code>rho = 0.8</code>.</p>
+<ul>
+<li>Figure 1: Independent vs dependent normals.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig01_mvn_indep_vs_dep.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Independent vs dependent normals</figcaption>
+</figure>
 </div>
-<div class="callout-body-container">
-<p><strong>Source:</strong> Illinois Institute of Technology, April 27, 2026.</p>
-<p><a href="https://www.iit.edu/news/applied-mathematics-professor-honored-siam-fellow" class="btn btn-primary">Read the original Illinois Tech article</a></p>
+<p>The dependent construction reproduces both target correlation and mixed-moment behavior, while the independent baseline remains near zero correlation.</p>
+</section>
+<section id="example-2-zero-inflated-exponential-uniform-joint-model" class="level5">
+<h5 class="anchored" data-anchor-id="example-2-zero-inflated-exponential-uniform-joint-model">Example 2: Zero-inflated exponential-uniform joint model</h5>
+<p>A joint construction with an atom at <code>X=0</code> is used to model zero inflation with branch-dependent behavior in <code>Y</code>.</p>
+<ul>
+<li>Figure 2: Zero-inflated exponential plus uniform joint model.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig02_zero_inflated_joint.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: Zero-inflated exponential plus uniform joint model</figcaption>
+</figure>
 </div>
+<p>The empirical mass at zero and the observed joint geometry are consistent with the model specification.</p>
+</section>
+<section id="example-3-acceptance-rejection-dependence-with-mc-vs-qmc" class="level5">
+<h5 class="anchored" data-anchor-id="example-3-acceptance-rejection-dependence-with-mc-vs-qmc">Example 3: Acceptance-rejection dependence with MC vs QMC</h5>
+<p>A triangular target region is sampled via acceptance-rejection using IID MC and digital-net QMC proposals.</p>
+<ul>
+<li>Figure 3: Acceptance-rejection target with MC and QMC proposals.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig03_accept_reject_mc_vs_qmc.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: Acceptance-rejection target with MC and QMC proposals</figcaption>
+</figure>
 </div>
+<p>Both methods sample the intended target, while QMC provides visibly more even coverage and competitive moment estimates.</p>
+</section>
+<section id="example-4-custom-triangular-marginal" class="level5">
+<h5 class="anchored" data-anchor-id="example-4-custom-triangular-marginal">Example 4: Custom triangular marginal</h5>
+<p>A user-defined triangular distribution is passed directly to <code>SciPyWrapper</code>.</p>
+<ul>
+<li>Figure 4: Custom triangular marginal with analytical overlay.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig04_custom_triangular_marginal.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: Custom triangular marginal with analytical overlay</figcaption>
+</figure>
 </div>
+<p>Sample range and empirical behavior align closely with analytical expectations.</p>
+</section>
+<section id="example-5-warning-path-for-malformed-custom-distributions" class="level5">
+<h5 class="anchored" data-anchor-id="example-5-warning-path-for-malformed-custom-distributions">Example 5: Warning path for malformed custom distributions</h5>
+<p>An intentionally malformed custom distribution triggers diagnostic warnings, demonstrating that invalid definitions can be detected early rather than silently propagated.</p>
+</section>
+<section id="example-6-dependent-multivariate-student-t" class="level5">
+<h5 class="anchored" data-anchor-id="example-6-dependent-multivariate-student-t">Example 6: Dependent multivariate Student t</h5>
+<p>A dependent multivariate Student t model is used to validate heavy-tail behavior beyond the Gaussian setting.</p>
+<ul>
+<li>Figure 5: Dependent multivariate Student t behavior.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig05_multivariate_student_t_joint.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: Dependent multivariate Student t behavior</figcaption>
+</figure>
+</div>
+<p>Empirical dependence and covariance trends are consistent with the target model and expected heavy-tailed structure.</p>
+</section>
+</section>
+<section id="validation" class="level4">
+<h4 class="anchored" data-anchor-id="validation">Validation</h4>
+<p>The behavior above is supported by dedicated unit checks, including:</p>
+<ol type="1">
+<li>Correlation and mixed moments in joint Gaussian sampling.</li>
+<li>Zero-mass accuracy in zero-inflated sampling.</li>
+<li>Range and mean behavior for custom triangular marginals.</li>
+<li>Correlation preservation in dependent Student t sampling.</li>
+</ol>
+</section>
+<section id="practical-impact" class="level4">
+<h4 class="anchored" data-anchor-id="practical-impact">Practical Impact</h4>
+<p>This extension keeps the familiar QMCPy workflow while enabling substantially richer probabilistic modeling. Users can now encode dependence, prototype domain-specific marginals, and retain diagnostic guardrails inside the same interface that previously handled only independent SciPy marginals.</p>
+</section>
+<section id="conclusion" class="level4">
+<h4 class="anchored" data-anchor-id="conclusion">Conclusion</h4>
+<p>The updated <code>SciPyWrapper</code> preserves simplicity for existing users and adds the expressive power needed for realistic modern simulation tasks. By supporting dependent joints, custom marginals, and warning-based validation, it strengthens both modeling flexibility and numerical reliability within QMCPy’s core workflow.</p>
+</section>
+<section id="references" class="level4">
+<h4 class="anchored" data-anchor-id="references">References</h4>
+<ol type="1">
+<li>Choi, S.-C., Hickernell, F., McCourt, M., Sorokin, A. QMCPy: A Quasi-Monte Carlo Python Library. https://qmcsoftware.github.io/QMCSoftware/</li>
+<li>SciPy Statistics Documentation. https://docs.scipy.org/doc/scipy/reference/stats.html</li>
+<li>QMCSoftware repository. https://github.com/QMCSoftware/QMCSoftware</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

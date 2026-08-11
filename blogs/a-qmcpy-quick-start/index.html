@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Quasi-Monte Carlo sequence generators in OpenCL and C.">
+<meta name="author" content="Aleksei Sorokin and Sou-Cheng Choi">
+<meta name="dcterms.date" content="2020-07-06">
+<meta name="description" content="A quick introduction to QMCPy through the Keister integration problem.">
 
-<title>QMCToolsCL – QMCSoftware</title>
+<title>A QMCPy Quick Start – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,26 +29,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,17 +113,46 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">QMCSoftware</span>
     </a>
   </div>
@@ -97,27 +163,27 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software/index.html"> 
+    <a class="nav-link" href="../../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blogs/index.html"> 
+    <a class="nav-link" href="../../blogs/index.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications/index.html"> 
+    <a class="nav-link" href="../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../news/index.html"> 
+    <a class="nav-link" href="../../news/index.html"> 
 <span class="menu-text">News &amp; Events</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../community/index.html"> 
+    <a class="nav-link" href="../../community/index.html"> 
 <span class="menu-text">Community</span></a>
   </li>  
 </ul>
@@ -142,7 +208,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#maintained-resources" id="toc-maintained-resources" class="nav-link active" data-scroll-target="#maintained-resources">Maintained resources</a></li>
+  <li><a href="#keister-integration-problem" id="toc-keister-integration-problem" class="nav-link active" data-scroll-target="#keister-integration-problem">Keister Integration Problem</a></li>
+  <li><a href="#define-the-integrand" id="toc-define-the-integrand" class="nav-link" data-scroll-target="#define-the-integrand">Define the Integrand</a></li>
+  <li><a href="#set-up-qmcpy-objects" id="toc-set-up-qmcpy-objects" class="nav-link" data-scroll-target="#set-up-qmcpy-objects">Set Up QMCPy Objects</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -151,19 +220,36 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">QMCToolsCL</h1>
-</div>
+<h1 class="title">A QMCPy Quick Start</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Quasi-Monte Carlo</div>
+    <div class="quarto-category">Tutorial</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    Quasi-Monte Carlo sequence generators in OpenCL and C.
+    A quick introduction to QMCPy through the Keister integration problem.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksei Sorokin and Sou-Cheng Choi </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Last revised</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 6, 2020</p>
+    </div>
+  </div>
   
     
   </div>
@@ -173,20 +259,112 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="project-summary">
-<p>QMCToolsCL provides quasi-Monte Carlo sequence generators implemented in OpenCL and C.</p>
-</div>
-<div class="project-links">
-<p><a href="https://qmcsoftware.github.io/QMCToolsCL/" class="btn btn-primary">Documentation</a> <a href="https://github.com/QMCSoftware/QMCToolsCL" class="btn btn-outline-primary">GitHub repository</a></p>
-</div>
-<section id="maintained-resources" class="level2">
-<h2 class="anchored" data-anchor-id="maintained-resources">Maintained resources</h2>
-<p>The project’s technical documentation and source repository are the authoritative places for supported generators, interfaces, installation, and development information.</p>
-<ul>
-<li><a href="https://qmcsoftware.github.io/QMCToolsCL/">QMCToolsCL documentation</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL">Source code</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL/blob/main/CONTRIBUTING.md">Contributing guidelines</a></li>
-</ul>
+<p>This quick start introduces QMCPy through the Keister integration problem and shows how a discrete distribution, true measure, integrand, and stopping criterion fit together.</p>
+<p>QMCPy is an open-source, object-oriented <a href="../../blogs/why-add-q-to-mc/index.html">quasi-Monte Carlo (QMC)</a> software framework in Python 3. It contains standardized parent classes for modeling integrands, true measures, discrete distributions, and stopping criteria. The framework is designed to help researchers and users quickly extend and experiment with new algorithmic components, validate theory, and compare proven methods in their own applications.</p>
+<p>QMCPy can be installed with <code>pip install qmcpy</code>. The source code is available from the <a href="https://github.com/QMCSoftware/QMCSoftware">QMCSoftware GitHub repository</a>.</p>
+<section id="keister-integration-problem" class="level2">
+<h2 class="anchored" data-anchor-id="keister-integration-problem">Keister Integration Problem</h2>
+<p>This quick start introduces the QMCPy workflow through the Keister function [2]. We integrate the Keister function with respect to a <span class="math inline">\(d\)</span>-dimensional Gaussian measure:</p>
+<p><span class="math display">\[
+f(\boldsymbol{x})
+= \pi^{d/2}\cos(\|\boldsymbol{x}\|),
+\qquad
+\boldsymbol{x}\in\mathbb{R}^d,
+\qquad
+\boldsymbol{X}\sim\mathcal{N}(\boldsymbol{0}_d,\boldsymbol{I}_d/2).
+\]</span></p>
+<p>The target integral is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu
+&amp;= \mathbb{E}[f(\boldsymbol{X})] \\
+&amp;:= \int_{\mathbb{R}^d}
+  f(\boldsymbol{x})\,
+  \pi^{-d/2}\exp(-\|\boldsymbol{x}\|^2)
+  \,\mathrm{d}\boldsymbol{x} \\
+&amp;= \int_{[0,1]^d}
+  \pi^{d/2}
+  \cos\left(
+    \sqrt{\frac{1}{2}\sum_{j=1}^d
+      \left(\Phi^{-1}(u_j)\right)^2}
+  \right)
+  \,\mathrm{d}\boldsymbol{u}.
+\end{aligned}
+\]</span></p>
+<p>Here <span class="math inline">\(\|\boldsymbol{x}\|\)</span> is the Euclidean norm, <span class="math inline">\(\boldsymbol{I}_d\)</span> is the <span class="math inline">\(d\)</span>-dimensional identity matrix, and <span class="math inline">\(\Phi\)</span> denotes the standard normal cumulative distribution function. When <span class="math inline">\(d=2\)</span>, the exact value is approximately <span class="math inline">\(\mu \approx 1.80819\)</span>.</p>
+<figure id="fig-keister-surfaces" class="figure">
+<img src="figures/three_3d_surfacescatters.png" alt="Keister function and lattice sampling points at different tolerances" style="width:100%" class="figure-img">
+<figcaption>
+Keister function and realizations of sampling points for different error tolerances.
+</figcaption>
+</figure>
+</section>
+<section id="define-the-integrand" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-integrand">Define the Integrand</h2>
+<p>The Keister function can be implemented with NumPy:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> keister(x):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    x: nxd numpy ndarray with n samples d dimensions</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    returns n-vector of the Keister function evaluations</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> x.shape[<span class="dv">1</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    norm_x <span class="op">=</span> np.sqrt((x<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>(<span class="dv">1</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> np.pi<span class="op">**</span>(d<span class="op">/</span><span class="dv">2</span>) <span class="op">*</span> np.cos(norm_x)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> k <span class="co"># size n vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="set-up-qmcpy-objects" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-qmcpy-objects">Set Up QMCPy Objects</h2>
+<p>In addition to the Keister integrand and Gaussian true measure, we must select a discrete distribution and a stopping criterion. The discrete distribution determines the sites at which the integrand is evaluated. The stopping criterion determines how many points are needed for the mean approximation to satisfy a user-specified error tolerance, <span class="math inline">\(\varepsilon\)</span>.</p>
+<p>For this example, we use a lattice sequence and the corresponding lattice-based cubature stopping criterion:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lattice <span class="op">=</span> qmcpy.Lattice(dimension <span class="op">=</span> <span class="dv">2</span>, seed <span class="op">=</span> <span class="dv">7</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>gaussian <span class="op">=</span> qmcpy.Gaussian(lattice, mean <span class="op">=</span> <span class="dv">0</span>, covariance <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>cf_keister <span class="op">=</span> qmcpy.CustomFun(gaussian, g <span class="op">=</span> keister)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>stopping_criterion <span class="op">=</span> qmcpy.CubQMCLatticeG(cf_keister, abs_tol <span class="op">=</span> <span class="fl">1e-4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Calling <code>integrate</code> on the stopping criterion returns the numerical solution and a data object. Printing the data object provides a summary of the integration problem:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>solution, data <span class="op">=</span> stopping_criterion.integrate()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>One run gives:</p>
+<pre class="text"><code>Data (Data)
+    solution        1.808
+    comb_bound_low  1.808
+    comb_bound_high 1.808
+    comb_bound_diff 1.28e-04
+    comb_flags      1
+    n_total         2^(16)
+    n               2^(16)
+    time_integrate  0.017
+CubQMCLatticeG (AbstractStoppingCriterion)
+    abs_tol         1.00e-04
+    rel_tol         0
+    n_init          2^(10)
+    n_limit         2^(30)
+CustomFun (AbstractIntegrand)
+Gaussian (AbstractTrueMeasure)
+    mean            0
+    covariance      2^(-1)
+    decomp_type     PCA
+Lattice (AbstractLDDiscreteDistribution)
+    d               2^(1)
+    replications    1
+    randomize       SHIFT
+    gen_vec_source  kuo.lattice-33002-1024-1048576.9125.txt
+    order           RADICAL INVERSE
+    n_limit         2^(20)
+    entropy         7</code></pre>
+<p>This guide is a quick introduction to the QMCPy framework and syntax, not an exhaustive overview. See the searchable <a href="https://qmcsoftware.github.io/QMCSoftware/">QMCPy documentation</a> for more details.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Choi, S.-C. T., Hickernell, F. J., McCourt, M., Rathinavel, J., &amp; Sorokin, A. QMCPy: A quasi-Monte Carlo Python Library. <a href="https://qmcsoftware.github.io/QMCSoftware/">https://qmcsoftware.github.io/QMCSoftware/</a>. 2020.</li>
+<li>Keister, B. D. Multidimensional Quadrature Algorithms. <em>Computers in Physics</em> 10, 119-122. 1996.</li>
+<li>Oliphant, T. <em>Guide to NumPy</em>. Trelgol Publishing, USA, 2006.</li>
+<li>Hickernell, F. J., Choi, S.-C. T., Jiang, L., &amp; Jimenez Rugama, L. A. Quasi-Monte Carlo Methods. In <em>Wiley StatsRef: Statistics Reference Online</em>. John Wiley &amp; Sons, 2018.</li>
+<li>Jimenez Rugama, L. A. &amp; Hickernell, F. J. Adaptive multidimensional integration based on rank-1 lattices. In <em>Monte Carlo and Quasi-Monte Carlo Methods: MCQMC, Leuven, Belgium, April 2014</em>, 407-422. Springer-Verlag, Berlin, 2016. arXiv:1411.1966.</li>
+</ol>
 
 
 </section>
@@ -609,7 +787,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../../about.html">
 <p>About this site</p>
 </a>
   </li>  
@@ -621,5 +799,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

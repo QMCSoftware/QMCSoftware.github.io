@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Quasi-Monte Carlo sequence generators in OpenCL and C.">
+<meta name="author" content="Aadit Jain">
+<meta name="dcterms.date" content="2026-02-25">
+<meta name="description" content="Using QMCPy’s plot_proj function to visualize discrete distributions and true measures.">
 
-<title>QMCToolsCL – QMCSoftware</title>
+<title>Visualizing the Generated Samples Helps – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,26 +29,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,17 +113,46 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">QMCSoftware</span>
     </a>
   </div>
@@ -97,27 +163,27 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software/index.html"> 
+    <a class="nav-link" href="../../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blogs/index.html"> 
+    <a class="nav-link" href="../../blogs/index.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications/index.html"> 
+    <a class="nav-link" href="../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../news/index.html"> 
+    <a class="nav-link" href="../../news/index.html"> 
 <span class="menu-text">News &amp; Events</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../community/index.html"> 
+    <a class="nav-link" href="../../community/index.html"> 
 <span class="menu-text">Community</span></a>
   </li>  
 </ul>
@@ -142,7 +208,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#maintained-resources" id="toc-maintained-resources" class="nav-link active" data-scroll-target="#maintained-resources">Maintained resources</a></li>
+  <li><a href="#what-does-the-plot-projections-function-do" id="toc-what-does-the-plot-projections-function-do" class="nav-link active" data-scroll-target="#what-does-the-plot-projections-function-do">What Does the Plot Projections Function Do?</a></li>
+  <li><a href="#setting-up-the-qmcpy-environment-before-utilizing-the-plot-projections-function" id="toc-setting-up-the-qmcpy-environment-before-utilizing-the-plot-projections-function" class="nav-link" data-scroll-target="#setting-up-the-qmcpy-environment-before-utilizing-the-plot-projections-function">Setting Up the QMCPy Environment Before Utilizing the Plot Projections Function</a></li>
+  <li><a href="#the-different-applications-of-the-plot-projection-function" id="toc-the-different-applications-of-the-plot-projection-function" class="nav-link" data-scroll-target="#the-different-applications-of-the-plot-projection-function">The Different Applications of the Plot Projection Function</a></li>
+  <li><a href="#how-this-function-benefits-us" id="toc-how-this-function-benefits-us" class="nav-link" data-scroll-target="#how-this-function-benefits-us">How This Function Benefits Us</a></li>
   </ul>
 </nav>
     </div>
@@ -151,19 +220,36 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">QMCToolsCL</h1>
-</div>
+<h1 class="title">Visualizing the Generated Samples Helps</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Visualization</div>
+    <div class="quarto-category">Sampling</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    Quasi-Monte Carlo sequence generators in OpenCL and C.
+    Using QMCPy’s plot_proj function to visualize discrete distributions and true measures.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aadit Jain </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Last revised</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 25, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -173,20 +259,78 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="project-summary">
-<p>QMCToolsCL provides quasi-Monte Carlo sequence generators implemented in OpenCL and C.</p>
-</div>
-<div class="project-links">
-<p><a href="https://qmcsoftware.github.io/QMCToolsCL/" class="btn btn-primary">Documentation</a> <a href="https://github.com/QMCSoftware/QMCToolsCL" class="btn btn-outline-primary">GitHub repository</a></p>
-</div>
-<section id="maintained-resources" class="level2">
-<h2 class="anchored" data-anchor-id="maintained-resources">Maintained resources</h2>
-<p>The project’s technical documentation and source repository are the authoritative places for supported generators, interfaces, installation, and development information.</p>
-<ul>
-<li><a href="https://qmcsoftware.github.io/QMCToolsCL/">QMCToolsCL documentation</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL">Source code</a></li>
-<li><a href="https://github.com/QMCSoftware/QMCToolsCL/blob/main/CONTRIBUTING.md">Contributing guidelines</a></li>
-</ul>
+<p>This post introduces QMCPy’s <code>plot_proj</code> function for visualizing two-dimensional projections of discrete distributions and true measures.</p>
+<p>It is a universal truth that visuals better appeal to the human mind than a group of numbers listed out. With visuals, it is easier for us to discern patterns and identify any flaws in the logic behind our mathematical calculations and equations. To visualize the different Discrete Distribution and True Measure objects, the <a href="https://qmcpy.org/">QMCPy</a> Plot Projections function has been developed. This blog presents the different applications of this function.</p>
+<section id="what-does-the-plot-projections-function-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-the-plot-projections-function-do">What Does the Plot Projections Function Do?</h2>
+<p>A Discrete Distribution or True Measure object with <span class="math inline">\(d \geq 2\)</span> dimensions has a maximum of <span class="math inline">\(d\times(d -1)\)</span> dimensional pairings. For example, <span class="math inline">\([2,3]\)</span> and <span class="math inline">\([3,2]\)</span> are considered separate pairings. The Plot Projections function, referred to as <code>plot_proj</code>, plots all or a subset of all the possible dimension pairings based on user arguments. This function either takes a Discrete Distribution or True Measure object at a time. It can also display extensibility by passing in a list of successively larger samples, for example <span class="math inline">\([2^6,2^7,2^8]\)</span>.</p>
+<p>To display extensibility, the <code>plot_proj</code> function uses <a href="https://matplotlib.org/stable/gallery/color/color_cycle_default.html">the default <code>prop_cycle</code></a>, which is obtained from the <code>rc</code> parameters of Matplotlib. This default <code>prop_cycle</code> contains a list of colors through which the <code>plot_proj</code> function iterates over and displays extensibility. The list of colors is: blue, orange, green, red, purple, brown, pink, grey, yellow, cyan. The colors are stored in this order but in a hexadecimal format.</p>
+<p>The parameters and plot examples of this function can be seen in the <a href="https://github.com/QMCSoftware/QMCSoftware/blob/master/demos/plot_proj_function.ipynb">Plot Projections Notebook</a>.</p>
+</section>
+<section id="setting-up-the-qmcpy-environment-before-utilizing-the-plot-projections-function" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-qmcpy-environment-before-utilizing-the-plot-projections-function">Setting Up the QMCPy Environment Before Utilizing the Plot Projections Function</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-different-applications-of-the-plot-projection-function" class="level2">
+<h2 class="anchored" data-anchor-id="the-different-applications-of-the-plot-projection-function">The Different Applications of the Plot Projection Function</h2>
+<ol type="1">
+<li><p>Here we show a two dimensional projection of an IID object:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>iid <span class="op">=</span> qp.IIDStdUniform(d)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> qp.plot_proj(iid, n <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Figure 1: Uniform IID Object Projection</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/iid.png" class="img-fluid figure-img"></p>
+<figcaption>Uniform IID object projection.</figcaption>
+</figure>
+</div></li>
+<li><p>Here we show a two dimensional projection of a Gaussian object and how the axes returned by the <code>plot_proj</code> function can be manipulated by adding a horizontal and vertical line to denote the x and y axis respectively:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>iid <span class="op">=</span> qp.IIDStdUniform(d)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>iid_gaussian <span class="op">=</span> qp.Gaussian(iid,mean <span class="op">=</span>[<span class="dv">2</span>,<span class="dv">4</span>],covariance<span class="op">=</span>[[<span class="dv">9</span>,<span class="dv">4</span>],[<span class="dv">4</span>,<span class="dv">5</span>]])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> qp.plot_proj(iid_gaussian, n <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">7</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">0</span>].axvline(x<span class="op">=</span><span class="dv">0</span>,color<span class="op">=</span> <span class="st">'k'</span>,alpha<span class="op">=</span><span class="fl">.25</span>)<span class="op">;</span> <span class="co">#adding vertical line</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">0</span>].axhline(y<span class="op">=</span><span class="dv">0</span>,color<span class="op">=</span> <span class="st">'k'</span>,alpha<span class="op">=</span><span class="fl">.25</span>)<span class="op">;</span> <span class="co">#adding horizontal line</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Figure 2: Gaussian IID Object Projection</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/iid-gaussian.png" class="img-fluid figure-img"></p>
+<figcaption>Gaussian IID object projection.</figcaption>
+</figure>
+</div></li>
+<li><p>Here we show certain specified dimensional projections, with dimensions 1 and 2 on the x axes and dimensions 3 and 4 on the y axes, of a Uniform object with successively increasing numbers of points. The initial points are in blue. The next additional points are in orange. The final additional points are in green:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>halton <span class="op">=</span> qp.Halton(d)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>halton_uniform <span class="op">=</span> qp.Uniform(halton,lower_bound<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>upper_bound<span class="op">=</span>[<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> qp.plot_proj(halton_uniform, n <span class="op">=</span> [<span class="dv">2</span><span class="op">**</span><span class="dv">6</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">7</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">8</span>],</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>d_horizontal <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>], d_vertical <span class="op">=</span> [<span class="dv">3</span>,<span class="dv">4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Figure 3: Halton Object Projection</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/halton-uniform.png" class="img-fluid figure-img"></p>
+<figcaption>Halton uniform object projection.</figcaption>
+</figure>
+</div></li>
+<li><p>Here we show a four dimensional projection of a Halton object with successively increasing numbers of points. The initial points are in blue. The next additional points are in orange. The final additional points are in green:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>halton <span class="op">=</span> qp.Halton(d)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> qp.plot_proj(halton, n <span class="op">=</span> [<span class="dv">2</span><span class="op">**</span><span class="dv">5</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">6</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">7</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>d_horizontal <span class="op">=</span> <span class="bu">range</span>(d), d_vertical <span class="op">=</span> <span class="bu">range</span>(d),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>math_ind <span class="op">=</span> <span class="va">False</span>, marker_size <span class="op">=</span> <span class="dv">15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Figure 4: Halton Object Projection (More Points)</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/halton.png" class="img-fluid figure-img"></p>
+<figcaption>Halton object projection with more points.</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+<section id="how-this-function-benefits-us" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-function-benefits-us">How This Function Benefits Us</h2>
+<p>In addition to making it easy to see the difference between different Discrete Distribution and True Measure objects, this function consists of many features that makes it user-friendly and help generate a strong and precise visualization of the different Discrete Distribution and True Measure objects. For instance, the extensibility feature enables us to see how the space of the plot fills up, the <code>marker_size</code> parameter helps make the samples/points bigger when plotting high-dimensional projections, and the <code>math_ind</code> parameter allows the user to either input mathematical or Python dimensions for the sampler based on one’s preference. This function could also be developed in the future to support other distributions such as Brownian Motion.</p>
 
 
 </section>
@@ -609,7 +753,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../../about.html">
 <p>About this site</p>
 </a>
   </li>  
@@ -621,5 +765,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Larysa Matiukha, Aleksei Sorokin, and Sou-Cheng Choi">
+<meta name="dcterms.date" content="2025-10-22">
+<meta name="description" content="Generating and analyzing Geometric Brownian Motion paths efficiently with QMCPy.">
+
+<title>Highly Efficient Geometric Brownian Motion Modeling with QMCPy – QMCSoftware</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed blogs-page quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">QMCSoftware</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../software/index.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blogs/index.html"> 
+<span class="menu-text">Blogs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications/index.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../news/index.html"> 
+<span class="menu-text">News &amp; Events</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../community/index.html"> 
+<span class="menu-text">Community</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/QMCSoftware"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#gbm-objects-in-qmcpy" id="toc-gbm-objects-in-qmcpy" class="nav-link" data-scroll-target="#gbm-objects-in-qmcpy">GBM Objects in QMCPy</a></li>
+  <li><a href="#log-normality-property" id="toc-log-normality-property" class="nav-link" data-scroll-target="#log-normality-property">Log-Normality Property</a></li>
+  <li><a href="#gbm-vs-bm" id="toc-gbm-vs-bm" class="nav-link" data-scroll-target="#gbm-vs-bm">GBM vs BM</a></li>
+  <li><a href="#quantlib-vs-qmcpy-comparison" id="toc-quantlib-vs-qmcpy-comparison" class="nav-link" data-scroll-target="#quantlib-vs-qmcpy-comparison">QuantLib vs QMCPy Comparison</a></li>
+  <li><a href="#internals" id="toc-internals" class="nav-link" data-scroll-target="#internals">Internals</a></li>
+  <li><a href="#conclusions-and-future-work" id="toc-conclusions-and-future-work" class="nav-link" data-scroll-target="#conclusions-and-future-work">Conclusions and Future Work</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Highly Efficient Geometric Brownian Motion Modeling with QMCPy</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Finance</div>
+    <div class="quarto-category">Geometric Brownian Motion</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Generating and analyzing Geometric Brownian Motion paths efficiently with QMCPy.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Larysa Matiukha, Aleksei Sorokin, and Sou-Cheng Choi </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Last revised</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 22, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This post demonstrates how QMCPy can generate and analyze Geometric Brownian Motion paths efficiently for simulation and finance workflows.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Example implementation of GBM using QMCPy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Install the required Python packages:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install qmcpy numpy matplotlib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Generate 16 paths on <span class="math inline">\([0,1]\)</span> with QMCPy’s sampler (<span class="math inline">\(S_0=1\)</span>, <span class="math inline">\(\mu=0.05\)</span>, <span class="math inline">\(\sigma^2=0.2\)</span>) and plot five:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> qp.Lattice(<span class="dv">252</span>, seed<span class="op">=</span><span class="dv">42</span>)  <span class="co"># daily steps for 1 year</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>gbm <span class="op">=</span> qp.GeometricBrownianMotion(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    sampler, t_final<span class="op">=</span><span class="dv">1</span>, initial_value<span class="op">=</span><span class="dv">1</span>, drift<span class="op">=</span><span class="fl">0.05</span>, diffusion<span class="op">=</span><span class="fl">0.2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> gbm.gen_samples(<span class="dv">16</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">1.0</span>, paths.shape[<span class="dv">1</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.plot(t, paths[:<span class="dv">5</span>].T, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"$t$"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"$S_t$"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GBM paths"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this blog, we demonstrate how to simulate and analyze a geometric Brownian motion (GBM) process using QMCPy in Python. GBM is widely used in finance to model stock prices and other assets. We will walk through key code snippets, plots, and insights. The numerical results can be reproduced using the <a href="https://qmcsoftware.github.io/QMCSoftware/demos/GBM/gbm_demo/">GBM demo notebook</a>.</p>
+<p>GBM is a continuous stochastic process in which the natural logarithm of its values follows a Brownian motion (BM) [1]. Mathematically, it can be defined as follows:</p>
+<p><span class="math display">\[
+S_t = S_0 \, e^{\bigl(\mu - \tfrac{\sigma^2}{2}\bigr)t + \sigma W_t}.
+\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(S_0\)</span> is the initial value,</li>
+<li><span class="math inline">\(\mu\)</span> is a drift coefficient,</li>
+<li><span class="math inline">\(\sigma\)</span> is the volatility (note: QMCPy uses diffusion <span class="math inline">\(= \sigma^2\)</span>),</li>
+<li><span class="math inline">\(W_t\)</span> is a standard BM.</li>
+</ul>
+<p>At any time <span class="math inline">\(0 &lt; t \le T\)</span>, where <span class="math inline">\(0\)</span> and <span class="math inline">\(T\)</span> represent the beginning and end time of the process, <span class="math inline">\(S_t\)</span> follows a log-normal distribution with expected value and variance as follows (see Section 3.2 in [1]):</p>
+<ul>
+<li><span class="math inline">\(E[S_t] = S_0 e^{\mu t}\)</span>,</li>
+<li><span class="math inline">\(\operatorname{Var}[S_t] = S_0^2 e^{2\mu t}(e^{\sigma^2 t} - 1)\)</span>,</li>
+<li><span class="math inline">\(\operatorname{Cov}(S_{t_i}, S_{t_j}) = S_0^2 e^{\mu(t_i + t_j)}
+\left(e^{\sigma^2 \min(t_i, t_j)} - 1\right)\)</span>.</li>
+</ul>
+<p>GBM is commonly used to model stock prices driving option payoffs in derivatives pricing [2, 3].</p>
+</section>
+<section id="gbm-objects-in-qmcpy" class="level2">
+<h2 class="anchored" data-anchor-id="gbm-objects-in-qmcpy">GBM Objects in QMCPy</h2>
+<p>GBM in QMCPy inherits from <code>BrownianMotion</code> [4, 5]. We can instantiate a GBM class and generate sample paths to see the class in action:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>qp_gbm <span class="op">=</span> qp.GeometricBrownianMotion(qp.Lattice(<span class="dv">2</span>, seed<span class="op">=</span><span class="dv">42</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>qp_gbm.gen_samples(n<span class="op">=</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The output shows 4 sample paths evaluated at 2 time points, yielding a <span class="math inline">\((4 \times 2)\)</span> array where rows represent paths and columns represent time steps:</p>
+<p><span class="math display">\[
+\left[
+\begin{array}{rr}
+0.72608046 &amp; 0.70071241 \\
+0.38739775 &amp; 0.07432173 \\
+0.81262942 &amp; 1.66867239 \\
+0.61937100 &amp; 0.31898397
+\end{array}
+\right].
+\]</span></p>
+</section>
+<section id="log-normality-property" class="level2">
+<h2 class="anchored" data-anchor-id="log-normality-property">Log-Normality Property</h2>
+<p>The log-normal property is fundamental in financial modeling because it ensures asset prices remain strictly positive while allowing for unlimited upside potential. This property makes GBM the cornerstone of the Black-Scholes model and many derivative pricing frameworks.</p>
+<p>To validate theoretical properties, we generate <span class="math inline">\(2^{12} = 4096\)</span> paths over 5 time steps and compare empirical moments with theoretical values. The theoretical values match the last values captured in <code>qp_gbm.mean_gbm</code> and <code>qp_gbm.covariance_gbm</code> for the final time point.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate GBM samples for theoretical validation</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>S0, mu, sigma, T, n_samples <span class="op">=</span> <span class="fl">100.0</span>, <span class="fl">0.05</span>, <span class="fl">0.20</span>, <span class="fl">1.0</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">12</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>diffusion <span class="op">=</span> sigma<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> qp.Lattice(<span class="dv">5</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>qp_gbm <span class="op">=</span> qp.GeometricBrownianMotion(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    sampler, t_final<span class="op">=</span>T, initial_value<span class="op">=</span>S0, drift<span class="op">=</span>mu, diffusion<span class="op">=</span>diffusion</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> qp_gbm.gen_samples(n_samples)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>S_T <span class="op">=</span> paths[:, <span class="op">-</span><span class="dv">1</span>]  <span class="co"># Final values only</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate theoretical vs empirical sample moments</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>theo_mean <span class="op">=</span> S0 <span class="op">*</span> np.exp(mu <span class="op">*</span> T)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>theo_var <span class="op">=</span> S0<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> np.exp(<span class="dv">2</span> <span class="op">*</span> mu <span class="op">*</span> T) <span class="op">*</span> (np.exp(diffusion <span class="op">*</span> T) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>qp_emp_mean <span class="op">=</span> np.mean(S_T)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>qp_emp_var <span class="op">=</span> np.var(S_T, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean: </span><span class="sc">{</span>qp_emp_mean<span class="sc">:.3f}</span><span class="ss"> (theoretical: </span><span class="sc">{</span>theo_mean<span class="sc">:.3f}</span><span class="ss">)"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variance: </span><span class="sc">{</span>qp_emp_var<span class="sc">:.3f}</span><span class="ss"> (theoretical: </span><span class="sc">{</span>theo_var<span class="sc">:.3f}</span><span class="ss">)"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>qp_gbm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Statistic</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sample Mean</td>
+<td>105.127 (Theoretical: 105.127)</td>
+</tr>
+<tr class="even">
+<td>Sample Variance</td>
+<td>449.776 (Theoretical: 451.029)</td>
+</tr>
+<tr class="odd">
+<td>Time Vector</td>
+<td><span class="math inline">\([0.2,\; 0.4,\; 0.6,\; 0.8,\; 1.0]\)</span></td>
+</tr>
+<tr class="even">
+<td>Drift (<span class="math inline">\(\mu\)</span>)</td>
+<td>0.05</td>
+</tr>
+<tr class="odd">
+<td>Diffusion (<span class="math inline">\(\sigma^2\)</span>)</td>
+<td>0.040</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td><span class="math inline">\([101.005,\; 102.020,\; 103.045,\; 104.081,\; 105.127]\)</span></td>
+</tr>
+<tr class="odd">
+<td>Decomposition Type</td>
+<td>PCA</td>
+</tr>
+<tr class="even">
+<td>Covariance Matrix</td>
+<td><span class="math inline">\(\left[\begin{array}{rrrrr} 81.943 &amp; 82.767 &amp; 83.599 &amp; 84.439 &amp; 85.288 \\ 82.767 &amp; 167.869 &amp; 169.556 &amp; 171.260 &amp; 172.981 \\ 83.599 &amp; 169.556 &amp; 257.923 &amp; 260.516 &amp; 263.134 \\ 84.439 &amp; 171.260 &amp; 260.516 &amp; 352.258 &amp; 355.798 \\ 85.288 &amp; 172.981 &amp; 263.134 &amp; 355.798 &amp; 451.029 \end{array}\right]\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gbm-vs-bm" class="level2">
+<h2 class="anchored" data-anchor-id="gbm-vs-bm">GBM vs BM</h2>
+<p>Below we compare BM and GBM using the same parameters: <code>drift = 0</code>, <code>diffusion = 1</code>, and <code>initial_value = 1</code>. The driftless BM paths should fluctuate symmetrically around the initial value (<span class="math inline">\(y = 1\)</span>) and can take negative values, while the GBM paths remain strictly positive.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> qp.Lattice(<span class="dv">2</span><span class="op">**</span><span class="dv">7</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plot_paths(<span class="st">"BM"</span>, sampler, t_final<span class="op">=</span><span class="dv">1</span>, initial_value<span class="op">=</span><span class="dv">1</span>, drift<span class="op">=</span><span class="dv">0</span>, diffusion<span class="op">=</span><span class="dv">1</span>, n<span class="op">=</span>n)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plot_paths(<span class="st">"GBM"</span>, sampler, t_final<span class="op">=</span><span class="dv">1</span>, initial_value<span class="op">=</span><span class="dv">1</span>, drift<span class="op">=</span><span class="dv">0</span>, diffusion<span class="op">=</span><span class="dv">1</span>, n<span class="op">=</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Next, we demonstrate how easily one can swap samplers or change parameters in QMCPy. For example, to model a stock price with initial value <span class="math inline">\(S_0=50\)</span>, drift <span class="math inline">\(\mu=0.1\)</span>, and volatility <span class="math inline">\(\sigma=\sqrt{0.2}\)</span> over a 5-year horizon using IID sampling:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gbm_iid <span class="op">=</span> plot_paths(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GBM"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    qp.IIDStdUniform(<span class="dv">2</span><span class="op">**</span><span class="dv">8</span>, seed<span class="op">=</span><span class="dv">42</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    t_final<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    initial_value<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    drift<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    diffusion<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="dv">32</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We can also use a low-discrepancy lattice sampler with the same parameters:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gbm_lattice <span class="op">=</span> plot_paths(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GBM"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    qp.Lattice(<span class="dv">2</span><span class="op">**</span><span class="dv">8</span>, seed<span class="op">=</span><span class="dv">42</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    t_final<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    initial_value<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    drift<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    diffusion<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="dv">32</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The generated sample paths are plotted below. The four panels show, respectively:</p>
+<ul>
+<li>BM with lattice sampler (<span class="math inline">\(T=1\)</span>, <span class="math inline">\(S_0=1\)</span>, <span class="math inline">\(\mu=0\)</span>, <span class="math inline">\(\sigma^2=1\)</span>, 16 paths),</li>
+<li>GBM with lattice sampler (<span class="math inline">\(T=1\)</span>, <span class="math inline">\(S_0=1\)</span>, <span class="math inline">\(\mu=0\)</span>, <span class="math inline">\(\sigma^2=1\)</span>, 16 paths),</li>
+<li>GBM with IID sampler (<span class="math inline">\(T=5\)</span>, <span class="math inline">\(S_0=50\)</span>, <span class="math inline">\(\mu=0.1\)</span>, <span class="math inline">\(\sigma^2=0.2\)</span>, 32 paths),</li>
+<li>GBM with lattice sampler (<span class="math inline">\(T=5\)</span>, <span class="math inline">\(S_0=50\)</span>, <span class="math inline">\(\mu=0.1\)</span>, <span class="math inline">\(\sigma^2=0.2\)</span>, 32 paths).</li>
+</ul>
+<figure id="fig-bm-gbm-paths" class="figure">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem;">
+<p><img src="figures/figure_1.png" alt="BM with lattice sampler" class="figure-img"> <img src="figures/figure_2.png" alt="GBM with lattice sampler" class="figure-img"> <img src="figures/figure_3.png" alt="GBM with IID sampler" class="figure-img"> <img src="figures/figure_4.png" alt="GBM with lattice sampler for five-year horizon" class="figure-img"></p>
+</div>
+<figcaption>
+Comparison of sample paths for BM and GBM using different samplers.
+</figcaption>
+</figure>
+</section>
+<section id="quantlib-vs-qmcpy-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="quantlib-vs-qmcpy-comparison">QuantLib vs QMCPy Comparison</h2>
+<p>In this section, we compare QMCPy’s <code>GeometricBrownianMotion</code> implementation with the industry-standard QuantLib library [6] to validate its accuracy and performance. The numerical results are summarized in the following table.</p>
+<p>Both libraries produce statistically equivalent GBM simulations that match theoretical values. QMCPy typically runs 1.5 to 2 times faster due to vectorized operations, lazy loading, and optimized memory management. More importantly, it demonstrates superior numerical accuracy (lower mean absolute errors) with Sobol, lattice, and Halton samplers, making it useful for research and high-performance applications. QuantLib remains the industry standard for production systems that require comprehensive support for financial modeling and risk management.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Sampler</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">Std Dev</th>
+<th style="text-align: right;">Mean Absolute Error</th>
+<th style="text-align: right;">Std Dev Error</th>
+<th style="text-align: right;">Mean Time (s)</th>
+<th style="text-align: right;">Std Dev (s)</th>
+<th style="text-align: right;">Speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>QuantLib</td>
+<td>Sobol</td>
+<td style="text-align: right;">100.88887227</td>
+<td style="text-align: right;">0.00000000</td>
+<td style="text-align: right;">4.23823737</td>
+<td style="text-align: right;">21.23743882</td>
+<td style="text-align: right;">0.00009037</td>
+<td style="text-align: right;">0.00000000</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr class="even">
+<td>QMCPy</td>
+<td>Sobol</td>
+<td style="text-align: right;">103.66893699</td>
+<td style="text-align: right;">1.17417404</td>
+<td style="text-align: right;">1.45817264</td>
+<td style="text-align: right;">20.06326479</td>
+<td style="text-align: right;">0.00143112</td>
+<td style="text-align: right;">0.00000000</td>
+<td style="text-align: right;">0.08401794</td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> QuantLib <span class="im">as</span> ql</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_quantlib_paths(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    initial_value: <span class="bu">float</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    mu: <span class="bu">float</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    sigma: <span class="bu">float</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    maturity: <span class="bu">float</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    n_steps: <span class="bu">int</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    n_paths: <span class="bu">int</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    sampler_type: <span class="bu">str</span> <span class="op">=</span> <span class="st">"IIDStdUniform"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    seed: <span class="bu">int</span> <span class="op">=</span> <span class="dv">7</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate Geometric Brownian Motion paths using QuantLib.</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">        initial_value: Initial value of the GBM process (S_0)</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">        mu: Drift parameter</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">        sigma: Volatility parameter (note: NOT diffusion coefficient)</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">        maturity: Final time T</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">        n_steps: Number of discretization time steps</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">        n_paths: Number of paths to generate</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">        sampler_type: Type of sampler ('IIDStdUniform' or 'Sobol')</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">        seed: Random seed for reproducibility</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">        tuple: (paths, gbm) where paths has shape (n_paths, n_steps+1)</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">               (includes initial value at t=0) and gbm is the</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">               GeometricBrownianMotionProcess object</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">    Raises:</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">        ValueError: If sampler_type is not 'IIDStdUniform' or 'Sobol'</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    gbm <span class="op">=</span> ql.GeometricBrownianMotionProcess(initial_value, mu, sigma)</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    times <span class="op">=</span> ql.TimeGrid(maturity, n_steps)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    dimension <span class="op">=</span> n_steps</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> sampler_type <span class="op">==</span> <span class="st">"IIDStdUniform"</span>:</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>        uniform_rng <span class="op">=</span> ql.UniformRandomGenerator(seed)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        sequence_gen <span class="op">=</span> ql.GaussianRandomSequenceGenerator(</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>            ql.UniformRandomSequenceGenerator(n_steps, uniform_rng)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>        path_gen <span class="op">=</span> ql.GaussianPathGenerator(gbm, maturity, n_steps, sequence_gen, <span class="va">False</span>)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        paths <span class="op">=</span> np.zeros((n_paths, n_steps <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_paths):</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>            sample_path <span class="op">=</span> path_gen.<span class="bu">next</span>().value()</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>            paths[i, :] <span class="op">=</span> np.array([sample_path[j] <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n_steps <span class="op">+</span> <span class="dv">1</span>)])</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> paths, gbm</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> sampler_type <span class="op">==</span> <span class="st">"Sobol"</span>:</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>        uniform_rsg <span class="op">=</span> ql.UniformLowDiscrepancySequenceGenerator(dimension, seed)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>        sequence_gen <span class="op">=</span> ql.GaussianLowDiscrepancySequenceGenerator(uniform_rsg)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>        path_gen <span class="op">=</span> ql.GaussianSobolMultiPathGenerator(</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>            gbm, <span class="bu">list</span>(times), sequence_gen, <span class="va">False</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>        paths <span class="op">=</span> np.zeros((n_paths, n_steps <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>        paths[:, <span class="dv">0</span>] <span class="op">=</span> initial_value  <span class="co"># Set initial value</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_paths):</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>            sample_path <span class="op">=</span> path_gen.<span class="bu">next</span>().value()</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>            <span class="co"># For 1D process, get the first (and only) path</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>            path_values <span class="op">=</span> sample_path[<span class="dv">0</span>]</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>            paths[i, :] <span class="op">=</span> np.array([path_values[j] <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n_steps <span class="op">+</span> <span class="dv">1</span>)])</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> paths, gbm</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Unsupported sampler type: </span><span class="sc">{</span>sampler_type<span class="sc">}</span><span class="ss">.  Use 'IIDStdUniform' or 'Sobol'"</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the next figure, the top row shows sample paths: QMCPy on the left and QuantLib on the right. The bottom-left panel overlays the marginal distribution at <span class="math inline">\(t=1\)</span>, where both libraries yield nearly identical shapes with means and standard deviations matching the table above. The bottom-right panel is a QMCPy covariance heatmap with time 0 at the top of the <span class="math inline">\(y\)</span>-axis; the variance increases along the diagonal with time and the off-diagonal structure follows <span class="math inline">\(\min(t_i,t_j)\)</span>, consistent with the analytic form and the numerical matrix above.</p>
+<figure id="fig-qmcpy-quantlib-comparison" class="figure">
+<img src="figures/figure_5.png" alt="QMCPy and QuantLib GBM comparison" style="width:100%" class="figure-img">
+<figcaption>
+QMCPy vs QuantLib comparison. Top: sample paths from QMCPy (left) and QuantLib (right). Bottom left: marginal distribution at <span class="math inline">\(t=1\)</span>. Bottom right: QMCPy covariance heatmap.
+</figcaption>
+</figure>
+<p>The evaluation of computational efficiency was done by creating comprehensive performance benchmarks comparing QMCPy and QuantLib across two key scaling dimensions. The benchmarks were performed using the <code>perfplot</code> library, which automatically handles warm-up, multiple runs, and statistical analysis to ensure reliable timing measurements.</p>
+<p>The following figure presents the results of our performance analysis. The left panel shows how execution time scales with the number of time steps while keeping the number of paths fixed at 4,096. Both libraries exhibit approximately linear scaling, but QMCPy demonstrates superior performance at smaller time step counts, with QuantLib becoming more competitive as the number of time steps increases. The right panel examines scaling behavior with respect to the number of paths while fixing the time steps at 252, representing a typical trading year. Here, QMCPy maintains a consistent performance advantage across all path counts, with the gap becoming more pronounced at higher path numbers. This performance difference is particularly relevant for Monte Carlo applications that require large numbers of simulation paths for accurate estimation.</p>
+<figure id="fig-gbm-performance" class="figure">
+<img src="figures/figure_6.png" alt="GBM performance comparison" class="figure-img">
+<figcaption>
+GBM Performance Comparison: QuantLib vs QMCPy. Left plot shows performance scaling with number of time steps for fixed paths. Right plot shows performance scaling with number of paths for fixed number of time steps.
+</figcaption>
+</figure>
+<p>To further validate these performance findings, we conducted an extended parameter sweep analysis across a broader range of configurations. The next figure presents the comprehensive results of this analysis, systematically examining performance across varying time steps and path counts.</p>
+<ul>
+<li>Regarding accuracy, QMCPy’s Sobol sampler generally achieves the lowest mean absolute error (MAE), particularly when a larger number of paths are used, reaching errors below <span class="math inline">\(10^{-3}\)</span>. The lattice sampler also provides competitive accuracy, especially with higher path counts. While QuantLib’s standard uniform IID sampler yields slightly lower MAE for a larger number of paths compared to QMCPy’s IID sampler, it is notably slower.</li>
+<li>Regarding speed, low-discrepancy samplers like Sobol, lattice, and Halton demonstrate superior convergence rates with increasing path counts compared to IID methods. With QMCPy, Sobol and lattice samplers offer the best speed-accuracy trade-off. QuantLib achieves comparable runtime to QMCPy’s faster samplers, but without the accuracy benefits. The Halton sampler, while yielding the most accurate results, incurs significantly higher computational costs. These results highlight QMCPy’s quasi-Monte Carlo methods as particularly well-suited for applications requiring high accuracy, with Sobol and lattice samplers providing an optimal balance of speed and precision for most practical scenarios.</li>
+</ul>
+<figure id="fig-gbm-performance2" class="figure">
+<img src="figures/figure_7.png" alt="Comprehensive parameter sweep performance analysis" class="figure-img">
+<figcaption>
+Comprehensive parameter sweep performance analysis comparing QuantLib and QMCPy across varying time steps and path counts. The results demonstrate QMCPy’s consistent performance advantages and superior scaling characteristics for both dimensions of the parameter space.
+</figcaption>
+</figure>
+</section>
+<section id="internals" class="level2">
+<h2 class="anchored" data-anchor-id="internals">Internals</h2>
+<p>The <code>GeometricBrownianMotion</code> class in QMCPy is engineered for speed, robustness, and mathematical correctness. Its design leverages object-oriented inheritance and vectorized operations, resulting in both flexibility and high performance. <code>GeometricBrownianMotion</code> inherits from <code>BrownianMotion</code>, which itself inherits from <code>Gaussian</code>. This layered design allows the GBM class to reuse and extend efficient implementations for Gaussian random vectors and BM increments. The constructor rigorously checks input parameters (e.g., positivity of initial value and diffusion, valid decomposition type), ensuring mathematical integrity and preventing run-time errors.</p>
+<p>The class uses vectorized NumPy operations to generate entire arrays of GBM paths in a single call, minimizing Python loops and maximizing computational throughput. Sample generation proceeds in two stages:</p>
+<ol type="1">
+<li>The parent class <code>BrownianMotion</code> generates standard BM sample paths using the specified sampler (e.g., low-discrepancy lattice, IID uniform), with drift and diffusion handled in the mean and covariance structure.</li>
+<li>The GBM class transforms the BM samples via the exponential mapping above, performed in a fully vectorized fashion, ensuring that thousands of paths can be efficiently simulated.</li>
+</ol>
+<p>The class computes and stores the theoretical mean and covariance matrices for GBM at initialization, which can be used for validation and theoretical comparisons. Both mean and covariance are calculated using analytical formulas, leveraging <a href="https://numpy.org/devdocs/user/basics.broadcasting.html">NumPy broadcasting</a> for efficient computations. Briefly, broadcasting in NumPy allows arithmetic operations between arrays of different shapes by automatically expanding the smaller array to match the shape of the larger array.</p>
+<p>The Gaussian and BM classes both implement Cholesky and PCA factorization of the covariance matrix</p>
+<p><span class="math display">\[
+\Sigma = L L^\top
+\quad\text{and}\quad
+\Sigma = P D P^\top,
+\]</span></p>
+<p>respectively. In the Cholesky method, one computes the lower-triangular <span class="math inline">\(L=\operatorname{chol}(\Sigma)\)</span> and obtains correlated increments via <span class="math inline">\(X=LZ\)</span>, where <span class="math inline">\(Z\sim\mathcal{N}(0,I)\)</span>. In the PCA approach, one first diagonalizes <span class="math inline">\(\Sigma=PDP^\top\)</span>, then forms <span class="math inline">\(X = P D^{1/2} Z\)</span>. By default PCA is used for its superior numerical stability in high dimensions and slightly lower cost when many eigenvalues are near zero. These correlated normals feed directly into the GBM update</p>
+<p><span class="math display">\[
+S_{t+\Delta t}
+= S_t \exp\!\Bigl((\mu - \tfrac12\sigma^2)\Delta t
++ \sigma\sqrt{\Delta t}\,X\Bigr),
+\]</span></p>
+<p>ensuring that the simulated paths respect the intended covariance structure and remain strictly positive, with strict-positivity checks raising warnings or errors if violated.</p>
+</section>
+<section id="conclusions-and-future-work" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-future-work">Conclusions and Future Work</h2>
+<p>This blog demonstrates that QMCPy’s quasi-Monte Carlo implementations provide significant advantages over traditional Monte Carlo methods for modeling geometric Brownian motion. QMCPy’s approach combines superior numerical accuracy with enhanced computational efficiency, making it particularly well-suited for high-performance financial modeling applications.</p>
+<p>In the future, we aim to investigate ways to improve the runtime of the Halton sampler. For example, we may consider starting with Halton sampling points for high accuracy in early iterations, then switch to Sobol for faster convergence as sample size increases. It would also be interesting to experiment with ensemble sampling by running multiple samplers in parallel and combine the results using weighted averaging based on their relative accuracies.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Takeaways
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To the best of our knowledge, this blog presents the first publicly available benchmark comparing QuantLib and QMCPy for Geometric Brownian Motion simulations. Key takeaways include:</p>
+<ul>
+<li><strong>Theoretical Validation</strong>: QMCPy’s GBM implementation correctly preserves log-normality and matches theoretical moments, providing reliable foundations for financial modeling applications.</li>
+<li><strong>QMC Advantage</strong>: Quasi-Monte Carlo methods (Sobol, lattice, Halton) demonstrate superior convergence and accuracy compared to traditional Monte Carlo, with Halton achieving the lowest mean error and Sobol providing consistent performance across scenarios.</li>
+<li><strong>Flexibility and Ease of Use</strong>: Change one argument in QMCPy to swap samplers or covariance decompositions, enabling rapid experimentation and method comparison.</li>
+<li><strong>Performance</strong>: Vectorized operations and optimized memory management produce 1.5-2x faster path generation than QuantLib.</li>
+<li><strong>Robustness</strong>: Superior numerical stability through PCA decomposition and comprehensive error handling make QMCPy suitable for both research and practical financial and scientific applications.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Glasserman, P. <em>Monte Carlo Methods in Financial Engineering</em>. Springer-Verlag, New York, 2004.</li>
+<li>Hull, J. <em>Options, Futures, and Other Derivatives</em> (10th ed.). Pearson, 2017.</li>
+<li>Ross, S. M. <em>Introduction to Probability Models</em> (11th ed.). Academic Press, 2014.</li>
+<li>Choi, S.-C. T., Hickernell, F. J., Jagadeeswaran, R., McCourt, M. J., &amp; Sorokin, A. G. Quasi-Monte Carlo Software. In A. Keller (Ed.), <em>Monte Carlo and Quasi-Monte Carlo Methods</em>, 2022.</li>
+<li>Choi, S.-C. T., Hickernell, F., McCourt, M., &amp; Sorokin, A. QMCPy: A quasi-Monte Carlo Python Library. <a href="https://qmcsoftware.github.io/QMCSoftware/">https://qmcsoftware.github.io/QMCSoftware/</a>. 2020.</li>
+<li>The QuantLib contributors. QuantLib: A free/open-source library for quantitative finance. Version 1.38. DOI: <a href="https://doi.org/10.5281/zenodo.1440997">10.5281/zenodo.1440997</a>. 2003–2025. <a href="https://www.quantlib.org">https://www.quantlib.org</a>.</li>
+</ol>
+</section>
+<section id="acknowledgments" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
+<p>The authors thank Fred Hickernell, Joshua Jay Herman and Jiangrui Kang for their insightful feedback and help with the blog post.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/qmcsoftware\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>QMCSoftware — open-source quasi-Monte Carlo software</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+<p>About this site</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

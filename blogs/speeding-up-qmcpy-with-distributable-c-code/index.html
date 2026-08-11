@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-04-27">
-<meta name="description" content="Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.">
+<meta name="author" content="Aleksei Sorokin and Jagadeeswaran Rathinavel">
+<meta name="dcterms.date" content="2021-03-21">
+<meta name="description" content="Using distributable C extensions through ctypes and packaging metadata to accelerate QMCPy.">
 
-<title>Fred Hickernell Named a 2026 SIAM Fellow – QMCSoftware</title>
+<title>Speeding up QMCPy with Distributable C Code – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,6 +28,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -47,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -80,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -138,35 +174,50 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#c" id="toc-c" class="nav-link active" data-scroll-target="#c">C</a></li>
+  <li><a href="#python-code" id="toc-python-code" class="nav-link" data-scroll-target="#python-code">Python Code</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Fred Hickernell Named a 2026 SIAM Fellow</h1>
+<h1 class="title">Speeding up QMCPy with Distributable C Code</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Recognition</div>
-    <div class="quarto-category">Community</div>
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Performance</div>
+    <div class="quarto-category">C Extensions</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.
+    Using distributable C extensions through ctypes and packaging metadata to accelerate QMCPy.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksei Sorokin and Jagadeeswaran Rathinavel </p>
+          </div>
+  </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Last revised</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 27, 2026</p>
+      <p class="date">March 21, 2021</p>
     </div>
   </div>
   
@@ -178,21 +229,96 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Illinois Tech Professor Fred Hickernell was named to the 2026 class of Fellows of the Society for Industrial and Applied Mathematics (SIAM). The distinction recognizes his mathematical and statistical innovations in high-dimensional integration and approximation, as well as his scientific leadership.</p>
-<p>The Illinois Tech article also highlights the open-source software developed by Hickernell’s research group and collaborators, including <a href="../../software/qmcpy.html">QMCPy</a>, which makes quasi-Monte Carlo methods available in Python.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Source:</strong> Illinois Institute of Technology, April 27, 2026.</p>
-<p><a href="https://www.iit.edu/news/applied-mathematics-professor-honored-siam-fellow" class="btn btn-primary">Read the original Illinois Tech article</a></p>
-</div>
-</div>
-</div>
+<p>This post explains how QMCPy uses distributable C extensions through <code>ctypes</code> and packaging metadata to speed up low-discrepancy generators.</p>
+<p>Many Python packages rely on underlying C or C++ code to speed up their numerical methods. For example, <a href="https://numpy.org/">NumPy</a> calls C and C++ extensions in order to speed up matrix manipulation algorithms.</p>
+<p>Real Python’s article <a href="https://realpython.com/python-bindings-overview/#python-bindings-overview"><em>Python Bindings: Calling C or C++ From Python</em></a> discusses a few reasons why you may want to utilize C or C++ extensions within your Python package. Perhaps you already have a stable library in C or C++ that you want to call from Python. Our approach in this blog will allow the existing extension to be called from Python with only minor code modifications. You may also be interested in speeding up your Python code by moving it to a compiled language that can optimize subroutines. For example, in QMCPy we have found that many low discrepancy sequence generators are significantly faster when implemented in C.</p>
+<p>So why not implement everything in C or C++? In our experience, Python delivers a convenience, readability, and community engagement that allow for rapid development, testing, and distribution to a large audience of active users.</p>
+<p>While the benefits of moving certain modules to C/C++ have been well documented, implementing these extensions to play nicely with your existing Python codebase can often be quite tricky. Moreover, writing extensions for platform-independent distribution with PyPI, so someone can <code>pip install yourPackage</code>, can be even more challenging. In this blog post we share how we developed the QMCPy package [1] to be platform agnostic while utilizing C extensions.</p>
+<section id="c" class="level2">
+<h2 class="anchored" data-anchor-id="c">C</h2>
+<p>When you first explore writing C/C++ extensions you will likely come across <a href="https://docs.python.org/3/extending/extending.html">Python’s recommended solution</a>. This approach requires a good bit of boilerplate code and prohibits plug-and-play of an existing C/C++ library. QMCPy’s approach uses the <a href="https://docs.python.org/3/library/ctypes.html"><code>ctypes</code></a> library to call a C function with a few lines of Python defining the arguments and return values of the compiled function.</p>
+<p>Let us now turn to an example from our QMCPy library. Based on Art Owen’s work in [2], we wrote the below Halton generator in C. Note that the implementation does not contain all the boilerplate code of a native Python solution, but instead may be used as a standalone C file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"MRG63k3a.h"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> primes<span class="op">[</span><span class="dv">1000</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="op">...};</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>EXPORT <span class="dt">void</span> halton_owen<span class="op">(</span><span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> d<span class="op">,</span> <span class="dt">int</span> n0<span class="op">,</span> <span class="dt">int</span> d0<span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                        <span class="dt">int</span> randomize<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span>ans<span class="op">,</span> <span class="dt">long</span> <span class="dt">long</span> seed<span class="op">){</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    seed_MRG63k3a<span class="op">(</span>seed<span class="op">);</span> <span class="op">...}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A few important notes about the above code are the use of <code>#include</code>, <code>EXPORT</code>, and <code>long long</code>. Depending on the compiler, such as <code>gcc</code> or Windows <code>cl.exe</code>, <code>EXPORT</code> allows us to expose a function, in the above case <code>halton_owen</code>, so that the Python code can invoke it. When you <code>EXPORT</code> a function it makes the C code available to <code>ctypes</code>. The Halton generator utilizes the MRG63k3a random number generator [3], which is stored in a separate file. We can call this function by creating a <code>.h</code> file that defines the external function we wish to call. In <code>MRG63k3a.h</code> we define the <code>seed_MRG63k3a</code> method which is then included and used in the above Halton generator.</p>
+<p>When your Python package is installed, the C compiler that builds the extensions is platform-specific. We found that the <code>gcc</code> compiler uses 8 bytes to store a <code>long</code> while Windows <code>cl.exe</code> uses only 4. As a workaround, we suggest using the <code>long long</code> datatype, which is 8 bytes for both <code>gcc</code> and <code>cl.exe</code>. A nice way to verify you are using <code>gcc</code> and debug these cross-language problems is to intentionally trigger compiler errors.</p>
+<p>With these three C files, the Halton generator, MRG63k3a, and MRG63k3a’s header, we are ready to call our function from Python.</p>
+</section>
+<section id="python-code" class="level2">
+<h2 class="anchored" data-anchor-id="python-code">Python Code</h2>
+<p>First, we will use <code>ctypes</code> to define our function from Python. <code>ctypes</code> requires that we define the arguments and return values of our Halton function in order for it to be treated like a native Python function. Below is an example of how to set up and call our Halton function in C using Python.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ctypes</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ctypes <span class="im">import</span> CDLL, RTLD_GLOBAL</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> os.path <span class="im">import</span> dirname, abspath</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> glob <span class="im">import</span> glob</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># load the library</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>c_lib <span class="op">=</span> CDLL(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    glob(dirname(abspath(<span class="va">__file__</span>))<span class="op">+</span><span class="st">'/c_lib*'</span>)[<span class="dv">0</span>],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    mode <span class="op">=</span> RTLD_GLOBAL)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># define the function arguments</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>halton_cf <span class="op">=</span> c_lib.halton_owen</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>halton_cf.argtypes <span class="op">=</span> [</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    ctypes.c_int,  <span class="co"># n</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    ctypes.c_int,  <span class="co"># d</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    ctypes.c_int, <span class="co"># n0</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    ctypes.c_int, <span class="co"># d0</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    ctypes.c_int, <span class="co"># randomize</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    ctypeslib.ndpointer( <span class="co"># result array</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        ctypes.c_double,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        flags <span class="op">=</span> <span class="st">'C_CONTIGUOUS'</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    ctypes.c_long]  <span class="co"># seed</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># define the return value</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>halton_cf.restype <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># example call to the function</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   create an empty array to fill with Halton points</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> zeros((<span class="dv">5</span>,<span class="dv">3</span>), dtype<span class="op">=</span>double)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#   fill the array with 5, 3-dimensional Halton points</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>halton_cf(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="va">True</span>, x, <span class="dv">17</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The second piece of Python code you will need is a <code>setup.py</code>. The <code>setup.py</code> file defines the C extensions of your package and helps prepare your package for distribution on PyPI. While it is possible to compile and call your extension function without a <code>setup.py</code> file, we found this method to be the easiest and most straightforward for package distribution.</p>
+<p>Below is a snippet from our <code>setup.py</code> file that defines the extensions, packages, and other metadata. Note that we use the <a href="https://setuptools.readthedocs.io/en/latest/"><code>setuptools</code></a> package to easily define our distribution properties, although <a href="https://docs.python.org/3/library/distutils.html"><code>distutils</code></a> may also be used.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> setuptools</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> setuptools <span class="im">import</span> Extension</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># define package API</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>packages <span class="op">=</span> [</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'qmcpy'</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'qmcpy.discrete_distribution'</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'qmcpy.discrete_distribution.halton'</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>setuptools.setup(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"qmcpy"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    packages<span class="op">=</span>packages,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    include_package_data<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    ext_modules<span class="op">=</span>[</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        Extension(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="st">'qmcpy.discrete_distribution.c_lib.c_lib'</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            sources<span class="op">=</span>[</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">'qmcpy/discrete_distribution/c_lib/halton_owen.c'</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                <span class="st">'qmcpy/discrete_distribution/c_lib/MRG63k3a.c'</span>],</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            )],)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>When distributing your package on PyPI, you may come across an error regarding missing <code>.h</code> files, e.g., the <code>MRG63k3a.h</code> file mentioned earlier. For this file to be included in your distribution, you need to include a <code>MANIFEST.in</code> file that defines all the non-Python and non-C code to be included. That way the <code>.h</code> files and other files will be included in your package distribution. We provide a sample from our <code>MANIFEST.in</code> below.</p>
+<pre class="text"><code>include qmcpy/discrete_distribution/c_lib/*.h
+include qmcpy/discrete_distribution/sobol/generating_matrices/*.npy
+include qmcpy/discrete_distribution/lattice/generating_vectors/*.npy</code></pre>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Choi, S.-C. T., Hickernell, F., McCourt, M., &amp; Sorokin, A. QMCPy: A quasi-Monte Carlo Python Library. <a href="https://qmcsoftware.github.io/QMCSoftware/">https://qmcsoftware.github.io/QMCSoftware/</a>. 2020.</li>
+<li>Owen, A. B. A randomized Halton algorithm in R. 2017. <a href="https://arxiv.org/abs/1706.02808">arXiv:1706.02808 [stat.CO]</a>.</li>
+<li>L’Ecuyer, P. Good parameters and implementations for combined multiple recursive random number generators. <em>Operations Research</em>, 47, 159-164. <a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.47.1.159">https://pubsonline.informs.org/doi/abs/10.1287/opre.47.1.159</a>. 1999.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-04-27">
-<meta name="description" content="Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.">
+<meta name="author" content="Aadit Jain">
+<meta name="dcterms.date" content="2026-02-25">
+<meta name="description" content="A vectorized extension of CubMCCLT for confidence intervals on vector-valued quantities of interest.">
 
-<title>Fred Hickernell Named a 2026 SIAM Fellow – QMCSoftware</title>
+<title>CubMCCLTVec: Vectorizing the CubMCCLT Algorithm – QMCSoftware</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,6 +28,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -47,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bea0d21d842899b0512647519f2e64b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-324e6dc18736a024d46d5a7b4f4cea1c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,10 +113,39 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed blogs-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -138,35 +203,52 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-does-the-cubmccltvec-class-do" id="toc-what-does-the-cubmccltvec-class-do" class="nav-link active" data-scroll-target="#what-does-the-cubmccltvec-class-do">What Does the CubMCCLTVec Class Do?</a></li>
+  <li><a href="#some-examples-utilizing-the-cubmccltvec-class" id="toc-some-examples-utilizing-the-cubmccltvec-class" class="nav-link" data-scroll-target="#some-examples-utilizing-the-cubmccltvec-class">Some Examples Utilizing the CubMCCLTVec Class</a></li>
+  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation">Python Implementation</a></li>
+  <li><a href="#benefits-of-developing-the-cubmccltvec-class" id="toc-benefits-of-developing-the-cubmccltvec-class" class="nav-link" data-scroll-target="#benefits-of-developing-the-cubmccltvec-class">Benefits of Developing the CubMCCLTVec Class</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Fred Hickernell Named a 2026 SIAM Fellow</h1>
+<h1 class="title">CubMCCLTVec: Vectorizing the CubMCCLT Algorithm</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Recognition</div>
-    <div class="quarto-category">Community</div>
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Vector-Valued Integration</div>
+    <div class="quarto-category">Stopping Criteria</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Illinois Tech professor recognized for innovations in high-dimensional integration and approximation and for scientific leadership.
+    A vectorized extension of CubMCCLT for confidence intervals on vector-valued quantities of interest.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aadit Jain </p>
+          </div>
+  </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Last revised</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 27, 2026</p>
+      <p class="date">February 25, 2026</p>
     </div>
   </div>
   
@@ -178,21 +260,190 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Illinois Tech Professor Fred Hickernell was named to the 2026 class of Fellows of the Society for Industrial and Applied Mathematics (SIAM). The distinction recognizes his mathematical and statistical innovations in high-dimensional integration and approximation, as well as his scientific leadership.</p>
-<p>The Illinois Tech article also highlights the open-source software developed by Hickernell’s research group and collaborators, including <a href="../../software/qmcpy.html">QMCPy</a>, which makes quasi-Monte Carlo methods available in Python.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Source:</strong> Illinois Institute of Technology, April 27, 2026.</p>
-<p><a href="https://www.iit.edu/news/applied-mathematics-professor-honored-siam-fellow" class="btn btn-primary">Read the original Illinois Tech article</a></p>
-</div>
-</div>
-</div>
+<p>This post introduces <code>CubMCCLTVec</code>, a vectorized extension of <code>CubMCCLT</code> for confidence intervals on vector-valued quantities of interest.</p>
+<p>Recent work by Aleksei G. Sorokin and Jagadeeswaran Rathinavel [1] discuss extending stopping criterion for a scalar mean to stopping criterion for vector quantities of interest formulated as functions of multiple means. One such scalar stopping criterion is <code>CubMCCLT</code> that calculates a confidence interval for <span class="math inline">\(\mu\)</span> by using the Central Limit Theorem. When <span class="math inline">\(\{x_i\}_{i=1}^{n}\)</span> are IID and <span class="math inline">\(f\)</span> has a finite variance, the confidence interval for <span class="math inline">\(\mu\)</span> can be calculated as:</p>
+<p><span class="math display">\[
+\mu^{\pm} = \hat{\mu}\; \pm\; C Z_{\alpha^{(\mu)}/2} \hat{\sigma}/\sqrt{n}
+\]</span></p>
+<p>Here, <span class="math inline">\(\hat{\mu}\)</span> is the sample average of function evaluations, <span class="math inline">\(Z_{\alpha^{(\mu)}/2}\)</span> is the inverse CDF of a standard normal distribution at <span class="math inline">\(1 - \alpha^{(\mu)}/2\)</span>, the variance of <span class="math inline">\(f(X)\)</span> can be approximated by <span class="math inline">\(\hat{\sigma}^2 = \frac{1}{n-1} \sum_{i=1}^{n} (f(\boldsymbol{x}_i) - \hat{\mu})^2\)</span>, and <span class="math inline">\(C^2\)</span> is an inflation factor greater than 1 for a more conservative estimate.</p>
+<p>Building on the <code>CubMCCLT</code> algorithm, we have developed a vectorized version of it known as <code>CubMCCLTVec</code>.</p>
+<section id="what-does-the-cubmccltvec-class-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-the-cubmccltvec-class-do">What Does the CubMCCLTVec Class Do?</h2>
+<p>The <code>CubMCCLTVec</code> class, which is a stopping criterion object, calculates a confidence interval for functions with multiple outputs based on the user-specified confidence level (default is 99%). Given an initial and maximum sample size and an absolute tolerance, we keep on doubling the sample size and recomputing the confidence interval until half the confidence interval width is less than the absolute tolerance or the double of the current sample size exceeds the maximum sample size.</p>
+<p>Like the other stopping criterion objects, <code>CubMCCLTVec</code> too utilizes an accumulate data object to recompute the confidence interval known as <code>MeanVarDataVec</code>.</p>
+</section>
+<section id="some-examples-utilizing-the-cubmccltvec-class" class="level2">
+<h2 class="anchored" data-anchor-id="some-examples-utilizing-the-cubmccltvec-class">Some Examples Utilizing the CubMCCLTVec Class</h2>
+<p>The following code illustrates three examples that are being solved using <code>CubMCCLTVec</code>:</p>
+<ol type="1">
+<li><p>Covariance [2]: <span class="math inline">\(T \sim \mathcal{N}(1,I_d)\)</span> and the covariance of <span class="math inline">\(P = T_0\cdots T_{d-1}\)</span> and <span class="math inline">\(S = T_0+\dots+T_{d-1}\)</span> is:</p>
+<p><span class="math display">\[
+\mathrm{Cov}[P,S] = \mathbb{E}[PS]-\mathbb{E}[P]\mathbb{E}[S] = \mu_0-\mu_1\mu_2
+\]</span></p>
+<p>Theoretically, <span class="math inline">\(\mathrm{Cov}[P,S] = 2d-(1)(d) = d\)</span>.</p></li>
+<li><p>Box Integral [3]: <span class="math inline">\(B_s(x) = (\sum_{j=1}^{d} x^2_j)^{s/2}\)</span> where <span class="math inline">\(x_1,\dots,x_d \sim \mathcal{U}[0,1]\)</span> and the box integral is computed for <span class="math inline">\(s=-1\)</span> and <span class="math inline">\(s=1\)</span> (the two outputs).</p></li>
+<li><p>Custom Fun: <span class="math inline">\(x_j \sim \mathcal{U}[0,2j]\)</span> for <span class="math inline">\(j=1,\dots,6\)</span>.</p></li>
+</ol>
+</section>
+<section id="python-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="python-implementation">Python Implementation</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1: Covariance</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dimension <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>true_measure <span class="op">=</span> qp.IIDStdUniform(dimension)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Covariance(qp.integrand.Integrand):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, true_measure):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(true_measure)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> g(<span class="va">self</span>, x):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        P <span class="op">=</span> np.prod(x, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        S <span class="op">=</span> np.<span class="bu">sum</span>(x, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.vstack((P<span class="op">*</span>S, P, S)).T</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>integrand <span class="op">=</span> Covariance(true_measure)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> qp.CubMCCLTVec(integrand, abs_tol<span class="op">=</span><span class="fl">1e-2</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Covariance:"</span>, solution.integrate())</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 2: Box Integral</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>dimension <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>true_measure <span class="op">=</span> qp.IIDStdUniform(dimension)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BoxIntegral(qp.integrand.Integrand):</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, true_measure):</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(true_measure)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> g(<span class="va">self</span>, x):</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        norm_sq <span class="op">=</span> np.<span class="bu">sum</span>(x<span class="op">**</span><span class="dv">2</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.vstack((norm_sq<span class="op">**</span>(<span class="op">-</span><span class="fl">0.5</span>), norm_sq<span class="op">**</span>(<span class="fl">0.5</span>))).T</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>integrand <span class="op">=</span> BoxIntegral(true_measure)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> qp.CubMCCLTVec(integrand, abs_tol<span class="op">=</span><span class="fl">1e-2</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Box Integral:"</span>, solution.integrate())</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 3: Custom Function</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>dimension <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>true_measure <span class="op">=</span> qp.IIDStdUniform(dimension)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CustomFun(qp.integrand.Integrand):</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, true_measure):</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(true_measure)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> g(<span class="va">self</span>, x):</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        weights <span class="op">=</span> np.arange(<span class="dv">1</span>, dimension<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        scaled <span class="op">=</span> x <span class="op">*</span> (<span class="dv">2</span><span class="op">*</span>weights)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        f1 <span class="op">=</span> np.<span class="bu">sum</span>(scaled, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        f2 <span class="op">=</span> np.prod(scaled, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.vstack((f1, f2)).T</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>integrand <span class="op">=</span> CustomFun(true_measure)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> qp.CubMCCLTVec(integrand, abs_tol<span class="op">=</span><span class="fl">1e-2</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Custom Fun:"</span>, solution.integrate())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 1 Output: Covariance</strong></p>
+<pre class="text"><code>Solution: 3.998147791818197
+Data:
+MeanVarDataVec (AccumulateData Object)
+    solution        3.998
+    comb_bound_low  3.977
+    comb_bound_high 4.019
+    comb_flags      1
+    n_total         2^(26)
+    n               [67108864. 67108864. 67108864.]
+    time_integrate  152.068
+CubMCCLTVec (StoppingCriterion Object)
+    inflate         1.200
+    alpha           0.010
+    abs_tol         0.025
+    rel_tol         0
+    n_init          2^(8)
+    n_max           2^(30)
+CovIntegrand (Integrand Object)
+Gaussian (TrueMeasure Object)
+    mean            1
+    covariance      1
+    decomp_type     PCA
+IIDStdUniform (DiscreteDistribution Object)
+    d               2^(2)
+    entropy         7
+    spawn_key       ()</code></pre>
+<p><strong>Example 2 Output: Box Integral</strong></p>
+<pre class="text"><code>Solution: [1.1853359  0.95670595]
+Data:
+MeanVarDataVec (AccumulateData Object)
+    solution        [1.185 0.957]
+    comb_bound_low  [1.139 0.918]
+    comb_bound_high [1.232 0.995]
+    comb_flags      [ True  True]
+    n_total         2^(11)
+    n               [2048.  512.]
+    time_integrate  0
+CubMCCLTVec (StoppingCriterion Object)
+    inflate         1.200
+    alpha           0.010
+    abs_tol         0.050
+    rel_tol         0
+    n_init          2^(8)
+    n_max           2^(30)
+BoxIntegral (Integrand Object)
+    s               [-1  1]
+Uniform (TrueMeasure Object)
+    lower_bound     0
+    upper_bound     1
+IIDStdUniform (DiscreteDistribution Object)
+    d               3
+    entropy         7
+    spawn_key       ()</code></pre>
+<p><strong>Example 3 Output: Custom Fun</strong></p>
+<pre class="text"><code>Solution: [[1.00001237 1.99884832 2.99870039]
+           [4.00056276 4.99789845 6.00074045]]
+Data:
+MeanVarDataVec (AccumulateData Object)
+    solution            [[1.    1.999 2.999]
+                        [4.001 4.998 6.001]]
+    comb_bound_low      [[0.99  1.989 2.991]
+                        [3.991 4.989 5.993]]
+    comb_bound_high     [[1.01  2.009 3.006]
+                        [4.01  5.007 6.008]]
+    comb_flags          [[ True  True  True]
+                        [ True  True  True]]
+    n_total             2^(21)
+    n                   [[ 32768. 131072.  524288.]
+                        [ 524288. 1048576. 2097152.]]
+    time_integrate      0.650
+CubMCCLTVec (StoppingCriterion Object)
+    inflate             1.200
+    alpha               0.010
+    abs_tol             0.010
+    rel_tol             0
+    n_init              2^(8)
+    n_max               2^(30)
+CustomFun (Integrand Object)
+Uniform (TrueMeasure Object)
+    lower_bound         0
+    upper_bound         1
+IIDStdUniform (DiscreteDistribution Object)
+    d                   6
+    entropy             7
+    spawn_key           ()</code></pre>
+</section>
+<section id="benefits-of-developing-the-cubmccltvec-class" class="level2">
+<h2 class="anchored" data-anchor-id="benefits-of-developing-the-cubmccltvec-class">Benefits of Developing the CubMCCLTVec Class</h2>
+<p>This class gives us a new and different option to find when the user-specified error tolerance has been satisfied and its generalization to functions with multiple outputs allows us to utilize the existing <code>CubMCCLT</code> algorithm and extend it to such functions.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Sorokin, A. G., &amp; Rathinavel, J. <em>On Bounding and Approximating Functions of Multiple Expectations using Quasi-Monte Carlo</em>. To appear in the <em>Monte Carlo and Quasi-Monte Carlo Methods in Scientific Computing Proceedings 2022</em> (2022).</li>
+<li>Sorokin, A. <em>Monte Carlo for Vector Functions of Integrals</em>. Jupyter Notebook. QMCPy: A quasi-Monte Carlo Python Library, 2023. <a href="https://github.com/QMCSoftware/QMCSoftware/blob/master/demos/pydata.chi.2023.ipynb">https://github.com/QMCSoftware/QMCSoftware/blob/master/demos/pydata.chi.2023.ipynb</a>.</li>
+<li>Bailey, D., Borwein, J., &amp; Crandall, R. <em>Box integrals</em>. <em>Journal of Computational and Applied Mathematics</em> <strong>206</strong>, 196-208. ISSN: 0377-0427. <a href="https://www.sciencedirect.com/science/article/pii/S0377042706004250">https://www.sciencedirect.com/science/article/pii/S0377042706004250</a> (2007).</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
