@@ -1,0 +1,271 @@
+---
+title: "How Much Accuracy Do You Need?"
+author: "Sou-Cheng Choi (with edits by Fred Hickernell)"
+date: 2026-05-04
+date-format: "MMMM D, YYYY"
+description: "Checkpointing and resuming QMCPy integration when accuracy requirements change."
+categories:
+  - "QMCPy"
+  - "Checkpointing"
+  - "Stopping Criteria"
+---
+
+This post explains how QMCPy's resume feature lets users begin with a loose
+tolerance, inspect the result, and later continue to a tighter tolerance
+without discarding prior samples.
+
+The executable source is the
+[`accuracy_and_resume.ipynb`](https://github.com/QMCSoftware/QMCSoftware/blob/develop/demos/demo_resume_data/accuracy_and_resume.ipynb)
+notebook in the QMCPy repository. A shorter recipe is available in
+[`resume_examples.ipynb`](https://github.com/QMCSoftware/QMCSoftware/blob/develop/demos/demo_resume_data/resume_examples.ipynb).
+
+## Art Owen's reflections on Lyness and the accuracy question
+
+This notebook explores a discussion about the accuracy requirements for
+numerical integration, particularly in automatic quadrature routines. The
+central question is how a scientist determines the accuracy needed for a
+specific application.
+
+Three common responses illustrate the challenge:
+
+**Case A: The "plenty of time" response**
+
+> I would like 8-figure accuracy. I have quite enough computer time available
+> for this.
+
+This relatively rare response focuses on the result rather than computational
+cost. It fits small problems for which high accuracy is the main concern.
+
+**Case B: The "time-constrained" response**
+
+> I need at least 4-figure accuracy. But I don't want to use more than 2
+> seconds CPU time. If this can't be done, I shall abandon this problem. If it
+> can be done, I should prefer 6- or 7-figure accuracy. But if the marginal
+> cost for more figures is really small let's go to 12 figures.
+
+This more typical response reflects a limited computational budget and a
+preference for better accuracy when its marginal cost is small. Automatic
+quadrature with a restart or resume facility can refine an initial answer when
+the user later asks for more accuracy.
+
+**Case C: The "I don't know" response**
+
+> I really don't know. Let me explain...
+
+This response highlights the numerical analyst's role in helping a scientist
+connect application requirements to a quantitative accuracy target.
+
+## The problem
+
+Automatic quadrature routines such as those in QMCPy require a target
+accuracy. In practice, users may not know that target initially, or their
+needs may change after they inspect preliminary results or reconsider the
+available computational budget.
+
+## The solution: Resumable integration in QMCPy
+
+With QMCPy's `resume` feature, a user can:
+
+1. Start with a loose tolerance and get a quick estimate.
+2. Save the computation state.
+3. Resume with a tighter tolerance instead of starting over.
+4. Repeat the process as needed.
+
+The workflow supports checkpointing across Python sessions. Resuming requires
+a compatible QMCPy version and compatible problem settings, including the
+integrand definition, dimension, randomization, and stopping-criterion family.
+
+## Implementation
+
+Supported subclasses of `StoppingCriterion` implement resumption through three
+pieces:
+
+1. `integrate()` accepts a `resume` parameter.
+2. When `resume=<Data instance>` is supplied, the solver restores the previous
+   state, including sample points, transformed values, and relevant statistics.
+   The new run begins at the previous `n_total` instead of zero.
+3. `Data.save()` and `Data.load()` checkpoint the integration state for a
+   later Python session.
+
+The example below uses a three-dimensional Genz oscillatory integrand and
+QMCPy's `CubQMCLatticeG` stopping criterion.
+
+::: {.callout-note}
+The timing values below are empirical notebook outputs and will vary by
+machine. The fixed random seed makes the example reproducible, but the timings
+are not theoretical guarantees.
+:::
+
+```python
+from pathlib import Path
+from qmcpy import CubQMCLatticeG, Genz, Lattice
+from qmcpy.util.data import Data
+import resume_util as ru
+```
+
+### Step 1: Quick estimate
+
+The first run uses a loose absolute tolerance of $10^{-6}$. This example keeps
+the loose tolerance near the later tight tolerance so that the initial run has
+already completed useful work.
+
+```python
+def make_cub_qmc_lattice_solver(
+    abs_tol=1e-4, rel_tol=0, seed=7, dimension=3
+):
+    """Build a CubQMCLatticeG solver for the demo case."""
+    integrand = Genz(
+        Lattice(dimension=dimension, seed=seed),
+        kind_func="oscillatory",
+        kind_coeff=1,
+    )
+    return CubQMCLatticeG(
+        integrand, abs_tol=abs_tol, rel_tol=rel_tol
+    )
+
+abs_tol_loose = 1e-6
+rel_tol = 0
+dimension = 3
+seed = 7
+
+solver = make_cub_qmc_lattice_solver(
+    abs_tol_loose,
+    rel_tol=rel_tol,
+    seed=seed,
+    dimension=dimension,
+)
+solver.trace_iterations = True
+solver.verbose = True
+solution1, data1 = solver.integrate()
+```
+
+```text
+stage        iter    solution comb_bound_diff      n_min    n_total      m      xfull.shape
+-------------------------------------------------------------------------------------------
+ITER            1  -0.4289211       1.943e-03          0       1024     10        (1024, 3)
+ITER            2  -0.4289245       8.371e-04       1024       2048     11        (2048, 3)
+ITER            3  -0.4289312       1.955e-04       2048       4096     12        (4096, 3)
+ITER            4  -0.4289320       1.101e-04       4096       8192     13        (8192, 3)
+ITER            5  -0.4289320       1.444e-04       8192      16384     14       (16384, 3)
+ITER            6  -0.4289321       1.865e-05      16384      32768     15       (32768, 3)
+ITER            7  -0.4289321       9.302e-06      32768      65536     16       (65536, 3)
+ITER            8  -0.4289321       1.870e-06      65536     131072     17      (131072, 3)
+```
+
+The resulting `data1` object records an estimate of approximately
+$-0.4289321$, a combined-bound difference of $1.87\times 10^{-6}$, and
+$2^{17}=131{,}072$ total samples. It also retains the solver, integrand,
+measure, and lattice metadata required for diagnostics and resumption.
+
+### Step 2: Save the state
+
+Saving is optional when the same Python process will continue to use `data1`,
+but it enables resumption in a later session.
+
+```python
+output_dir = Path("output")
+output_dir.mkdir(parents=True, exist_ok=True)
+save_path = output_dir / "demo_resume_data.pkl"
+data1.save(save_path, overwrite=True)
+```
+
+`Data.save()` also supports gzip compression. When `compress=True`, QMCPy
+appends `.gz` when necessary.
+
+```python
+# Save compressed and load it again.
+data1.save("data.pkl", compress=True, overwrite=True)
+loaded_data = Data.load("data.pkl.gz")
+```
+
+In the saved notebook output, the uncompressed checkpoint occupied 7,346,730
+bytes and the compressed checkpoint occupied 4,548,870 bytes, a 38.1% reduction
+for that particular state.
+
+### Step 3: Resume with a tighter tolerance
+
+The next run tightens the absolute tolerance to $10^{-7}$ while reusing the
+saved state and the same solver instance.
+
+```python
+loaded_data = Data.load(save_path)
+old_n_total = int(loaded_data.n_total)
+old_time = float(loaded_data.time_integrate)
+
+abs_tol_tight = 1e-7
+solver.set_tolerance(abs_tol=abs_tol_tight)
+solution2, data2 = solver.integrate(resume=loaded_data)
+
+resume_wall_time = float(data2.time_integrate)
+new_samples_resume = int(data2.n_total) - old_n_total
+two_step_time = old_time + resume_wall_time
+```
+
+```text
+stage        iter    solution comb_bound_diff      n_min    n_total      m      xfull.shape
+-------------------------------------------------------------------------------------------
+RESUME          8  -0.4289321       1.870e-06     131072     131072     17      (131072, 3)
+ITER            9  -0.4289321       7.475e-07     131072     262144     18      (262144, 3)
+ITER           10  -0.4289321       2.536e-07     262144     524288     19      (524288, 3)
+ITER           11  -0.4289321       9.139e-08     524288    1048576     20     (1048576, 3)
+```
+
+The resumed result keeps the estimate near $-0.4289321$, reduces the
+combined-bound difference to $9.14\times 10^{-8}$, and increases the total
+sample count to $2^{20}=1{,}048{,}576$.
+
+### Step 4: Compare with starting from scratch
+
+There are three useful comparisons:
+
+1. **Incremental cost after the loose run already exists:** the resumed run
+   adds samples from $N_1$ to $N_2$, while a fresh tight run starts at zero.
+2. **New sample count:** this is less noisy than wall-clock time.
+3. **End-to-end time:** loose plus resume versus a fresh tight run.
+
+If the tight tolerance is known in advance, a direct tight run is usually just
+as efficient or slightly more efficient because checkpointing has overhead.
+The practical benefit appears when the loose run is already completed and the
+user later requests more accuracy.
+
+```python
+solver2 = make_cub_qmc_lattice_solver(
+    abs_tol=abs_tol_tight,
+    rel_tol=rel_tol,
+    seed=seed,
+    dimension=dimension,
+)
+solver2.trace_iterations = True
+solver2.verbose = True
+solution3, data3 = solver2.integrate()
+
+fresh_wall_time = float(data3.time_integrate)
+new_samples_fresh = int(data3.n_total)
+samples_saved = new_samples_fresh - new_samples_resume
+
+ru.print_stage_summary(
+    resume_solver=solver,
+    loose_data=data1,
+    resume_data=data2,
+    fresh_solver=solver2,
+    fresh_data=data3,
+)
+```
+
+| stage | absolute tolerance | total samples | new samples | iterations | solution | half-width | time (s) |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| Loose | $10^{-6}$ | 131,072 | 131,072 | 8 | -0.42893206 | $9.35\times10^{-7}$ | 0.0158 |
+| Resumed | $10^{-7}$ | 1,048,576 | 917,504 | 11 | -0.42893206 | $4.57\times10^{-8}$ | 0.1128 |
+| Fresh | $10^{-7}$ | 1,048,576 | 1,048,576 | 11 | -0.42893206 | $4.57\times10^{-8}$ | 0.1240 |
+
+For this saved run, resumption evaluated 917,504 new samples, while a fresh
+tight run evaluated 1,048,576. The 131,072 samples from the loose run were
+reused rather than discarded. The resumed and fresh calculations reached the
+same displayed estimate and error bound.
+
+## Conclusion
+
+QMCPy's resume feature supports an adaptive workflow: begin with a preliminary
+accuracy target, inspect the result, checkpoint the state, and pay for more
+samples only if a tighter answer is later needed. This provides a practical
+response to time-constrained or initially uncertain accuracy requirements.
