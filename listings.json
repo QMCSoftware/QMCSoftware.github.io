@@ -9,6 +9,8 @@
     "listing": "/blogs/index.html",
     "items": [
       "/blogs/why-add-q-to-mc/index.html",
+      "/blogs/iteration-log/index.html",
+      "/blogs/resume-feature/index.html",
       "/blogs/scipywrapper/index.html",
       "/blogs/cubmccltvec-vectorizing-the-cubmcclt-algorithm/index.html",
       "/blogs/visualizing-the-generated-samples-helps/index.html",
