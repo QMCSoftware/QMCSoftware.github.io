@@ -3,7 +3,7 @@
 This repository contains the public-facing website for
 [QMCSoftware](https://github.com/QMCSoftware), built with
 [Quarto](https://quarto.org/). It is an umbrella site for the organization's
-software, publications, blog, news and events, and community information.
+software, publications, blogs, news and events, and community information.
 
 Technical documentation remains with each software repository. The website
 links to maintained project documentation instead of duplicating it.

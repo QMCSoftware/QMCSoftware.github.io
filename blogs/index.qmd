@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: "Blogs"
 description: "Articles and project updates from QMCSoftware."
 listing:
   contents:
@@ -15,7 +15,7 @@ listing:
     - categories
 ---
 
-The QMCSoftware blog shares accessible introductions, project updates, and
+The QMCSoftware blogs share accessible introductions, project updates, and
 technical perspectives from across the community.
 
 This archive brings together the QMCPy articles previously maintained with the

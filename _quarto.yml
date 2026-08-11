@@ -3,7 +3,7 @@ project:
   output-dir: _site
   render:
     - "*.qmd"
-    - "blog/**/*.qmd"
+    - "blogs/**/*.qmd"
     - "news/**/*.qmd"
     - "community/**/*.qmd"
     - "software/**/*.qmd"
@@ -12,7 +12,7 @@ project:
     - CNAME
     - assets/**
     - data/**
-    - blog/**/figures/**
+    - blogs/**/figures/**
 
 website:
   title: "QMCSoftware"
@@ -25,8 +25,8 @@ website:
         text: Home
       - href: software/index.qmd
         text: Software
-      - href: blog/index.qmd
-        text: Blog
+      - href: blogs/index.qmd
+        text: Blogs
       - href: publications/index.qmd
         text: Publications
       - href: news/index.qmd

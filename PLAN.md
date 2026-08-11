@@ -45,10 +45,10 @@ replace project documentation.
 ### Phase 2A — Establish the original site skeleton
 
 - [x] Configure a Quarto website that renders to `_site/`.
-- [x] Add Home, Blog, News & Events, Community, Documentation, and GitHub
+- [x] Add Home, Blogs, News & Events, Community, Documentation, and GitHub
   navigation.
 - [x] Add initial Home and About sources.
-- [x] Create `blog/`, `news/`, `community/`, `assets/`, `styles/`, and workflow
+- [x] Create `blogs/`, `news/`, `community/`, `assets/`, `styles/`, and workflow
   structure.
 - [x] Link Documentation to the existing MkDocs site and GitHub to the primary
   QMCSoftware repository.
@@ -93,7 +93,7 @@ replace project documentation.
 - [x] Migrate “A QMCPy Quick Start” as a self-contained Quarto post, preserving
   its original authorship, date, Keister example, code, mathematics, output,
   references, and figure.
-- [x] Establish listing metadata and a discoverable Blog index.
+- [x] Establish listing metadata and a discoverable Blogs index.
 - [x] Inventory the existing 18 posts and their assets without modifying the
   source repository.
 - [x] Define consistent Quarto post metadata, paths, authorship, and categories.

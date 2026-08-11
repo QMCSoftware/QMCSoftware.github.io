@@ -19,8 +19,8 @@
 - [x] Documented the separation between the broad AcademicLib registry,
   website-curated publication records, and blog-local citations; catalog
   display order no longer depends on YAML record order.
-- [x] Added working Blog, News & Events, and Publications listings.
-- [x] Preserved Home, About, Blog, News & Events, and Community pages.
+- [x] Added working Blogs, News & Events, and Publications listings.
+- [x] Preserved Home, About, Blogs, News & Events, and Community pages.
 - [x] Added authoritative project documentation and repository links.
 - [x] Added a restrained responsive visual foundation.
 - [x] Retained the QMCPy logo asset for possible project-specific use while
@@ -43,6 +43,8 @@
   legacy mathematical delimiters for Quarto.
 - [x] Rendered all 30 site pages and completed local link, desktop, mobile, and
   per-post browser checks for the 18-post archive.
+- [x] Widened the shared blog reading column modestly and made title metadata
+  responsive so realistic author names and dates wrap without clipping.
 
 ## Underway
 

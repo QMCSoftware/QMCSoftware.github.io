@@ -58,6 +58,19 @@ main.content figure > div[style*="display: grid"] > img {
   min-width: 0;
 }
 
+/* Keep blog title metadata readable without changing individual posts. */
+body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta {
+  grid-template-columns: minmax(0, 2fr) minmax(10rem, 1fr);
+}
+
+body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta > div {
+  min-width: 0;
+}
+
+body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta-contents {
+  overflow-wrap: anywhere;
+}
+
 .hero {
   margin: 0 0 2.5rem;
   padding: clamp(2rem, 6vw, 4.5rem);
@@ -206,6 +219,12 @@ main.content figure > div[style*="display: grid"] > img {
 .publication-item h3,
 .publication-item h4 {
   margin-top: 0;
+}
+
+@media (max-width: 767.98px) {
+  body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 575.98px) {
