@@ -45,10 +45,10 @@ replace project documentation.
 ### Phase 2A — Establish the original site skeleton
 
 - [x] Configure a Quarto website that renders to `_site/`.
-- [x] Add Home, Blog, News & Events, Community, Documentation, and GitHub
+- [x] Add Home, Blogs, News & Events, Community, Documentation, and GitHub
   navigation.
 - [x] Add initial Home and About sources.
-- [x] Create `blog/`, `news/`, `community/`, `assets/`, `styles/`, and workflow
+- [x] Create `blogs/`, `news/`, `community/`, `assets/`, `styles/`, and workflow
   structure.
 - [x] Link Documentation to the existing MkDocs site and GitHub to the primary
   QMCSoftware repository.
@@ -93,7 +93,7 @@ replace project documentation.
 - [x] Migrate “A QMCPy Quick Start” as a self-contained Quarto post, preserving
   its original authorship, date, Keister example, code, mathematics, output,
   references, and figure.
-- [x] Establish listing metadata and a discoverable Blog index.
+- [x] Establish listing metadata and a discoverable Blogs index.
 - [x] Inventory the existing 18 posts and their assets without modifying the
   source repository.
 - [x] Define consistent Quarto post metadata, paths, authorship, and categories.
@@ -124,6 +124,8 @@ replace project documentation.
 ### Phase 7 — Develop community content
 
 - [x] Link to maintained community and contribution resources.
+- [x] Add a Website-owned, community-maintained directory of QMC software
+  across organizations and ecosystems.
 - [ ] Agree on the intended audience and approved community narrative.
 - [ ] Add verified governance, contributor, support, and participation
   information without duplicating maintained technical guidance.
@@ -168,7 +170,7 @@ replace project documentation.
   `gh-pages`.
 - [x] Explicitly preserve `CNAME` in the rendered publish directory.
 - [ ] Review repository Pages settings and workflow permissions.
-- [ ] Trigger the workflow on GitHub and verify the `gh-pages` branch contents.
+- [x] Trigger the workflow on GitHub and verify the `gh-pages` branch contents.
 - [ ] Verify HTTPS and `qmcsoftware.org` after deployment.
 
 ### Phase 11 — Collaborator review and prototype decision
@@ -178,5 +180,16 @@ replace project documentation.
 - [ ] Record requested changes and resolve launch-blocking issues.
 - [ ] Agree on ownership and cadence for blog, news, and community updates.
 - [x] Authorize and locally validate the historic 18-post blog migration.
+- [x] Approve and publish the completed historic 18-post archive.
 - [x] Authorize migration of the two newer resume and iteration-log blogs.
-- [ ] Approve the completed 20-post archive before merging its review PR.
+- [ ] Approve and publish the completed 20-post archive after pull-request
+  review.
+
+### Phase 12 — Coordinate work across machines
+
+- [x] Define durable repository rules, a direct-to-`main` author workflow, and
+  a concise operational handoff for Website collaborators and agents.
+- [x] Make synchronization, branch selection, validation, and publication
+  expectations explicit.
+- [ ] Use the workflow during several real Website tasks and refine it only in
+  response to observed coordination problems.

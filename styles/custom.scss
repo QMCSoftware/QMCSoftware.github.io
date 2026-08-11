@@ -58,6 +58,19 @@ main.content figure > div[style*="display: grid"] > img {
   min-width: 0;
 }
 
+/* Keep blog title metadata readable without changing individual posts. */
+body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta {
+  grid-template-columns: minmax(0, 2fr) minmax(10rem, 1fr);
+}
+
+body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta > div {
+  min-width: 0;
+}
+
+body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta-contents {
+  overflow-wrap: anywhere;
+}
+
 .hero {
   margin: 0 0 2.5rem;
   padding: clamp(2rem, 6vw, 4.5rem);
@@ -208,6 +221,151 @@ main.content figure > div[style*="display: grid"] > img {
   margin-top: 0;
 }
 
+.qmc-software-table-wrap {
+  margin: 1.5rem 0 2.5rem;
+  overflow-x: auto;
+  border: 1px solid rgba(7, 59, 76, 0.16);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.4rem 1.2rem rgba(7, 59, 76, 0.06);
+}
+
+.qmc-software-table {
+  width: 100%;
+  min-width: 64rem;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.qmc-software-table th {
+  padding: 0.85rem 1rem;
+  border-bottom: 0;
+  background: #073b4c;
+  color: #ffffff;
+  text-align: left;
+}
+
+.qmc-software-table th:nth-child(1) {
+  width: 48%;
+}
+
+.qmc-software-table th:nth-child(2) {
+  width: 14%;
+}
+
+.qmc-software-table th:nth-child(3) {
+  width: 18%;
+}
+
+.qmc-software-table th:nth-child(4) {
+  width: 20%;
+}
+
+.qmc-software-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(7, 59, 76, 0.12);
+  vertical-align: top;
+}
+
+.qmc-software-table tbody tr:nth-child(even) {
+  background: rgba(11, 110, 105, 0.035);
+}
+
+.qmc-software-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.software-description,
+.software-related,
+.software-status,
+.qmc-software-table td[data-label="Contact"] > * {
+  display: block;
+}
+
+.software-description,
+.software-related {
+  margin-top: 0.3rem;
+  color: #52636f;
+  font-size: 0.92em;
+  line-height: 1.4;
+}
+
+.software-related {
+  margin-top: 0.2rem;
+}
+
+.software-status + .software-status,
+.qmc-software-table td[data-label="Contact"] > * + * {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 767.98px) {
+  body.blogs-page #title-block-header.quarto-title-block.default .quarto-title-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .qmc-software-table-wrap {
+    overflow-x: visible;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .qmc-software-table,
+  .qmc-software-table tbody,
+  .qmc-software-table tr,
+  .qmc-software-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .qmc-software-table {
+    min-width: 0;
+  }
+
+  .qmc-software-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .qmc-software-table tr {
+    margin-bottom: 1rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(7, 59, 76, 0.16);
+    border-top: 0.3rem solid #0b6e69;
+    border-radius: 0.75rem;
+    background: #ffffff;
+    box-shadow: 0 0.4rem 1.2rem rgba(7, 59, 76, 0.06);
+  }
+
+  .qmc-software-table tbody tr:nth-child(even) {
+    background: #ffffff;
+  }
+
+  .qmc-software-table td {
+    display: grid;
+    grid-template-columns: minmax(7rem, 0.38fr) minmax(0, 1fr);
+    gap: 0.65rem;
+    padding: 0.55rem 0;
+    border: 0;
+  }
+
+  .qmc-software-table td::before {
+    content: attr(data-label);
+    color: #073b4c;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+  }
+}
+
 @media (max-width: 575.98px) {
   .hero {
     padding: 2rem 1.35rem;
@@ -229,6 +387,11 @@ main.content figure > div[style*="display: grid"] > img {
   .software-grid,
   .pathway-grid {
     grid-template-columns: 1fr;
+  }
+
+  .qmc-software-table td {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
   }
 }
 

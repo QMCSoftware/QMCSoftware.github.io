@@ -19,8 +19,8 @@
 - [x] Documented the separation between the broad AcademicLib registry,
   website-curated publication records, and blog-local citations; catalog
   display order no longer depends on YAML record order.
-- [x] Added working Blog, News & Events, and Publications listings.
-- [x] Preserved Home, About, Blog, News & Events, and Community pages.
+- [x] Added working Blogs, News & Events, and Publications listings.
+- [x] Preserved Home, About, Blogs, News & Events, and Community pages.
 - [x] Added authoritative project documentation and repository links.
 - [x] Added a restrained responsive visual foundation.
 - [x] Retained the QMCPy logo asset for possible project-specific use while
@@ -43,8 +43,14 @@
 - [x] Preserved all 48 historic blog images and added two result figures for
   the newer iteration-log article; expanded MkDocs code snippets, converted
   callouts and image groups, and normalized mathematical delimiters for Quarto.
-- [x] Rendered all 32 site pages and completed local link, desktop, and mobile
+- [x] Rendered all 33 site pages and completed local link, desktop, and mobile
   checks for the 20-post archive.
+- [x] Widened the shared blog reading column modestly and made title metadata
+  responsive so realistic author names and dates wrap without clipping.
+- [x] Added a responsive, YAML-driven QMC Software Directory under Community,
+  separate from the organization-owned projects in Software.
+- [x] Added durable repository guidance, a multi-machine author workflow, and
+  a concise operational handoff for direct Website collaboration.
 
 ## Underway
 
@@ -52,22 +58,26 @@
   and provisional homepage copy.
 - [ ] Accessibility review beyond the completed desktop and mobile browser
   checks.
-- [ ] Live GitHub Pages workflow and custom-domain verification.
+- [ ] Exercise the new coordination workflow during several real Website tasks
+  and refine it only where experience shows a need.
 
 ## Next recommended task
 
-- [ ] Review the two new posts in their draft pull request and approve the
-  completed 20-post archive before merge and deployment.
+See [notes/NEXT.md](notes/NEXT.md) for the immediate operational handoff.
 
 ## Decisions and scope boundaries
 
 - Technical documentation stays with each software project.
+- The Website owns the broader community QMC software directory; the Software
+  section remains limited to projects maintained by the QMCSoftware
+  organization.
 - The primary GitHub link targets the QMCSoftware organization; project pages
   link to their respective repositories and documentation.
 - The site uses `qmcsoftware.org` as its canonical URL and custom domain;
   redirect behavior from the former domain still requires verification.
-- The complete 20-post QMCPy blog archive is migrated locally; publishing it
-  remains approval-gated.
+- The historic 18-post QMCPy blog archive is published on the Website; the two
+  May 2026 posts are migrated in a review branch, with publication still
+  approval-gated.
 - Blog cards and title blocks use each post's last-revised date; the archive is
   sorted newest revision first and does not carry a separate first-published
   date.
@@ -76,5 +86,6 @@
 - No Reveal.js project, speculative infrastructure, or Python dependency file
   is included.
 - Generated `_site/` output remains outside the `main` branch.
-- The completed prototype is maintained on a review branch until it is approved
-  for merge into `main`.
+- Small, validated Website changes may be published directly to `main`; use a
+  short-lived branch when work spans sessions, overlaps another task, or
+  benefits from isolation or review.

@@ -1,0 +1,8 @@
+language:
+  title-block-published: "Last revised"
+
+format:
+  html:
+    body-classes: blogs-page
+    grid:
+      body-width: 880px

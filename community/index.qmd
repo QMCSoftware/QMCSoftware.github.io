@@ -12,5 +12,11 @@ technical and contributor information:
 - [QMCToolsCL contributing guidelines](https://github.com/QMCSoftware/QMCToolsCL/blob/main/CONTRIBUTING.md)
 - [QuasiMC.jl contributing guidelines](https://github.com/QMCSoftware/QuasiMC.jl/blob/develop/CONTRIBUTING.md)
 
+## Community resources
+
+The [QMC Software Directory](software-directory.qmd) is a community-maintained
+guide to quasi-Monte Carlo software across organizations, programming
+languages, and application areas. Corrections and additions are welcome.
+
 Additional public community content will be developed after collaborator
 review.
