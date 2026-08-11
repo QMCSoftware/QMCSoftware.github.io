@@ -7,27 +7,27 @@
 - Small, validated Website changes may be committed and pushed directly to
   `main`; longer, overlapping, or higher-risk work should use a short-lived
   branch.
-- The complete blog archive and the community QMC Software Directory are live
-  on the Website.
+- The historic 18-post blog archive and the community QMC Software Directory
+  are live on the Website.
+- Draft pull request #4 adds the two May 2026 QMCPy posts and is integrated
+  with the current `main`; it remains pending review and merge.
 - The QMC software directory still exists in `QMCSoftware`. Removing it is a
   separate future task that must use that repository's issue and pull-request
   workflow.
 
 ## Current focus
 
-Adopt the coordination workflow in `AGENTS.md` and `AUTHOR_WORKFLOW.md` during
+Use the coordination workflow in `AGENTS.md` and `AUTHOR_WORKFLOW.md` to finish
+reviewing and publishing the two-post expansion, then continue applying it to
 the next several real Website tasks. Refine it only in response to observed
 ambiguity, overlap, or unnecessary friction.
 
 ## Immediate next task
 
-For the next substantive Website change:
-
-1. follow the start, validation, synchronization, and publication steps in
-   `AUTHOR_WORKFLOW.md`;
-2. use a short-lived branch if the work will span sessions or may overlap
-   another collaborator; and
-3. update this file only if the operational handoff materially changes.
+1. Review the two new posts and the completed checks in draft pull request #4.
+2. Merge the pull request after approval and verify the production deployment.
+3. For the next substantive Website change, follow the start, validation,
+   synchronization, and publication steps in `AUTHOR_WORKFLOW.md`.
 
 ## Questions to resolve
 

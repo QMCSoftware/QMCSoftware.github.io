@@ -32,17 +32,19 @@
 - [x] Added repository guidance, roadmap, ignore rules, and local instructions.
 - [x] Rendered the complete 13-page site and verified local link targets and
   rendered `CNAME` preservation.
-- [x] Migrated the complete 18-post QMCPy blog archive into self-contained
-  Quarto posts while retaining the technical documentation and notebooks in
-  the QMCPy repository.
+- [x] Migrated the complete historic 18-post QMCPy blog archive into
+  self-contained Quarto posts while retaining the technical documentation and
+  notebooks in the QMCPy repository.
+- [x] Added the two newer QMCPy documentation blogs, “Stop Re-running” and
+  “How Much Accuracy Do You Need?”, bringing the current archive to 20 posts.
 - [x] Standardized blog chronology on one last-revised `date` per post, with no
   separate first-publication field, and retained the approved revised version
   of “Why Add Q to MC?”.
-- [x] Preserved and published all 48 blog images in the local render, expanded
-  MkDocs code snippets, converted callouts and image groups, and normalized
-  legacy mathematical delimiters for Quarto.
-- [x] Rendered all 30 site pages and completed local link, desktop, mobile, and
-  per-post browser checks for the 18-post archive.
+- [x] Preserved all 48 historic blog images and added two result figures for
+  the newer iteration-log article; expanded MkDocs code snippets, converted
+  callouts and image groups, and normalized mathematical delimiters for Quarto.
+- [x] Rendered all 33 site pages and completed local link, desktop, and mobile
+  checks for the 20-post archive.
 - [x] Widened the shared blog reading column modestly and made title metadata
   responsive so realistic author names and dates wrap without clipping.
 - [x] Added a responsive, YAML-driven QMC Software Directory under Community,
@@ -73,7 +75,9 @@ See [notes/NEXT.md](notes/NEXT.md) for the immediate operational handoff.
   link to their respective repositories and documentation.
 - The site uses `qmcsoftware.org` as its canonical URL and custom domain;
   redirect behavior from the former domain still requires verification.
-- The complete 18-post QMCPy blog archive is published on the Website.
+- The historic 18-post QMCPy blog archive is published on the Website; the two
+  May 2026 posts are migrated in a review branch, with publication still
+  approval-gated.
 - Blog cards and title blocks use each post's last-revised date; the archive is
   sorted newest revision first and does not carry a separate first-published
   date.

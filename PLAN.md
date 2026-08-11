@@ -106,6 +106,9 @@ replace project documentation.
   living-article revisions to “Why Add Q to MC?”.
 - [x] Verify last-revised dates, authors, local links, code, mathematics, and all
   48 images in a complete local render and browser review.
+- [x] Add the two May 2026 QMCPy documentation blogs on iteration logs and
+  resuming integrations, retaining links to their executable notebooks.
+- [x] Expand the current website archive from the historic 18 posts to 20 posts.
 - [ ] Define and verify redirects or canonical handling for legacy URLs.
 - [ ] Publish the complete archive only after collaborator review.
 
@@ -176,8 +179,11 @@ replace project documentation.
   with QMCSoftware collaborators.
 - [ ] Record requested changes and resolve launch-blocking issues.
 - [ ] Agree on ownership and cadence for blog, news, and community updates.
-- [x] Authorize and locally validate the 18-post blog migration.
-- [x] Approve and publish the completed 18-post archive.
+- [x] Authorize and locally validate the historic 18-post blog migration.
+- [x] Approve and publish the completed historic 18-post archive.
+- [x] Authorize migration of the two newer resume and iteration-log blogs.
+- [ ] Approve and publish the completed 20-post archive after pull-request
+  review.
 
 ### Phase 12 — Coordinate work across machines
 
