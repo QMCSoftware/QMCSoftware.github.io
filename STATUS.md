@@ -47,6 +47,8 @@
   responsive so realistic author names and dates wrap without clipping.
 - [x] Added a responsive, YAML-driven QMC Software Directory under Community,
   separate from the organization-owned projects in Software.
+- [x] Added durable repository guidance, a multi-machine author workflow, and
+  a concise operational handoff for direct Website collaboration.
 
 ## Underway
 
@@ -54,12 +56,12 @@
   and provisional homepage copy.
 - [ ] Accessibility review beyond the completed desktop and mobile browser
   checks.
-- [ ] Live GitHub Pages workflow and custom-domain verification.
+- [ ] Exercise the new coordination workflow during several real Website tasks
+  and refine it only where experience shows a need.
 
 ## Next recommended task
 
-- [ ] Review and approve the completed local 18-post archive before any branch
-  is pushed or a pull request is opened.
+See [notes/NEXT.md](notes/NEXT.md) for the immediate operational handoff.
 
 ## Decisions and scope boundaries
 
@@ -71,8 +73,7 @@
   link to their respective repositories and documentation.
 - The site uses `qmcsoftware.org` as its canonical URL and custom domain;
   redirect behavior from the former domain still requires verification.
-- The complete 18-post QMCPy blog archive is migrated locally; publishing it
-  remains approval-gated.
+- The complete 18-post QMCPy blog archive is published on the Website.
 - Blog cards and title blocks use each post's last-revised date; the archive is
   sorted newest revision first and does not carry a separate first-published
   date.
@@ -81,5 +82,6 @@
 - No Reveal.js project, speculative infrastructure, or Python dependency file
   is included.
 - Generated `_site/` output remains outside the `main` branch.
-- The completed prototype is maintained on a review branch until it is approved
-  for merge into `main`.
+- Small, validated Website changes may be published directly to `main`; use a
+  short-lived branch when work spans sessions, overlaps another task, or
+  benefits from isolation or review.

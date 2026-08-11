@@ -15,8 +15,9 @@ repository.
 - Write only within `qmcsoftware-website` unless the user explicitly changes the
   scope.
 - `QMCSoftware` may be inspected for authoritative project information,
-  existing documentation, and later blog-migration planning, but must not be
-  modified from this repository.
+  existing documentation, and cross-repository planning, but must not be
+  modified from this repository. Changes there use its separate issue, branch,
+  review, and pull-request workflow.
 - `MATH565Fall2026` may be inspected for Quarto structure and deployment
   patterns, but must not be modified.
 - Other neighboring repositories are read-only references unless the user
@@ -25,7 +26,7 @@ repository.
 
 ## Branch, build, and deployment conventions
 
-- `main` is the eventual Quarto source branch.
+- `main` is the Quarto source branch.
 - Quarto renders the complete site to `_site/`.
 - `_site/` and Quarto-generated working files are not committed to `main`.
 - `.github/workflows/quarto-gh-pages.yml` renders on pushes to `main` and
@@ -34,7 +35,40 @@ repository.
   it as `_site/CNAME`.
 - Use `quarto preview` for local authoring and `quarto render` for production
   validation.
-- Do not commit or push unless the user explicitly asks.
+- Scoped, validated Website changes may be committed and pushed directly to
+  `main` without asking for separate permission each time. This standing
+  authorization applies only to this repository. Respect an explicit request
+  to keep particular work local or to hold it for review.
+- Before beginning work, inspect `git status` and synchronize with
+  `origin/main`. Pull with `--ff-only` when the worktree is clean; if it is not
+  clean, inspect and preserve the existing work before synchronizing.
+- Fetch again before publishing. If `origin/main` advanced, integrate those
+  changes without rewriting published history, rerun affected validation, and
+  then push. Never force-push.
+- Direct work on `main` is appropriate for small, focused changes. Use a
+  short-lived branch for work that spans sessions, overlaps another active
+  task, or carries enough risk to benefit from isolation. A pull request is
+  optional unless the user requests one.
+
+## Coordination and handoff
+
+- Read `notes/NEXT.md` before starting substantive work. It is the operational
+  handoff, not a lock; inspect recent Git history and remote branches when
+  concurrent work is possible.
+- Follow `AUTHOR_WORKFLOW.md` for the shared human-and-agent workflow across
+  machines.
+- Keep document responsibilities distinct:
+  - `AGENTS.md` contains durable agent rules and repository boundaries.
+  - `AUTHOR_WORKFLOW.md` contains the collaboration, validation, and
+    publication workflow.
+  - `notes/NEXT.md` contains the immediate focus, current state, unresolved
+    questions, and resumption point.
+  - `PLAN.md` contains the durable roadmap and architectural direction.
+  - `STATUS.md` records milestone-level progress and scope decisions.
+  - `README.md` provides public repository orientation and setup instructions.
+- At the end of work, reconcile only the handoff files whose information
+  materially changed. Always inspect `notes/NEXT.md`; keep it concise and
+  operational rather than turning it into a session log.
 
 ## Content and design principles
 
@@ -52,8 +86,8 @@ repository.
 ## Scope exclusions
 
 - Do not migrate the MkDocs technical documentation.
-- Do not import or convert the existing 18 blog posts until the blog-migration
-  phase is explicitly authorized.
+- Do not re-import or overwrite the migrated blog archive from the QMCPy
+  repository unless a specific migration or reconciliation task is authorized.
 - Do not add a Reveal.js slides project.
 - Do not rename this or any related repository.
 - Do not add speculative services, frameworks, or data pipelines.

@@ -167,7 +167,7 @@ replace project documentation.
   `gh-pages`.
 - [x] Explicitly preserve `CNAME` in the rendered publish directory.
 - [ ] Review repository Pages settings and workflow permissions.
-- [ ] Trigger the workflow on GitHub and verify the `gh-pages` branch contents.
+- [x] Trigger the workflow on GitHub and verify the `gh-pages` branch contents.
 - [ ] Verify HTTPS and `qmcsoftware.org` after deployment.
 
 ### Phase 11 — Collaborator review and prototype decision
@@ -177,4 +177,13 @@ replace project documentation.
 - [ ] Record requested changes and resolve launch-blocking issues.
 - [ ] Agree on ownership and cadence for blog, news, and community updates.
 - [x] Authorize and locally validate the 18-post blog migration.
-- [ ] Approve the completed local archive before publishing it for review.
+- [x] Approve and publish the completed 18-post archive.
+
+### Phase 12 — Coordinate work across machines
+
+- [x] Define durable repository rules, a direct-to-`main` author workflow, and
+  a concise operational handoff for Website collaborators and agents.
+- [x] Make synchronization, branch selection, validation, and publication
+  expectations explicit.
+- [ ] Use the workflow during several real Website tasks and refine it only in
+  response to observed coordination problems.
