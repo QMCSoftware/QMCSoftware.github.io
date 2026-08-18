@@ -2,134 +2,134 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://qmcsoftware.org/software/quasimc-jl.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/qmcpy.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/news/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/community/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.389Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/what-makes-a-sequence-low-discrepancy/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.389Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/visualizing-the-generated-samples-helps/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.384Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.964Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/scipywrapper/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.382Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.962Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/resume-feature/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.367Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.947Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/qei-with-qmcpy/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.365Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.945Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/iteration-log/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.363Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.943Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/gbm-qmcpy/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.362Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.943Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/cubmccltvec-vectorizing-the-cubmcclt-algorithm/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.350Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.931Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/analysis-of-qmc-efficiency-for-asian-option-pricing/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.350Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.931Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/accelerating-qmcpy-notebook-tests-with-parsl/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.344Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.925Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/about.html</loc>
-    <lastmod>2026-08-18T22:28:20.339Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.920Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/a-qmcpy-quick-start/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.342Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.923Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/accelerating-rare-event-reliability-simulations-for-cerns-large-hadron-collider-using-qmcpy/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.346Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.927Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/bayesian-stopping-criteria/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.350Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.931Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/digital-sequences-the-niederreiter-construction/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.357Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.938Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.362Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.943Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/linear-matrix-scrambling-and-digital-shift-for-halton/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.364Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.944Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/random-lattice-generators-are-not-bad/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.366Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.947Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/safe-handling-of-qmc-points/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.367Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.947Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/speeding-up-qmcpy-with-distributable-c-code/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.382Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.962Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/visualizing-the-internals-of-object-classes-in-qmcpy/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.388Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.968Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/blogs/why-add-q-to-mc/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.389Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/community/software-directory.html</loc>
-    <lastmod>2026-08-18T22:28:20.389Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/news/fred-hickernell-siam-fellow/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/publications/index.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/lddata.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
   <url>
     <loc>https://qmcsoftware.org/software/qmctoolscl.html</loc>
-    <lastmod>2026-08-18T22:28:20.390Z</lastmod>
+    <lastmod>2026-08-18T22:29:37.969Z</lastmod>
   </url>
 </urlset>
