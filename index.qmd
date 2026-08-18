@@ -93,8 +93,3 @@ Find maintained contribution resources and ways to connect with the projects.
 [Visit the community page →](community/index.qmd)
 :::
 ::::
-
-::: {.callout-note appearance="simple"}
-This umbrella website is an early prototype. Technical documentation remains
-with each software project and is linked from its page.
-:::
