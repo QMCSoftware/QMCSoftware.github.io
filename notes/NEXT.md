@@ -19,14 +19,14 @@
 
 ## Current focus
 
-Use the coordination workflow in `AGENTS.md` and `AUTHOR_WORKFLOW.md` to finish
-reviewing and publishing the two-post expansion, then continue applying it to
-the next several real Website tasks. Refine it only in response to observed
-ambiguity, overlap, or unnecessary friction.
+Continue applying the coordination workflow in `AGENTS.md` and
+`AUTHOR_WORKFLOW.md` to real Website tasks. Refine it only in response to
+observed ambiguity, overlap, or unnecessary friction.
 
 ## Immediate next task
 
-1. Verify the production deployment of the merged two-post expansion.
+1. Decide whether standard content pages should use a modestly wider body
+   column while retaining readable prose line lengths.
 2. For the next substantive Website change, follow the start, validation,
    synchronization, and publication steps in `AUTHOR_WORKFLOW.md`.
 
@@ -36,6 +36,8 @@ ambiguity, overlap, or unnecessary friction.
   requests the default rather than optional?
 - After several tasks, do pushed branches provide enough visibility, or is a
   lightweight issue-based work-claim convention also useful?
+- Should the standard content column increase from about 800 pixels to roughly
+  900–950 pixels on wider desktop screens?
 
 ## Definition of done
 
