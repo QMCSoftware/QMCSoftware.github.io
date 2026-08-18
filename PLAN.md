@@ -126,6 +126,8 @@ replace project documentation.
 - [x] Link to maintained community and contribution resources.
 - [x] Add a Website-owned, community-maintained directory of QMC software
   across organizations and ecosystems.
+- [x] Add an extensible list of university courses using QMCSoftware,
+  beginning with the Fall 2025 and Fall 2026 MATH 565 offerings.
 - [ ] Agree on the intended audience and approved community narrative.
 - [ ] Add verified governance, contributor, support, and participation
   information without duplicating maintained technical guidance.

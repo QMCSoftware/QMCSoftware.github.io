@@ -9,8 +9,10 @@
   branch.
 - The historic 18-post blog archive and the community QMC Software Directory
   are live on the Website.
-- Draft pull request #4 adds the two May 2026 QMCPy posts and is integrated
-  with the current `main`; it remains pending review and merge.
+- Pull request #4, adding the two May 2026 QMCPy posts, has been merged into
+  `main`.
+- Community includes extensible directories for QMC software and university
+  courses using QMCSoftware.
 - The QMC software directory still exists in `QMCSoftware`. Removing it is a
   separate future task that must use that repository's issue and pull-request
   workflow.
@@ -24,9 +26,8 @@ ambiguity, overlap, or unnecessary friction.
 
 ## Immediate next task
 
-1. Review the two new posts and the completed checks in draft pull request #4.
-2. Merge the pull request after approval and verify the production deployment.
-3. For the next substantive Website change, follow the start, validation,
+1. Verify the production deployment of the merged two-post expansion.
+2. For the next substantive Website change, follow the start, validation,
    synchronization, and publication steps in `AUTHOR_WORKFLOW.md`.
 
 ## Questions to resolve

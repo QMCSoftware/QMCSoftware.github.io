@@ -49,6 +49,8 @@
   responsive so realistic author names and dates wrap without clipping.
 - [x] Added a responsive, YAML-driven QMC Software Directory under Community,
   separate from the organization-owned projects in Software.
+- [x] Added an extensible Courses using QMCSoftware section under Community,
+  beginning with the Fall 2025 and Fall 2026 MATH 565 offerings.
 - [x] Added durable repository guidance, a multi-machine author workflow, and
   a concise operational handoff for direct Website collaboration.
 

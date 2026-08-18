@@ -18,5 +18,17 @@ The [QMC Software Directory](software-directory.qmd) is a community-maintained
 guide to quasi-Monte Carlo software across organizations, programming
 languages, and application areas. Corrections and additions are welcome.
 
+## Courses using QMCSoftware
+
+Public course materials offer another way to learn with QMCSoftware projects.
+
+**Illinois Institute of Technology**
+
+- [MATH 565: Monte Carlo and Quasi-Monte Carlo Methods — Fall 2026](https://fjhickernell.github.io/MATH565Fall2026/)
+- [MATH 565: Monte Carlo Methods — Fall 2025 archive](https://qmcsoftware.github.io/MATH565Fall2025/)
+
+Courses from other universities can be added here as public materials become
+available.
+
 Additional public community content will be developed after collaborator
 review.
