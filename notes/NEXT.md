@@ -25,9 +25,7 @@ observed ambiguity, overlap, or unnecessary friction.
 
 ## Immediate next task
 
-1. Decide whether standard content pages should use a modestly wider body
-   column while retaining readable prose line lengths.
-2. For the next substantive Website change, follow the start, validation,
+1. For the next substantive Website change, follow the start, validation,
    synchronization, and publication steps in `AUTHOR_WORKFLOW.md`.
 
 ## Questions to resolve
@@ -36,8 +34,6 @@ observed ambiguity, overlap, or unnecessary friction.
   requests the default rather than optional?
 - After several tasks, do pushed branches provide enough visibility, or is a
   lightweight issue-based work-claim convention also useful?
-- Should the standard content column increase from about 800 pixels to roughly
-  900–950 pixels on wider desktop screens?
 
 ## Definition of done
 

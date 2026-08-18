@@ -57,6 +57,8 @@ replace project documentation.
 
 - [x] Add a restrained initial color palette, typography, spacing, hero, and
   responsive button treatment.
+- [x] Widen the standard content column to improve the use of desktop space
+  while retaining readable prose line lengths.
 - [x] Keep the styling local and independent of classroom-specific styles.
 - [ ] Review the prototype with collaborators and align it with any approved
   QMCSoftware visual identity or assets.

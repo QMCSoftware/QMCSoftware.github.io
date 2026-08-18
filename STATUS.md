@@ -23,6 +23,8 @@
 - [x] Preserved Home, About, Blogs, News & Events, and Community pages.
 - [x] Added authoritative project documentation and repository links.
 - [x] Added a restrained responsive visual foundation.
+- [x] Widened the standard content column from 800 to 900 pixels for desktop
+  pages while preserving responsive behavior.
 - [x] Retained the QMCPy logo asset for possible project-specific use while
   removing it from organization-level branding.
 - [x] Added GitHub Actions rendering and `gh-pages` publication with explicit

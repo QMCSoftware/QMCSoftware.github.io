@@ -50,6 +50,8 @@ format:
   html:
     theme:
       light: [cosmo, styles/custom.scss]
+    grid:
+      body-width: 900px
     toc: true
     link-external-newwindow: true
     smooth-scroll: true
