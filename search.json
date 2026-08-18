@@ -95,7 +95,14 @@
     "href": "community/index.html#community-resources",
     "title": "Community",
     "section": "Community resources",
-    "text": "Community resources\nThe QMC Software Directory is a community-maintained guide to quasi-Monte Carlo software across organizations, programming languages, and application areas. Corrections and additions are welcome.\nAdditional public community content will be developed after collaborator review."
+    "text": "Community resources\nThe QMC Software Directory is a community-maintained guide to quasi-Monte Carlo software across organizations, programming languages, and application areas. Corrections and additions are welcome."
+  },
+  {
+    "objectID": "community/index.html#courses-using-qmcsoftware",
+    "href": "community/index.html#courses-using-qmcsoftware",
+    "title": "Community",
+    "section": "Courses using QMCSoftware",
+    "text": "Courses using QMCSoftware\nPublic course materials offer another way to learn with QMCSoftware projects.\nIllinois Institute of Technology\n\nMATH 565: Monte Carlo and Quasi-Monte Carlo Methods — Fall 2026\nMATH 565: Monte Carlo Methods — Fall 2025 archive\n\nCourses from other universities can be added here as public materials become available.\nAdditional public community content will be developed after collaborator review."
   },
   {
     "objectID": "blogs/what-makes-a-sequence-low-discrepancy/index.html",
