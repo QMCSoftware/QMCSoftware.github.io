@@ -57,6 +57,13 @@ repository.
   concurrent work is possible.
 - Follow `AUTHOR_WORKFLOW.md` for the shared human-and-agent workflow across
   machines.
+- At every Checkpoint for this project, reconcile the authoritative Check-In &
+  Focus Dashboard with the Website and QMCPy work completed during the session,
+  including the weekly pull-request-review rhythm when applicable. Make the
+  Dashboard edit as part of the Checkpoint, but leave the Dashboard repository
+  uncommitted and unpushed. Do not include `GitTracked` in the Website commit or
+  run infrastructure synchronization; those changes are committed and
+  synchronized separately through `infra save`.
 - Keep document responsibilities distinct:
   - `AGENTS.md` contains durable agent rules and repository boundaries.
   - `AUTHOR_WORKFLOW.md` contains the collaboration, validation, and
