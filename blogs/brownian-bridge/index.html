@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Joshua Park">
+<meta name="dcterms.date" content="2026-10-14">
+<meta name="description" content="Constructing Brownian motion paths with Brownian bridges, custom monitoring times, and applications to Asian option pricing.">
+
+<title>Brownian Bridge Construction in QMCPy – QMCSoftware</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-4faed20be0327b06b38b05768d20d9f1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed blogs-page quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">QMCSoftware</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../software/index.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blogs/index.html"> 
+<span class="menu-text">Blogs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications/index.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../news/index.html"> 
+<span class="menu-text">News &amp; Events</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-community" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Community</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-community">    
+        <li>
+    <a class="dropdown-item" href="../../community/index.html">
+ <span class="dropdown-text">Community overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../community/software-directory.html">
+ <span class="dropdown-text">QMC Software Directory</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/QMCSoftware"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#the-bridge-construction" id="toc-the-bridge-construction" class="nav-link" data-scroll-target="#the-bridge-construction">The Bridge Construction</a></li>
+  <li><a href="#the-od-time-complexity" id="toc-the-od-time-complexity" class="nav-link" data-scroll-target="#the-od-time-complexity">The O(d) Time Complexity</a></li>
+  <li><a href="#default-order-and-monitoring-times-parameter" id="toc-default-order-and-monitoring-times-parameter" class="nav-link" data-scroll-target="#default-order-and-monitoring-times-parameter">Default Order and Monitoring Times Parameter</a></li>
+  <li><a href="#pricing-an-asian-option" id="toc-pricing-an-asian-option" class="nav-link" data-scroll-target="#pricing-an-asian-option">Pricing an Asian Option</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Brownian Bridge Construction in QMCPy</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">QMCPy</div>
+    <div class="quarto-category">Brownian Motion</div>
+    <div class="quarto-category">Quasi-Monte Carlo</div>
+    <div class="quarto-category">Finance</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Constructing Brownian motion paths with Brownian bridges, custom monitoring times, and applications to Asian option pricing.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Joshua Park </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Last revised</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 14, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This post introduces <code>BrownianBridge</code> as a third <code>decomp_type</code> option for the <code>BrownianMotion</code> class.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The examples require QMCPy 2.4 or later. The option-pricing example also uses pandas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> <span class="st">"qmcpy&gt;=2.4"</span> pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The runtimes shown below are empirical benchmark results and vary by machine and software environment. They are not theoretical performance guarantees.</p>
+</div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The <code>BrownianMotion</code> class turns low discrepancy points into Brownian motion paths. The path values have covariance <span class="math inline">\(\Sigma_{ij} = \min(t_i, t_j)\)</span>, so for the decomposition options <code>PCA</code> and <code>Cholesky</code>, generating a path of <span class="math inline">\(d\)</span> times means computing a <span class="math inline">\(d \times d\)</span> matrix <span class="math inline">\(A\)</span> satisfying <span class="math inline">\(AA^\top = \Sigma\)</span>. This matrix <span class="math inline">\(A\)</span> is then multiplied by standard normal values to produce the final Brownian motion path. Computing <span class="math inline">\(A\)</span> costs <span class="math inline">\(O(d^3)\)</span> once, and the multiplication costs <span class="math inline">\(O(d^2)\)</span> for every path.</p>
+<p>The new option, <code>BrownianBridge</code>, produces paths with the same covariance without factoring <span class="math inline">\(\Sigma\)</span>. By default, it samples the final time first and then works inwards, sampling each remaining time conditional on the two nearest times already sampled. This follows Algorithms 6.1 and 6.2 of Owen [1]. This has two main benefits. Since the values with the largest conditional variance are paired with the highest quality points of the low discrepancy sequence, it is possible to lower the effective dimension [2]. A path also only costs <span class="math inline">\(O(d)\)</span> to generate since each new value is built conditional on solely the two nearest points.</p>
+<p>More comprehensive examples can be viewed in the <a href="https://qmcsoftware.org/qmcpy/demos/brownian_bridge/">Brownian bridge demo</a>. The executable source is the <a href="https://github.com/QMCSoftware/qmcpy/blob/master/demos/brownian_bridge.ipynb">Brownian bridge demo notebook</a> in the QMCPy repository.</p>
+</section>
+<section id="the-bridge-construction" class="level2">
+<h2 class="anchored" data-anchor-id="the-bridge-construction">The Bridge Construction</h2>
+<p>Given a Brownian motion <span class="math inline">\(W\)</span> with <span class="math inline">\(W(0) = 0\)</span>, the conditional distribution of an interior value given its two surrounding points <span class="math inline">\(\ell\)</span> and <span class="math inline">\(r\)</span> is [1, 4]</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Conditional Brownian motion distribution">
+<p><span class="math display">\[W(s) \;\Big|\; W(\ell),\, W(r) \;\sim\; \mathcal{N}\left(W(\ell) + \frac{s - \ell}{r - \ell}\big(W(r) - W(\ell)\big),\, \frac{(s - \ell)(r - s)}{r - \ell}\right).\]</span></p>
+</div>
+<p>Rearranging, the result is</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Brownian bridge construction formula">
+<p><span class="math display">\[W(s_j) = a_j\,W(\ell_j) + b_j\,W(r_j) + w_j\,Z_j,\]</span></p>
+</div>
+<p>where <span class="math inline">\(Z_1, \ldots, Z_d\)</span> are independent standard normals and the coefficients depend on which neighbors exist when <span class="math inline">\(s_j\)</span> is sampled. Owen’s Algorithm 6.1 computes the neighbor indices and coefficients once, then Algorithm 6.2 builds the path. There are four cases, represented in the table below (Owen, equations 6.10 and 6.11 and algorithms 6.1 and 6.2 [1]).</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Brownian bridge coefficients">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>case</th>
+<th><span class="math inline">\(a_j\)</span></th>
+<th><span class="math inline">\(b_j\)</span></th>
+<th><span class="math inline">\(w_j\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>first point, no neighbor</td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(\sqrt{s_j}\)</span></td>
+</tr>
+<tr class="even">
+<td>left neighbor only</td>
+<td><span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(\sqrt{s_j - \ell_j}\)</span></td>
+</tr>
+<tr class="odd">
+<td>right neighbor only</td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(s_j / r_j\)</span></td>
+<td><span class="math inline">\(\sqrt{s_j (r_j - s_j) / r_j}\)</span></td>
+</tr>
+<tr class="even">
+<td>both neighbors</td>
+<td><span class="math inline">\(\dfrac{r_j - s_j}{r_j - \ell_j}\)</span></td>
+<td><span class="math inline">\(\dfrac{s_j - \ell_j}{r_j - \ell_j}\)</span></td>
+<td><span class="math inline">\(\sqrt{\dfrac{(s_j - \ell_j)(r_j - s_j)}{r_j - \ell_j}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Owen’s algorithm ensures that every case is accounted for regardless of the sampling order. However, the left only case occurs when <span class="math inline">\(s_j\)</span> exists beyond every time sampled so far, which the default ordering never produces since the final time is sampled first.</p>
+</section>
+<section id="the-od-time-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="the-od-time-complexity">The O(d) Time Complexity</h2>
+<p><code>BrownianBridge</code> also produces a factorization in the same sense that <code>PCA</code> and <code>Cholesky</code> do, though the resulting matrix is different. For <span class="math inline">\(d = 4\)</span>, in construction order,</p>
+<p><span class="math display">\[W(1) = Z_1\]</span></p>
+<p><span class="math display">\[W(\tfrac12) = \tfrac12 Z_1 + \tfrac12 Z_2\]</span></p>
+<p><span class="math display">\[W(\tfrac34) = \tfrac34 Z_1 + \tfrac14 Z_2 + \sqrt{\tfrac18}\, Z_3\]</span></p>
+<p><span class="math display">\[W(\tfrac14) = \tfrac14 Z_1 + \tfrac14 Z_2 + \sqrt{\tfrac18}\, Z_4\]</span></p>
+<p>Reading off the coefficients gives matrix <span class="math inline">\(A\)</span>, where <span class="math inline">\(A_{ij}\)</span> is the coefficient of <span class="math inline">\(Z_j\)</span>, and this matrix <span class="math inline">\(A\)</span> satisfies <span class="math inline">\(AA^\top = \Sigma\)</span> [3]. Furthermore, each step <span class="math inline">\(j\)</span> of construction corresponds with a matrix <span class="math inline">\(M_j\)</span>, and the full construction multiplies them in sequence, <span class="math inline">\(A = M_d \cdots M_1\)</span>. These matrices are very sparse, since each one is simply the identity matrix with only row <span class="math inline">\(j\)</span> altered. For instance, for <span class="math inline">\(W(\frac34)\)</span>,</p>
+<p><span class="math display">\[ M_3 = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ \frac12 &amp; \frac12 &amp; \sqrt{\tfrac18} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}.\]</span></p>
+<p>Only one row differs at each step, containing <span class="math inline">\(w_j\)</span>, <span class="math inline">\(a_j\)</span>, and <span class="math inline">\(b_j\)</span>, so each step performs a constant amount of work. Therefore, the time cost is <span class="math inline">\(O(d)\)</span>. Combined with the <span class="math inline">\(O(d^2)\)</span> cost of identifying the nearest neighbors, the total cost when generating <span class="math inline">\(n\)</span> paths is <span class="math inline">\(O(d^2 + nd)\)</span>. In comparison, covariance factorization has a time cost of <span class="math inline">\(O(d^3 + nd^2)\)</span>.</p>
+<p>Figure 1 below demonstrates the timing difference between the three methods. The first graph compares the three methods including the construction cost, while the second graph does not.</p>
+<figure id="fig-timing" class="figure">
+<img src="figures/timing.png" alt="Timing Comparison Across Dimensions" class="figure-img">
+<figcaption>
+Figure 1: Time to construct the object and generate 1024 paths (left) and time to generate 1024 paths from existing object (right).
+</figcaption>
+</figure>
+</section>
+<section id="default-order-and-monitoring-times-parameter" class="level2">
+<h2 class="anchored" data-anchor-id="default-order-and-monitoring-times-parameter">Default Order and Monitoring Times Parameter</h2>
+<p>The user has the choice to provide a custom <code>monitoring_times</code>. However, if no custom monitoring times are given, the bridge uses the first <span class="math inline">\(d\)</span> points of the van der Corput sequence in Gray code order, with the first value replaced by the final time and scaled by <code>t_final</code>. For <code>t_final=1</code> and <span class="math inline">\(d = 6\)</span>, the order is <span class="math inline">\(1, \tfrac{1}{2}, \tfrac{3}{4}, \tfrac{1}{4}, \tfrac{3}{8}, \tfrac{7}{8}\)</span>.</p>
+<p>For powers of 2, paths at shared time points are identical when using a fixed sequence of random normals, meaning that a <span class="math inline">\(d = 8\)</span> path, for instance, is simply a refinement of a <span class="math inline">\(d = 4\)</span> path. For non-powers of 2, a <code>ParameterWarning</code> is raised since the resulting time grid is no longer split into equally spaced intervals for a van der Corput sequence. Figure 2 below demonstrates this refinement pattern for <span class="math inline">\(d = 1, 2, 4, 8\)</span>, using the Lattice sampler with a fixed seed.</p>
+<figure id="fig-increasing-d" class="figure">
+<img src="figures/increasing_d.png" alt="Brownian bridge paths for increasing dimension" class="figure-img">
+<figcaption>
+Figure 2: Brownian bridge paths for d = 1, 2, 4, and 8.
+</figcaption>
+</figure>
+<p><code>monitoring_times</code> accepts <span class="math inline">\(d\)</span> distinct, finite, positive times not exceeding <code>t_final</code>, and with the default <code>bridge_vdc_gray_ordering=True</code> the array is permuted to follow van der Corput order. Below is an example of using the <code>monitoring_times</code> parameter.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>bm <span class="op">=</span> qp.BrownianMotion(qp.DigitalNetB2(<span class="dv">4</span>, seed<span class="op">=</span><span class="dv">7</span>), decomp_type<span class="op">=</span><span class="st">'BrownianBridge'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                       monitoring_times<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">1.0</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>bm.bridge_construction_times</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>array([1. , 0.6, 0.8, 0.3])</code></pre>
+<p>The array above shows the order that the path is built with the default <code>bridge_vdc_gray_ordering=True</code>. In this case, the final time is sampled first, then the midpoint by index, then the quarter points by index, and so forth, matching the van der Corput ordering. When <code>bridge_vdc_gray_ordering=False</code>, times are sampled in the order provided within <code>monitoring_times</code>. Whatever order is used internally, the output comes back in increasing time by default. However, with <code>bridge_output_order='input'</code>, the output is returned in the order they were provided initially.</p>
+</section>
+<section id="pricing-an-asian-option" class="level2">
+<h2 class="anchored" data-anchor-id="pricing-an-asian-option">Pricing an Asian Option</h2>
+<p><code>FinancialOption</code> builds its price paths on a <code>BrownianMotion</code>, making <code>BrownianBridge</code> a possibility for option pricing. An example is shown below with 64 monitoring times.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qmcpy <span class="im">as</span> qp</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> decomp <span class="kw">in</span> [<span class="st">'PCA'</span>, <span class="st">'Cholesky'</span>, <span class="st">'BrownianBridge'</span>]:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    option <span class="op">=</span> qp.FinancialOption(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        qp.DigitalNetB2(<span class="dv">64</span>, seed<span class="op">=</span><span class="dv">7</span>), option<span class="op">=</span><span class="st">'ASIAN'</span>, call_put<span class="op">=</span><span class="st">'call'</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        asian_mean<span class="op">=</span><span class="st">'arithmetic'</span>, volatility<span class="op">=</span><span class="fl">0.2</span>, start_price<span class="op">=</span><span class="fl">100.0</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        strike_price<span class="op">=</span><span class="fl">100.0</span>, interest_rate<span class="op">=</span><span class="fl">0.05</span>, t_final<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        decomp_type<span class="op">=</span>decomp)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    price, data <span class="op">=</span> qp.CubQMCNetG(option, abs_tol<span class="op">=</span><span class="fl">1e-3</span>).integrate()</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">'decomp_type'</span>: decomp, <span class="st">'price'</span>: price,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'n_total'</span>: data.n_total,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'time (s)'</span>: time.perf_counter() <span class="op">-</span> start})</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows).set_index(<span class="st">'decomp_type'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>                            price  n_total  time (s)
+decomp_type
+PCA             5.762911487976071    32768  0.142041
+Cholesky        5.762510583277217  1048576  3.192768
+BrownianBridge  5.762770153849477   131072  0.338079</code></pre>
+<p>While <code>BrownianBridge</code> has a lower cost per path than the other methods, <code>PCA</code> wins overall by requiring far fewer paths. Generally, <code>BrownianBridge</code> requires a higher dimensional setting to outperform <code>PCA</code> as depicted in Figure 1 above.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p><code>BrownianBridge</code> is a new decomposition type within the <code>BrownianMotion</code> class that pairs the highest variance points with the highest quality points of the sequence, generates each path in <span class="math inline">\(O(d)\)</span> instead of <span class="math inline">\(O(d^2)\)</span>, and accepts custom monitoring times.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Owen, A. B. <em>Monte Carlo theory, methods and examples</em>. 2013. <a href="https://artowen.su.domains/mc/">https://artowen.su.domains/mc/</a>.</li>
+<li>Caflisch, R. E., Morokoff, W., and Owen, A. B. Valuation of Mortgage Backed Securities Using Brownian Bridges To Reduce Effective Dimension. 1997.</li>
+<li>Giles, M. B., Kuo, F. Y., Sloan, I. H., and Waterhouse, B. J. Quasi-Monte Carlo for finance applications. 2008.</li>
+<li>Glasserman, P. <em>Monte Carlo Methods in Financial Engineering</em>. Springer-Verlag, New York. 2003.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/qmcsoftware\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>QMCSoftware — open-source quasi-Monte Carlo software</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+<p>About this site</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
