@@ -24,6 +24,24 @@
 
 ## Current focus
 
+The Publications update was approved for publication on 2026-10-30.
+The 24-paper WordPress list and two new 2026 preprints are
+preserved, with the featured tutorial deduplicated and GAIL link retained.
+The 2026-10-29 citation refresh uses verified formal records where available,
+with explicit preprint, thesis, forthcoming, and historical-link statuses.
+
+The user has now authorized adding the 15 selected pre-2020 Fred Hickernell
+papers with more than 90 Google Scholar citations and direct QMC or
+low-discrepancy relevance. The catalog contains 41 papers: 40 ordinary and
+one featured. All ordinary entries share a continuous publication-year
+descending list, with title ordering within a year and no year sections.
+Tags remain hidden; the new records have no tags, and dated Scholar counts
+are retained only as selection metadata. The full 35-source-page render,
+41-record and rendered-order checks, preservation of the previous 26 records,
+all-page local-reference checks, and browser inspection passed. Math in the
+new titles renders correctly. Publication page:
+`https://qmcsoftware.org/publications/#publication-catalog`.
+
 Continue applying the coordination workflow in `AGENTS.md` and
 `AUTHOR_WORKFLOW.md` to real Website tasks. Refine it only in response to
 observed ambiguity, overlap, or unnecessary friction.

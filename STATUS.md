@@ -16,6 +16,17 @@
 - [x] Added a sourced 2026 SIAM Fellow news item.
 - [x] Added a hand-written featured publication and a one-record YAML catalog
   convention for ordinary publications.
+- [x] Restored the 24-paper WordPress Publications list with source provenance
+  and its earlier GAIL reference. The restored collection contains 26 papers with
+  the two additional 2026 preprints and the featured tutorial deduplicated;
+  the restoration is validated and retained in the expanded catalog.
+- [x] Checked all 26 publication citations on 2026-10-29, updated available
+  formal publication records and links, distinguished forthcoming work and
+  preprints, and hid tags from the page while retaining their catalog data.
+- [x] Added 15 pre-2020 Fred Hickernell QMC or low-discrepancy papers selected
+  with more than 90 Google Scholar citations, bringing the catalog to
+  41 papers. Replaced year sections with one continuous catalog sorted by
+  publication year descending, with title ordering within each year.
 - [x] Documented the separation between the broad AcademicLib registry,
   website-curated publication records, and blog-local citations; catalog
   display order no longer depends on YAML record order.
