@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.10.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,10 +45,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-18148710a85913c49bb0889d4abfab21.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b46566acf1f37f18a7fbbc82da38989a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -86,9 +86,10 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: [],
+      valueNames: ['listing-key','listing-cite','listing-short','listing-title','listing-authors','listing-year','listing-type','listing-venue','listing-arxiv','listing-arxiv_url','listing-tags','listing-related_projects','listing-featured','listing-description','listing-arxiv_version','listing-revision_date','listing-metadata_note','listing-publication_status','listing-metadata_checked','listing-metadata_sources','listing-source_url','listing-source_snapshot','listing-source_year_group','listing-source_citation','listing-volume','listing-article_number','listing-doi','listing-publisher_url','listing-doi_url','listing-series','listing-pages','listing-issue','listing-status_url','listing-scholar_url','listing-scholar_citations','listing-scholar_checked','listing-scholar_year','listing-selection_rule','listing-editors','listing-scope_evidence',{ data: ['index'] },{ data: ['categories'] }],
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-key","listing-cite","listing-short","listing-title","listing-authors","listing-year","listing-type","listing-venue","listing-arxiv","listing-arxiv_url","listing-tags","listing-related_projects","listing-featured","listing-description","listing-arxiv_version","listing-revision_date","listing-metadata_note","listing-publication_status","listing-metadata_checked","listing-metadata_sources","listing-source_url","listing-source_snapshot","listing-source_year_group","listing-source_citation","listing-volume","listing-article_number","listing-doi","listing-publisher_url","listing-doi_url","listing-series","listing-pages","listing-issue","listing-status_url","listing-scholar_url","listing-scholar_citations","listing-scholar_checked","listing-scholar_year","listing-selection_rule","listing-editors","listing-scope_evidence"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -218,6 +219,7 @@ window.Quarto = {
   <li><a href="#quasi-monte-carlo-methods-what-why-and-how" id="toc-quasi-monte-carlo-methods-what-why-and-how" class="nav-link" data-scroll-target="#quasi-monte-carlo-methods-what-why-and-how">Quasi-Monte Carlo Methods: What, Why, and How?</a></li>
   </ul></li>
   <li><a href="#publication-catalog" id="toc-publication-catalog" class="nav-link" data-scroll-target="#publication-catalog">Publication catalog</a></li>
+  <li><a href="#earlier-references" id="toc-earlier-references" class="nav-link" data-scroll-target="#earlier-references">Earlier references</a></li>
   <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope">Scope</a></li>
   <li><a href="#software-citation-resources" id="toc-software-citation-resources" class="nav-link" data-scroll-target="#software-citation-resources">Software citation resources</a></li>
   </ul>
@@ -250,8 +252,7 @@ window.Quarto = {
 </header>
 
 
-<p>This section collects reviewed publications connected with QMCSoftware and quasi-Monte Carlo methods. It will grow incrementally rather than attempting to infer a complete bibliography.</p>
-<p>Each item has a short, original description and links to authoritative publication records or accessible preprints. Structured citation metadata is kept locally in <a href="../data/publications.yml"><code>data/publications.yml</code></a>, which drives the general catalog below.</p>
+<p>This page collects papers, reports, and theses related to QMCSoftware and quasi-Monte Carlo methods. Each item includes a short description and links to publication records or accessible preprints.</p>
 <section id="featured-introduction" class="level2">
 <h2 class="anchored" data-anchor-id="featured-introduction">Featured introduction</h2>
 <section id="quasi-monte-carlo-methods-what-why-and-how" class="level3 featured-publication">
@@ -259,24 +260,397 @@ window.Quarto = {
 <p><strong>Fred J. Hickernell, Nathan Kirk, and Aleksei G. Sorokin</strong></p>
 <p><em>Monte Carlo and Quasi-Monte Carlo 2024</em>, Springer Proceedings in Mathematics &amp; Statistics, volume 522, pages 3–40, 2026.</p>
 <div class="project-links">
-<p><a href="https://doi.org/10.1007/978-3-032-10590-5_1" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-032-10590-5_1" class="btn btn-outline-primary">Springer</a> <a href="https://arxiv.org/abs/2502.03644" class="btn btn-outline-primary">arXiv</a></p>
+<p><a href="https://doi.org/10.1007/978-3-032-10590-5_1" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-032-10590-5_1" class="btn btn-outline-primary">Springer</a></p>
 </div>
 <p>This paper is a tutorial on what quasi-Monte Carlo is, why it can improve upon ordinary Monte Carlo, and how problems can be formulated to benefit from QMC.</p>
 </section>
 </section>
 <section id="publication-catalog" class="level2">
 <h2 class="anchored" data-anchor-id="publication-catalog">Publication catalog</h2>
-<p>Additional publications will appear here as verified records are added to the YAML catalog.</p>
+<p>Papers and reports related to QMCSoftware and quasi-Monte Carlo methods, ordered by publication year, newest first.</p>
 <div id="listing-publication-catalog" class="quarto-listing quarto-listing-container-custom">
 <div class="publication-catalog">
-
+<section id="fast-bayesian-multilevel-quasi-monte-carlo" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="fast-bayesian-multilevel-quasi-monte-carlo">Fast Bayesian multilevel quasi-Monte Carlo</h3>
+<p><strong>Aleksei G. Sorokin, Pieterjan Robbe, Gianluca Geraci, Michael S. Eldred, Fred J. Hickernell</strong></p>
+<p><em>Journal of Computational Physics</em>, volume 569, article 115517, 2027.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/j.jcp.2026.115517" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S002199912600865X" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Combines Bayesian cubature with multilevel quasi-Monte Carlo, using Gaussian process posterior uncertainty to guide adaptive sample allocation.</p>
+</section>
+<section id="empirical-bernstein-and-betting-confidence-intervals-for-randomized-quasi-monte-carlo" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="empirical-bernstein-and-betting-confidence-intervals-for-randomized-quasi-monte-carlo">Empirical Bernstein and betting confidence intervals for randomized quasi-Monte Carlo</h3>
+<p><strong>Aadit Jain, Fred J. Hickernell, Art B. Owen, Aleksei G. Sorokin</strong></p>
+<p><em>Information and Inference: A Journal of the IMA</em>, volume 15, issue 1, article iaag003, 2026.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1093/imaiai/iaag003" class="btn btn-primary">DOI</a> <a href="https://academic.oup.com/imaiai/article-abstract/15/1/iaag003/8509318" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Investigates empirical Bernstein and hedged betting confidence intervals for randomized quasi-Monte Carlo estimates of bounded integrands.</p>
+</section>
+<section id="enhancing-neural-autoregressive-distribution-estimators-for-image-reconstruction" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="enhancing-neural-autoregressive-distribution-estimators-for-image-reconstruction">Enhancing Neural Autoregressive Distribution Estimators for Image Reconstruction</h3>
+<p><strong>Ambrose Emmett-Iwaniw, Nathan Kirk</strong></p>
+<p><em>Monte Carlo and Quasi-Monte Carlo 2024</em>, Springer Proceedings in Mathematics &amp; Statistics, volume 522, pages 259–275, 2026.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1007/978-3-032-10590-5_11" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-032-10590-5_11" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Studies autoregressive image reconstruction from observed pixel subsets, including pixel designs inspired by low-discrepancy sampling.</p>
+</section>
+<section id="fast-multitask-gaussian-processes-with-application-to-surrogate-modeling-of-the-quark-gluon-plasma" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="fast-multitask-gaussian-processes-with-application-to-surrogate-modeling-of-the-quark-gluon-plasma">Fast multitask Gaussian processes, with application to surrogate modeling of the quark-gluon plasma</h3>
+<p><strong>Aleksei G. Sorokin, Pieterjan Robbe, Yen-Chun Liu, Simon Mak, Fred J. Hickernell</strong></p>
+<p><em>arXiv preprint arXiv:2603.16014</em>, 2026.</p>
+<div class="project-links">
+<p><a href="https://arxiv.org/abs/2603.16014" class="btn btn-outline-primary">arXiv preprint</a></p>
+</div>
+<p>Combines low-discrepancy designs with structured kernels to accelerate exact multitask Gaussian process fitting, with applications to surrogate modeling of the quark-gluon plasma.</p>
+</section>
+<section id="high-dimensional-quasi-monte-carlo-via-combinatorial-discrepancy" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="high-dimensional-quasi-monte-carlo-via-combinatorial-discrepancy">High-dimensional quasi-Monte Carlo via combinatorial discrepancy</h3>
+<p><strong>Jiaheng Chen, Haotian Jiang, Nathan Kirk</strong></p>
+<p><em>Journal of Complexity</em>, volume 96, article 102053, 2026.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/j.jco.2026.102053" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S0885064X26000385" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Constructs high-dimensional quasi-Monte Carlo point sets using combinatorial discrepancy, with error analysis for weighted function spaces and low effective dimension.</p>
+</section>
+<section id="multilevel-sampling-in-algebraic-statistics" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="multilevel-sampling-in-algebraic-statistics">Multilevel Sampling in Algebraic Statistics</h3>
+<p><strong>Nathan Kirk, Ivan Gvozdanović, Sonja Petrović</strong></p>
+<p><em>Algebraic Statistics (forthcoming, special issue for Henry Wynn)</em>, 2026.</p>
+<div class="project-links">
+<p><a href="https://www.sonjapetrovicstats.com/research/publications" class="btn btn-outline-primary">Publication status</a> <a href="https://arxiv.org/abs/2505.04062" class="btn btn-outline-primary">arXiv preprint</a></p>
+</div>
+<p>Adapts multilevel sampling ideas to lattice fibers in algebraic statistics and evaluates sample quality with coverage and discrepancy measures.</p>
+</section>
+<section id="neural-low-discrepancy-sequences" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="neural-low-discrepancy-sequences">Neural Low-Discrepancy Sequences</h3>
+<p><strong>Michael Etienne Van Huffel, Nathan Kirk, Makram Chahine, Daniela Rus, T. Konstantin Rusch</strong></p>
+<p><em>Proceedings of the 43rd International Conference on Machine Learning</em>, Proceedings of Machine Learning Research, volume 306, pages 123416–123433, 2026.</p>
+<div class="project-links">
+<p><a href="https://proceedings.mlr.press/v306/van-huffel26a.html" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Uses neural networks to construct finite low-discrepancy sequences by learning index-to-point maps and reducing discrepancies across sequence prefixes.</p>
+</section>
+<section id="optimal-monte-carlo-integration-on-matrix-manifolds" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="optimal-monte-carlo-integration-on-matrix-manifolds">Optimal Monte Carlo integration on matrix manifolds</h3>
+<p><strong>Aleksei G. Sorokin, Yihan Guo, Lek-Heng Lim</strong></p>
+<p><em>arXiv preprint arXiv:2610.16965</em>, 2026.</p>
+<div class="project-links">
+<p><a href="https://arxiv.org/abs/2610.16965" class="btn btn-outline-primary">arXiv preprint</a></p>
+</div>
+<p>Develops optimally weighted Monte Carlo integration rules on matrix manifolds using computable Sobolev kernels. The weights avoid kernel mean embedding calculations, and numerical experiments include an application to intrinsic volumes.</p>
+</section>
+<section id="algorithms-and-scientific-software-for-quasi-monte-carlo-fast-gaussian-process-regression-and-scientific-machine-learning" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="algorithms-and-scientific-software-for-quasi-monte-carlo-fast-gaussian-process-regression-and-scientific-machine-learning">Algorithms and Scientific Software for Quasi-Monte Carlo, Fast Gaussian Process Regression, and Scientific Machine Learning</h3>
+<p><strong>Aleksei G. Sorokin</strong></p>
+<p><em>PhD dissertation, Illinois Institute of Technology</em>, 2025.</p>
+<div class="project-links">
+<p><a href="https://arxiv.org/abs/2511.21915" class="btn btn-outline-primary">Thesis text</a></p>
+</div>
+<p>Brings together algorithms and scientific software for quasi-Monte Carlo integration, fast Gaussian process regression, and scientific machine learning.</p>
+<p><strong>Related projects:</strong> QMCPy</p>
+</section>
+<section id="fast-gaussian-process-regression-for-high-dimensional-functions-with-derivative-information" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="fast-gaussian-process-regression-for-high-dimensional-functions-with-derivative-information">Fast Gaussian process regression for high dimensional functions with derivative information</h3>
+<p><strong>Aleksei G. Sorokin, Pieterjan Robbe, Fred J. Hickernell</strong></p>
+<p><em>Proceedings of the First International Conference on Probabilistic Numerics</em>, Proceedings of Machine Learning Research, volume 271, pages 35–49, 2025.</p>
+<div class="project-links">
+<p><a href="https://proceedings.mlr.press/v271/sorokin25a.html" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Extends fast Gaussian process regression with structured kernels and low-discrepancy designs to incorporate derivative observations.</p>
+</section>
+<section id="low-stein-discrepancy-via-message-passing-monte-carlo" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="low-stein-discrepancy-via-message-passing-monte-carlo">Low Stein Discrepancy via Message-Passing Monte Carlo</h3>
+<p><strong>Nathan Kirk, T. Konstantin Rusch, Jakob Zech, Daniela Rus</strong></p>
+<p><em>ICLR 2025 Workshop on Frontiers in Probabilistic Inference</em>, 2025.</p>
+<div class="project-links">
+<p><a href="https://openreview.net/forum?id=2CEDeSbjO2" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Extends message-passing Monte Carlo to nonuniform target distributions by learning point sets that reduce kernelized Stein discrepancy.</p>
+</section>
+<section id="on-the-optimization-of-discrepancy-measures" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="on-the-optimization-of-discrepancy-measures">On the optimization of discrepancy measures</h3>
+<p><strong>François Clément, Nathan Kirk, Art B. Owen, T. Konstantin Rusch</strong></p>
+<p><em>arXiv preprint arXiv:2508.04926</em>, 2025.</p>
+<div class="project-links">
+<p><a href="https://arxiv.org/abs/2508.04926" class="btn btn-outline-primary">arXiv preprint</a></p>
+</div>
+<p>Studies numerical optimization of discrepancy measures and introduces an average squared discrepancy that treats the vertices of the unit cube symmetrically.</p>
+</section>
+<section id="optimizing-kernel-discrepancies-via-subset-selection" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="optimizing-kernel-discrepancies-via-subset-selection">Optimizing Kernel Discrepancies via Subset Selection</h3>
+<p><strong>Deyao Chen, François Clément, Carola Doerr, Nathan Kirk</strong></p>
+<p><em>arXiv preprint arXiv:2511.02706</em>, 2025.</p>
+<div class="project-links">
+<p><a href="https://arxiv.org/abs/2511.02706" class="btn btn-outline-primary">arXiv preprint</a></p>
+</div>
+<p>Selects subsets of candidate points to reduce kernel discrepancies, including constructions for uniform and nonuniform target distributions.</p>
+</section>
+<section id="qmcpy-a-python-package-for-randomized-low-discrepancy-sequences-quasi-monte-carlo-and-fast-kernel-methods" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="qmcpy-a-python-package-for-randomized-low-discrepancy-sequences-quasi-monte-carlo-and-fast-kernel-methods">QMCPy: A Python package for randomized low-discrepancy sequences, quasi-Monte Carlo, and fast kernel methods</h3>
+<p><strong>Aleksei G. Sorokin</strong></p>
+<p><em>arXiv preprint arXiv:2502.14256</em>, 2025.</p>
+<div class="project-links">
+<p><a href="https://arxiv.org/abs/2502.14256" class="btn btn-outline-primary">arXiv preprint</a></p>
+</div>
+<p>Presents QMCPy as a unified Python framework for randomized low-discrepancy sequences, quasi-Monte Carlo integration, and fast kernel computations.</p>
+<p><strong>Related projects:</strong> QMCPy</p>
+</section>
+<section id="a-neural-surrogate-solver-for-radiation-transfer" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="a-neural-surrogate-solver-for-radiation-transfer">A neural surrogate solver for radiation transfer</h3>
+<p><strong>Aleksei G. Sorokin, Xiaoyi Lu, Yi Wang</strong></p>
+<p><em>NeurIPS 2024 Workshop on Data-Driven and Differentiable Simulations, Surrogates, and Solvers</em>, 2024.</p>
+<div class="project-links">
+<p><a href="https://openreview.net/forum?id=SHidR8UMKo" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Develops neural surrogate solvers for radiative transfer across varying geometries and boundary conditions.</p>
+</section>
+<section id="a-unified-treatment-of-tractability-for-approximation-problems-defined-on-hilbert-spaces" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="a-unified-treatment-of-tractability-for-approximation-problems-defined-on-hilbert-spaces">A unified treatment of tractability for approximation problems defined on Hilbert spaces</h3>
+<p><strong>Onyekachi Emenike, Fred J. Hickernell, Peter Kritzer</strong></p>
+<p><em>Journal of Complexity</em>, volume 84, article 101856, 2024.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/j.jco.2024.101856" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/abs/pii/S0885064X24000335" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Unifies tractability analysis for approximation problems defined on Hilbert spaces.</p>
+</section>
+<section id="challenges-in-developing-great-quasi-monte-carlo-software" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="challenges-in-developing-great-quasi-monte-carlo-software">Challenges in Developing Great Quasi-Monte Carlo Software</h3>
+<p><strong>Sou-Cheng T. Choi, Yuhan Ding, Fred J. Hickernell, Jagadeeswaran Rathinavel, Aleksei G. Sorokin</strong></p>
+<p><em>Monte Carlo and Quasi-Monte Carlo Methods (MCQMC 2022)</em>, Springer Proceedings in Mathematics &amp; Statistics, volume 460, pages 209–222, 2024.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1007/978-3-031-59762-6_9" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-031-59762-6_9" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Discusses criteria and development practices for reliable, extensible quasi-Monte Carlo software, with QMCPy as an example.</p>
+<p><strong>Related projects:</strong> QMCPy</p>
+</section>
+<section id="computationally-efficient-and-error-aware-surrogate-construction-for-numerical-solutions-of-subsurface-flow-through-porous-media" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="computationally-efficient-and-error-aware-surrogate-construction-for-numerical-solutions-of-subsurface-flow-through-porous-media">Computationally efficient and error aware surrogate construction for numerical solutions of subsurface flow through porous media</h3>
+<p><strong>Aleksei G. Sorokin, Aleksandra Pachalieva, Daniel O’Malley, James M. Hyman, Fred J. Hickernell, Nicolas W. Hengartner</strong></p>
+<p><em>Advances in Water Resources</em>, volume 193, article 104836, 2024.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/j.advwatres.2024.104836" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S0309170824002239" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Studies error-aware surrogate construction for numerical simulations of subsurface flow through porous media.</p>
+</section>
+<section id="enhancing-semi-supervised-learning-via-representative-and-diverse-sample-selection" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="enhancing-semi-supervised-learning-via-representative-and-diverse-sample-selection">Enhancing Semi-Supervised Learning via Representative and Diverse Sample Selection</h3>
+<p><strong>Qian Shao, Jiangrui Kang, Qiyuan Chen, Zepeng Li, Hongxia Xu, Yiwen Cao, Jiajuan Liang, Jian Wu</strong></p>
+<p><em>Advances in Neural Information Processing Systems</em>, volume 37, pages 111199–111226, 2024.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.52202/079017-3531" class="btn btn-primary">DOI</a> <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/c959bb2cb164d37569a17fa67494d69a-Abstract-Conference.html" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Selects representative and diverse samples for labeling in semi-supervised learning with limited annotation budgets.</p>
+</section>
+<section id="on-bounding-and-approximating-functions-of-multiple-expectations-using-quasi-monte-carlo" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="on-bounding-and-approximating-functions-of-multiple-expectations-using-quasi-monte-carlo">On Bounding and Approximating Functions of Multiple Expectations Using Quasi-Monte Carlo</h3>
+<p><strong>Aleksei G. Sorokin, Jagadeeswaran Rathinavel</strong></p>
+<p><em>Monte Carlo and Quasi-Monte Carlo Methods (MCQMC 2022)</em>, Springer Proceedings in Mathematics &amp; Statistics, volume 460, pages 583–599, 2024.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1007/978-3-031-59762-6_29" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-031-59762-6_29" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Develops adaptive Monte Carlo and quasi-Monte Carlo algorithms for functions of multiple expectations, with implementations in QMCPy.</p>
+<p><strong>Related projects:</strong> QMCPy</p>
+</section>
+<section id="credible-intervals-for-probability-of-failure-with-gaussian-processes" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="credible-intervals-for-probability-of-failure-with-gaussian-processes">Credible Intervals for Probability of Failure with Gaussian Processes</h3>
+<p><strong>Aleksei G. Sorokin, Vishwas Rao</strong></p>
+<p><em>arXiv preprint arXiv:2311.07733</em>, 2023.</p>
+<div class="project-links">
+<p><a href="https://arxiv.org/abs/2311.07733" class="btn btn-outline-primary">arXiv preprint</a></p>
+</div>
+<p>Derives credible intervals for failure probabilities using Gaussian process surrogates and develops batch adaptive sampling for expensive simulations.</p>
+</section>
+<section id="sigopt-mulch-an-intelligent-system-for-automl-of-gradient-boosted-trees" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="sigopt-mulch-an-intelligent-system-for-automl-of-gradient-boosted-trees">SigOpt Mulch: An intelligent system for AutoML of gradient boosted trees</h3>
+<p><strong>Aleksei G. Sorokin, Xinran Zhu, Eric Hans Lee, Bolong Cheng</strong></p>
+<p><em>Knowledge-Based Systems</em>, volume 273, article 110604, 2023.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/j.knosys.2023.110604" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/abs/pii/S0950705123003544" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Describes an automated machine learning system for tuning gradient-boosted tree models.</p>
+</section>
+<section id="quasi-monte-carlo-software" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="quasi-monte-carlo-software">Quasi-Monte Carlo Software</h3>
+<p><strong>Sou-Cheng T. Choi, Fred J. Hickernell, Jagadeeswaran Rathinavel, Michael J. McCourt, Aleksei G. Sorokin</strong></p>
+<p><em>Monte Carlo and Quasi-Monte Carlo Methods (MCQMC 2020)</em>, Springer Proceedings in Mathematics &amp; Statistics, volume 387, pages 23–47, 2022.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1007/978-3-030-98319-2_2" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-030-98319-2_2" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Surveys quasi-Monte Carlo software and introduces the interacting sampling, transformation, integrand, and stopping components of QMCPy.</p>
+<p><strong>Related projects:</strong> QMCPy</p>
+</section>
+<section id="quasi-monte-carlo-importance-sampling-with-qmcpy" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="quasi-monte-carlo-importance-sampling-with-qmcpy">(Quasi-)Monte Carlo Importance Sampling with QMCPy</h3>
+<p><strong>Aleksei G. Sorokin, Fred J. Hickernell, Sou-Cheng T. Choi, Michael J. McCourt, Jagadeeswaran Rathinavel</strong></p>
+<p><em>Illinois Tech Undergraduate Research Journal</em>, volume 1, issue 1, pages 49–54, 2021.</p>
+<div class="project-links">
+<p><a href="https://urj.library.iit.edu/index.php/urj/article/view/48" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Demonstrates Monte Carlo and quasi-Monte Carlo importance sampling using QMCPy.</p>
+<p><strong>Related projects:</strong> QMCPy</p>
+</section>
+<section id="four-ways-to-grow-scientific-software" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="four-ways-to-grow-scientific-software">Four Ways to Grow Scientific Software</h3>
+<p><strong>Sou-Cheng T. Choi, Yuhan Ding, Claude Hall, Jr., Fred J. Hickernell, Aleksei G. Sorokin</strong></p>
+<p><em>Position Papers for the ASCR Workshop on the Science of Scientific-Software Development and Use</em>, 2021.</p>
+<div class="project-links">
+<p><a href="https://web.cvent.com/event/1b7d7c3a-e9b4-409d-ae2b-284779cfe72f/websitePage:3ceb5d08-06da-4175-8bbf-1c70dfb7d380" class="btn btn-outline-primary">Historical workshop link</a></p>
+</div>
+<p>Position paper on the development and growth of scientific software.</p>
+<p>Historical workshop reference; the original link has not been independently reverified.</p>
+</section>
+<section id="deterministic-multi-level-algorithms-for-infinite-dimensional-integration-on-mathbbrmathbbn" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="deterministic-multi-level-algorithms-for-infinite-dimensional-integration-on-mathbbrmathbbn">Deterministic multi-level algorithms for infinite-dimensional integration on <span class="math inline">\(\mathbb{R}^{\mathbb{N}}\)</span></h3>
+<p><strong>Ben Niu, Fred J. Hickernell, Thomas Müller-Gronbach, Klaus Ritter</strong></p>
+<p><em>Journal of Complexity</em>, volume 27, issue 3–4, pages 331–351, 2011.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/j.jco.2010.08.001" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S0885064X10000695" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Constructs deterministic multilevel methods for infinite-dimensional integration using rank-1 lattice rules and Niederreiter nets as finite-dimensional building blocks.</p>
+</section>
+<section id="multi-level-monte-carlo-algorithms-for-infinite-dimensional-integration-on-mathbbrmathbbn" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="multi-level-monte-carlo-algorithms-for-infinite-dimensional-integration-on-mathbbrmathbbn">Multi-level Monte Carlo algorithms for infinite-dimensional integration on <span class="math inline">\(\mathbb{R}^{\mathbb{N}}\)</span></h3>
+<p><strong>Fred J. Hickernell, Thomas Müller-Gronbach, Ben Niu, Klaus Ritter</strong></p>
+<p><em>Journal of Complexity</em>, volume 26, issue 3, pages 229–254, 2010.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/j.jco.2010.02.002" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S0885064X10000191" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Analyzes randomized multilevel integration for functions of infinitely many variables, including randomized quasi-Monte Carlo rules based on scrambled Niederreiter sequences.</p>
+</section>
+<section id="control-variates-for-quasi-monte-carlo" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="control-variates-for-quasi-monte-carlo">Control variates for quasi-Monte Carlo</h3>
+<p><strong>Fred J. Hickernell, Christiane Lemieux, Art B. Owen</strong></p>
+<p><em>Statistical Science</em>, volume 20, issue 1, pages 1–18, 2005.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1214/088342304000000468" class="btn btn-primary">DOI</a> <a href="https://projecteuclid.org/journals/statistical-science/volume-20/issue-1/Control-Variates-for-Quasi-Monte-Carlo/10.1214/088342304000000468.full" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Studies control variates tailored to quasi-Monte Carlo integration, including lattice rules, digital nets, and scrambled nets, and explains why Monte Carlo control coefficients need not be optimal for QMC.</p>
+</section>
+<section id="algorithm-823-implementing-scrambled-digital-sequences" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="algorithm-823-implementing-scrambled-digital-sequences">Algorithm 823: Implementing scrambled digital sequences</h3>
+<p><strong>Hee Sun Hong, Fred J. Hickernell</strong></p>
+<p><em>ACM Transactions on Mathematical Software</em>, volume 29, issue 2, pages 95–109, 2003.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1145/779359.779360" class="btn btn-primary">DOI</a></p>
+</div>
+<p>Implements random scrambling of digital nets and sequences while retaining their low-discrepancy properties, including Sobol’, Faure, Niederreiter, and Niederreiter–Xing constructions.</p>
+</section>
+<section id="the-existence-of-good-extensible-rank-1-lattices" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="the-existence-of-good-extensible-rank-1-lattices">The existence of good extensible rank-1 lattices</h3>
+<p><strong>Fred J. Hickernell, Harald Niederreiter</strong></p>
+<p><em>Journal of Complexity</em>, volume 19, issue 3, pages 286–300, 2003.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/S0885-064X(02)00026-2" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S0885064X02000262" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Proves the existence of extensible rank-1 lattice generating vectors with small discrepancy and related figures of merit across increasing sample sizes and dimensions.</p>
+</section>
+<section id="obtaining-on-2epsilon-convergence-for-lattice-quadrature-rules" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="obtaining-on-2epsilon-convergence-for-lattice-quadrature-rules">Obtaining <span class="math inline">\(O(N^{-2+\epsilon})\)</span> Convergence for Lattice Quadrature Rules</h3>
+<p><strong>Fred J. Hickernell</strong></p>
+<p><em>Monte Carlo and Quasi-Monte Carlo Methods 2000</em>, pages 274–289, 2002.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1007/978-3-642-56046-0_18" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-3-642-56046-0_18" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Applies the baker’s transformation to lattice rules to obtain nearly second-order convergence for sufficiently smooth nonperiodic integrands.</p>
+</section>
+<section id="uniform-designs-limit-aliasing" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="uniform-designs-limit-aliasing">Uniform designs limit aliasing</h3>
+<p><strong>Fred J. Hickernell, Min-Qian Liu</strong></p>
+<p><em>Biometrika</em>, volume 89, issue 4, pages 893–904, 2002.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1093/biomet/89.4.893" class="btn btn-primary">DOI</a> <a href="https://academic.oup.com/biomet/article/89/4/893/242412" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Shows how low-discrepancy experimental designs can control aliasing in linear models through discrepancy-based design criteria.</p>
+</section>
+<section id="extensible-lattice-sequences-for-quasi-monte-carlo-quadrature" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="extensible-lattice-sequences-for-quasi-monte-carlo-quadrature">Extensible Lattice Sequences for Quasi-Monte Carlo Quadrature</h3>
+<p><strong>Fred J. Hickernell, Hee Sun Hong, Pierre L’Écuyer, Christiane Lemieux</strong></p>
+<p><em>SIAM Journal on Scientific Computing</em>, volume 22, issue 3, pages 1117–1138, 2000.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1137/S1064827599356638" class="btn btn-primary">DOI</a> <a href="https://epubs.siam.org/doi/10.1137/S1064827599356638" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Develops extensible lattice sequences whose nested initial segments support quasi-Monte Carlo quadrature as the sample size and dimension increase.</p>
+</section>
+<section id="integration-and-approximation-in-arbitrary-dimensions" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="integration-and-approximation-in-arbitrary-dimensions">Integration and approximation in arbitrary dimensions</h3>
+<p><strong>Fred J. Hickernell, Henryk Woźniakowski</strong></p>
+<p><em>Advances in Computational Mathematics</em>, volume 12, issue 1, pages 25–58, 2000.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1023/A:1018948631251" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/article/10.1023/A:1018948631251" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Establishes dimension-independent integration and approximation bounds in weighted function spaces, including nonconstructive existence results for quasi-Monte Carlo rules with nearly first-order worst-case convergence.</p>
+</section>
+<section id="randomized-halton-sequences" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="randomized-halton-sequences">Randomized Halton sequences</h3>
+<p><strong>Xiaoqun Wang, Fred J. Hickernell</strong></p>
+<p><em>Mathematical and Computer Modelling</em>, volume 32, issue 7–8, pages 887–899, 2000.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/S0895-7177(00)00178-3" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S0895717700001783" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Randomizes the starting point of the Halton sequence to combine low-discrepancy sampling with Monte Carlo error estimation.</p>
+</section>
+<section id="goodness-of-fit-statistics-discrepancies-and-robust-designs" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="goodness-of-fit-statistics-discrepancies-and-robust-designs">Goodness-of-fit statistics, discrepancies and robust designs</h3>
+<p><strong>Fred J. Hickernell</strong></p>
+<p><em>Statistics &amp; Probability Letters</em>, volume 44, issue 1, pages 73–78, 1999.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1016/S0167-7152(98)00293-4" class="btn btn-primary">DOI</a> <a href="https://www.sciencedirect.com/science/article/pii/S0167715298002934" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Connects goodness-of-fit statistics and discrepancy measures with robust experimental-design criteria, explaining the role of low-discrepancy designs.</p>
+</section>
+<section id="a-generalized-discrepancy-and-quadrature-error-bound" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="a-generalized-discrepancy-and-quadrature-error-bound">A generalized discrepancy and quadrature error bound</h3>
+<p><strong>Fred J. Hickernell</strong></p>
+<p><em>Mathematics of Computation</em>, volume 67, issue 221, pages 299–322, 1998.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1090/S0025-5718-98-00894-1" class="btn btn-primary">DOI</a></p>
+</div>
+<p>Generalizes the Koksma–Hlawka inequality through a variation–discrepancy error bound for multidimensional integration, including nets and lattice rules.</p>
+</section>
+<section id="lattice-rules-how-well-do-they-measure-up" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="lattice-rules-how-well-do-they-measure-up">Lattice Rules: How Well Do They Measure Up?</h3>
+<p><strong>Fred J. Hickernell</strong></p>
+<p><em>Random and Quasi-Random Point Sets</em>, Lecture Notes in Statistics, volume 138, pages 109–166, 1998.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1007/978-1-4612-1702-2_3" class="btn btn-primary">DOI</a> <a href="https://link.springer.com/chapter/10.1007/978-1-4612-1702-2_3" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Examines lattice rules for quasi-Monte Carlo integration and compares measures of point-set uniformity and integration error.</p>
+</section>
+<section id="quadrature-error-bounds-with-applications-to-lattice-rules" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="quadrature-error-bounds-with-applications-to-lattice-rules">Quadrature Error Bounds with Applications to Lattice Rules</h3>
+<p><strong>Fred J. Hickernell</strong></p>
+<p><em>SIAM Journal on Numerical Analysis</em>, volume 33, issue 5, pages 1995–2016, 1996.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1137/S0036142994261439" class="btn btn-primary">DOI</a> <a href="https://epubs.siam.org/doi/abs/10.1137/S0036142994261439" class="btn btn-outline-primary">Publisher</a></p>
+</div>
+<p>Derives reproducing-kernel quadrature error bounds and worst-case integrands, with applications to lattice rules and analysis-of-variance decompositions.</p>
+</section>
+<section id="the-mean-square-discrepancy-of-randomized-nets" class="level3 publication-item">
+<h3 class="anchored" data-anchor-id="the-mean-square-discrepancy-of-randomized-nets">The mean square discrepancy of randomized nets</h3>
+<p><strong>Fred J. Hickernell</strong></p>
+<p><em>ACM Transactions on Modeling and Computer Simulation</em>, volume 6, issue 4, pages 274–296, 1996.</p>
+<div class="project-links">
+<p><a href="https://doi.org/10.1145/240896.240909" class="btn btn-primary">DOI</a></p>
+</div>
+<p>Derives mean-square L2-discrepancy formulas for randomized nets, quantifying the uniformity of an important family of low-discrepancy point sets.</p>
+</section>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
+<nav id="publication-catalog-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div>
+</section>
+<section id="earlier-references" class="level2">
+<h2 class="anchored" data-anchor-id="earlier-references">Earlier references</h2>
+<p>For additional work from 2011–2019, see the <a href="https://gailgithub.github.io/GAIL_Dev/">GAIL project website</a>, as referenced by the former QMCPy Publications page.</p>
 </section>
 <section id="scope" class="level2">
 <h2 class="anchored" data-anchor-id="scope">Scope</h2>
-<p>The collection may include publications that describe QMCSoftware projects, develop methods implemented in them, or demonstrate relevant applications. All metadata should be checked against the publisher or another authoritative record before publication.</p>
+<p>The collection may include publications that describe QMCSoftware projects, develop methods implemented in them, or demonstrate relevant applications.</p>
 </section>
 <section id="software-citation-resources" class="level2">
 <h2 class="anchored" data-anchor-id="software-citation-resources">Software citation resources</h2>

@@ -1,13 +1,13 @@
-- key: hickirsor_2026_qmc_tutorial
-  cite: HKS26
+- key: "hickirsor_2026_qmc_tutorial"
+  cite: "HKS26"
   short: "Hickernell, Kirk, Sorokin (2026)"
   title: "Quasi-Monte Carlo Methods: What, Why, and How?"
   authors:
-    - Fred J. Hickernell
-    - Nathan Kirk
-    - Aleksei G. Sorokin
+    - "Fred J. Hickernell"
+    - "Nathan Kirk"
+    - "Aleksei G. Sorokin"
   year: 2026
-  type: inproceedings
+  type: "inproceedings"
   venue: "Monte Carlo and Quasi-Monte Carlo 2024"
   series: "Springer Proceedings in Mathematics & Statistics"
   volume: 522
@@ -17,7 +17,1086 @@
   arxiv: "arXiv:2502.03644"
   arxiv_url: "https://arxiv.org/abs/2502.03644"
   publisher_url: "https://link.springer.com/chapter/10.1007/978-3-032-10590-5_1"
-  tags: [qmc, tutorial]
-  related_projects: [QMCPy, QuasiMC.jl]
+  tags: ["qmc", "tutorial"]
+  related_projects: ["QMCPy", "QuasiMC.jl"]
   featured: true
   description: "A tutorial on what quasi-Monte Carlo is, why it can improve upon ordinary Monte Carlo, and how problems can be formulated to benefit from QMC."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Fred J. Hickernell, Nathan Kirk, and Aleksei G. Sorokin. \"Quasi-Monte Carlo Methods: What, Why, and How?.\" arXiv preprint arXiv:2502.03644 (2025)."
+  metadata_sources: ["https://link.springer.com/chapter/10.1007/978-3-032-10590-5_1"]
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "SorEtal26a"
+  cite: "SRLMH26"
+  short: "Sorokin et al. (2026)"
+  title: "Fast multitask Gaussian processes, with application to surrogate modeling of the quark-gluon plasma"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Pieterjan Robbe"
+    - "Yen-Chun Liu"
+    - "Simon Mak"
+    - "Fred J. Hickernell"
+  year: 2026
+  type: "misc"
+  venue: "arXiv preprint arXiv:2603.16014"
+  arxiv: "arXiv:2603.16014"
+  arxiv_url: "https://arxiv.org/abs/2603.16014"
+  tags: ["gaussian-processes", "surrogate-modeling", "qmc"]
+  related_projects: []
+  featured: false
+  description: "Combines low-discrepancy designs with structured kernels to accelerate exact multitask Gaussian process fitting, with applications to surrogate modeling of the quark-gluon plasma."
+  arxiv_version: 2
+  revision_date: "2026-09-07"
+  metadata_note: "Current v2 title and five-author list retained; no formal publication located in the current publisher and author searches."
+  publication_status: "preprint"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://arxiv.org/abs/2603.16014"]
+
+- key: "SorGuoLim26"
+  cite: "SGL26"
+  short: "Sorokin, Guo, Lim (2026)"
+  title: "Optimal Monte Carlo integration on matrix manifolds"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Yihan Guo"
+    - "Lek-Heng Lim"
+  year: 2026
+  type: "misc"
+  venue: "arXiv preprint arXiv:2610.16965"
+  arxiv: "arXiv:2610.16965"
+  arxiv_url: "https://arxiv.org/abs/2610.16965"
+  tags: ["monte-carlo", "matrix-manifolds", "cubature"]
+  related_projects: []
+  featured: false
+  description: "Develops optimally weighted Monte Carlo integration rules on matrix manifolds using computable Sobolev kernels. The weights avoid kernel mean embedding calculations, and numerical experiments include an application to intrinsic volumes."
+  arxiv_version: 1
+  revision_date: "2026-10-12"
+  publication_status: "preprint"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://arxiv.org/abs/2610.16965"]
+
+# Restored from the WordPress Publications page; original citations are retained below.
+- key: "clekirkowenrusch_2025_discrepancy"
+  title: "On the optimization of discrepancy measures"
+  authors:
+    - "François Clément"
+    - "Nathan Kirk"
+    - "Art B. Owen"
+    - "T. Konstantin Rusch"
+  year: 2025
+  type: "misc"
+  venue: "arXiv preprint arXiv:2508.04926"
+  arxiv: "arXiv:2508.04926"
+  tags: ["qmc", "discrepancy", "optimization"]
+  related_projects: []
+  featured: false
+  description: "Studies numerical optimization of discrepancy measures and introduces an average squared discrepancy that treats the vertices of the unit cube symmetrically."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "François Clément, Nathan Kirk, Art B. Owen, and T. Konstantin Rusch. \"On the optimization of discrepancy measures.\" arXiv preprint arXiv:2508.04926 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2508.04926"
+  metadata_sources: ["https://arxiv.org/abs/2508.04926", "https://sites.math.washington.edu/~fclement/CV.pdf"]
+  arxiv_version: 3
+  revision_date: "2026-10-14"
+  publication_status: "preprint"
+  metadata_checked: "2026-10-29"
+
+- key: "chenjiangkirk_2025_combinatorial_discrepancy"
+  title: "High-dimensional quasi-Monte Carlo via combinatorial discrepancy"
+  authors:
+    - "Jiaheng Chen"
+    - "Haotian Jiang"
+    - "Nathan Kirk"
+  year: 2026
+  type: "article"
+  venue: "Journal of Complexity"
+  arxiv: "arXiv:2508.18426"
+  tags: ["qmc", "discrepancy", "high-dimensional-integration"]
+  related_projects: []
+  featured: false
+  description: "Constructs high-dimensional quasi-Monte Carlo point sets using combinatorial discrepancy, with error analysis for weighted function spaces and low effective dimension."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Jiaheng Chen, Haotian Jiang, and Nathan Kirk. \"High-Dimensional Quasi-Monte Carlo via Combinatorial Discrepancy.\" arXiv preprint arXiv:2508.18426 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2508.18426"
+  metadata_sources: ["https://www.sciencedirect.com/science/article/pii/S0885064X26000385", "https://research-portal.st-andrews.ac.uk/en/publications/high-dimensional-quasi-monte-carlo-via-combinatorial-discrepancy/"]
+  volume: 96
+  article_number: "102053"
+  doi: "10.1016/j.jco.2026.102053"
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S0885064X26000385"
+  doi_url: "https://doi.org/10.1016/j.jco.2026.102053"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "vanhuffel_etal_2025_neural_lds"
+  title: "Neural Low-Discrepancy Sequences"
+  authors:
+    - "Michael Etienne Van Huffel"
+    - "Nathan Kirk"
+    - "Makram Chahine"
+    - "Daniela Rus"
+    - "T. Konstantin Rusch"
+  year: 2026
+  type: "inproceedings"
+  venue: "Proceedings of the 43rd International Conference on Machine Learning"
+  arxiv: "arXiv:2510.03745"
+  tags: ["qmc", "low-discrepancy-sequences", "machine-learning"]
+  related_projects: []
+  featured: false
+  description: "Uses neural networks to construct finite low-discrepancy sequences by learning index-to-point maps and reducing discrepancies across sequence prefixes."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Michael Etienne Van Huffel, Nathan Kirk, Makram Chahine, Daniela Rus, and T. Konstantin Rusch. \"Neural Low-Discrepancy Sequences.\" arXiv preprint arXiv:2510.03745 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2510.03745"
+  metadata_sources: ["https://proceedings.mlr.press/v306/van-huffel26a.html"]
+  series: "Proceedings of Machine Learning Research"
+  volume: 306
+  pages: "123416–123433"
+  publisher_url: "https://proceedings.mlr.press/v306/van-huffel26a.html"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "chen_etal_2025_kernel_subset_selection"
+  title: "Optimizing Kernel Discrepancies via Subset Selection"
+  authors:
+    - "Deyao Chen"
+    - "François Clément"
+    - "Carola Doerr"
+    - "Nathan Kirk"
+  year: 2025
+  type: "misc"
+  venue: "arXiv preprint arXiv:2511.02706"
+  arxiv: "arXiv:2511.02706"
+  tags: ["qmc", "kernel-methods", "subset-selection"]
+  related_projects: []
+  featured: false
+  description: "Selects subsets of candidate points to reduce kernel discrepancies, including constructions for uniform and nonuniform target distributions."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Deyao Chen, François Clément, Carola Doerr, and Nathan Kirk. \"Optimizing Kernel Discrepancies via Subset Selection.\" arXiv preprint arXiv:2511.02706 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2511.02706"
+  metadata_sources: ["https://arxiv.org/abs/2511.02706", "https://perso.lip6.fr/Carola.Doerr/publications.html", "https://sites.math.washington.edu/~fclement/CV.pdf"]
+  arxiv_version: 1
+  revision_date: "2025-11-04"
+  publication_status: "preprint"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokin_2025_thesis"
+  title: "Algorithms and Scientific Software for Quasi-Monte Carlo, Fast Gaussian Process Regression, and Scientific Machine Learning"
+  authors:
+    - "Aleksei G. Sorokin"
+  year: 2025
+  type: "phdthesis"
+  venue: "PhD dissertation, Illinois Institute of Technology"
+  arxiv: "arXiv:2511.21915"
+  tags: ["qmc", "gaussian-processes", "scientific-machine-learning"]
+  related_projects: ["QMCPy"]
+  featured: false
+  description: "Brings together algorithms and scientific software for quasi-Monte Carlo integration, fast Gaussian process regression, and scientific machine learning."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Aleksei G. Sorokin, \"Algorithms and Scientific Software for Quasi-Monte Carlo, Fast Gaussian Process Regression, and Scientific Machine Learning.\" PhD diss., Illinois Institute of Technology, 2025."
+  arxiv_url: "https://arxiv.org/abs/2511.21915"
+  metadata_sources: ["https://arxiv.org/html/2511.21915v1", "https://alegresor.github.io/fastgps/#citation"]
+  metadata_note: "PhD in Applied Mathematics, Illinois Institute of Technology, December 2025; no institutional repository permalink located. The arXiv copy provides the thesis text."
+  publication_status: "thesis"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokinrobbehickernell_2025_gp_derivatives"
+  title: "Fast Gaussian process regression for high dimensional functions with derivative information"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Pieterjan Robbe"
+    - "Fred J. Hickernell"
+  year: 2025
+  type: "inproceedings"
+  venue: "Proceedings of the First International Conference on Probabilistic Numerics"
+  series: "Proceedings of Machine Learning Research"
+  volume: 271
+  pages: "35–49"
+  publisher_url: "https://proceedings.mlr.press/v271/sorokin25a.html"
+  tags: ["gaussian-processes", "derivative-information", "probabilistic-numerics"]
+  related_projects: []
+  featured: false
+  description: "Extends fast Gaussian process regression with structured kernels and low-discrepancy designs to incorporate derivative observations."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Aleksei G. Sorokin, Pieterjan Robbe, and Fred J. Hickernell. \"Fast Gaussian process regression for high dimensional functions with derivative information.\" In First International Conference on Probabilistic Numerics, pp. 35-49. PMLR, 2025."
+  metadata_sources: ["https://proceedings.mlr.press/v271/sorokin25a.html"]
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokin_etal_2025_bayesian_mlqmc"
+  title: "Fast Bayesian multilevel quasi-Monte Carlo"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Pieterjan Robbe"
+    - "Gianluca Geraci"
+    - "Michael S. Eldred"
+    - "Fred J. Hickernell"
+  year: 2027
+  type: "article"
+  venue: "Journal of Computational Physics"
+  arxiv: "arXiv:2510.24604"
+  tags: ["qmc", "multilevel-methods", "bayesian-cubature"]
+  related_projects: []
+  featured: false
+  description: "Combines Bayesian cubature with multilevel quasi-Monte Carlo, using Gaussian process posterior uncertainty to guide adaptive sample allocation."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Aleksei G. Sorokin, Pieterjan Robbe, Gianluca Geraci, Michael S. Eldred, and Fred J. Hickernell. \"Fast Bayesian Multilevel Quasi-Monte Carlo.\" arXiv preprint arXiv:2510.24604 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2510.24604"
+  metadata_sources: ["https://api.elsevier.com/content/article/pii/S002199912600865X?httpAccept=text/xml", "https://api.crossref.org/works/10.1016/j.jcp.2026.115517"]
+  volume: 569
+  article_number: "115517"
+  doi: "10.1016/j.jcp.2026.115517"
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S002199912600865X"
+  metadata_note: "Publisher-assigned issue cover date is 2027-01-15. The record was verified on 2026-10-29; Crossref registration date is not treated as the online publication date."
+  doi_url: "https://doi.org/10.1016/j.jcp.2026.115517"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "jain_etal_2025_rqmc_confidence"
+  title: "Empirical Bernstein and betting confidence intervals for randomized quasi-Monte Carlo"
+  authors:
+    - "Aadit Jain"
+    - "Fred J. Hickernell"
+    - "Art B. Owen"
+    - "Aleksei G. Sorokin"
+  year: 2026
+  type: "article"
+  venue: "Information and Inference: A Journal of the IMA"
+  arxiv: "arXiv:2504.18677"
+  tags: ["rqmc", "confidence-intervals", "error-estimation"]
+  related_projects: []
+  featured: false
+  description: "Investigates empirical Bernstein and hedged betting confidence intervals for randomized quasi-Monte Carlo estimates of bounded integrands."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Aadit Jain, Fred J. Hickernell, Art B. Owen, and Aleksei G. Sorokin. \"Empirical Bernstein and betting confidence intervals for randomized quasi-Monte Carlo.\" arXiv preprint arXiv:2504.18677 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2504.18677"
+  metadata_sources: ["https://academic.oup.com/imaiai/article-abstract/15/1/iaag003/8509318", "https://academic.oup.com/imaiai/issue/15/1"]
+  volume: 15
+  issue: 1
+  article_number: "iaag003"
+  doi: "10.1093/imaiai/iaag003"
+  publisher_url: "https://academic.oup.com/imaiai/article-abstract/15/1/iaag003/8509318"
+  doi_url: "https://doi.org/10.1093/imaiai/iaag003"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "emmettiwaniwkirk_2025_image_reconstruction"
+  title: "Enhancing Neural Autoregressive Distribution Estimators for Image Reconstruction"
+  authors:
+    - "Ambrose Emmett-Iwaniw"
+    - "Nathan Kirk"
+  year: 2026
+  type: "incollection"
+  venue: "Monte Carlo and Quasi-Monte Carlo 2024"
+  arxiv: "arXiv:2506.05391"
+  tags: ["qmc", "image-reconstruction", "machine-learning"]
+  related_projects: []
+  featured: false
+  description: "Studies autoregressive image reconstruction from observed pixel subsets, including pixel designs inspired by low-discrepancy sampling."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Ambrose Emmett-Iwaniw and Nathan Kirk. \"Enhancing Neural Autoregressive Distribution Estimators for Image Reconstruction.\" arXiv preprint arXiv:2506.05391 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2506.05391"
+  metadata_sources: ["https://link.springer.com/chapter/10.1007/978-3-032-10590-5_11"]
+  series: "Springer Proceedings in Mathematics & Statistics"
+  volume: 522
+  pages: "259–275"
+  doi: "10.1007/978-3-032-10590-5_11"
+  publisher_url: "https://link.springer.com/chapter/10.1007/978-3-032-10590-5_11"
+  doi_url: "https://doi.org/10.1007/978-3-032-10590-5_11"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "kirk_etal_2025_stein_mpmc"
+  title: "Low Stein Discrepancy via Message-Passing Monte Carlo"
+  authors:
+    - "Nathan Kirk"
+    - "T. Konstantin Rusch"
+    - "Jakob Zech"
+    - "Daniela Rus"
+  year: 2025
+  type: "inproceedings"
+  venue: "ICLR 2025 Workshop on Frontiers in Probabilistic Inference"
+  arxiv: "arXiv:2503.21103"
+  tags: ["sampling", "stein-discrepancy", "machine-learning"]
+  related_projects: []
+  featured: false
+  description: "Extends message-passing Monte Carlo to nonuniform target distributions by learning point sets that reduce kernelized Stein discrepancy."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Nathan Kirk, T. Konstantin Rusch, Jakob Zech, and Daniela Rus. \"Low Stein Discrepancy via Message-Passing Monte Carlo.\" arXiv preprint arXiv:2503.21103 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2503.21103"
+  metadata_sources: ["https://openreview.net/pdf?id=2CEDeSbjO2", "https://arxiv.org/abs/2503.21103"]
+  publisher_url: "https://openreview.net/forum?id=2CEDeSbjO2"
+  metadata_note: "Accepted workshop paper; no formal proceedings volume, page range, or publisher DOI located."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "kirkgvozdanovicpetrovic_2025_algebraic_sampling"
+  title: "Multilevel Sampling in Algebraic Statistics"
+  authors:
+    - "Nathan Kirk"
+    - "Ivan Gvozdanović"
+    - "Sonja Petrović"
+  year: 2026
+  type: "article"
+  venue: "Algebraic Statistics (forthcoming, special issue for Henry Wynn)"
+  arxiv: "arXiv:2505.04062"
+  tags: ["multilevel-methods", "algebraic-statistics", "sampling"]
+  related_projects: []
+  featured: false
+  description: "Adapts multilevel sampling ideas to lattice fibers in algebraic statistics and evaluates sample quality with coverage and discrepancy measures."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Nathan Kirk, Ivan Gvozdanović, and Sonja Petrović. \"Multilevel Sampling in Algebraic Statistics.\" arXiv preprint arXiv:2505.04062 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2505.04062"
+  metadata_sources: ["https://www.sonjapetrovicstats.com/research/publications", "https://arxiv.org/abs/2505.04062"]
+  publication_status: "forthcoming"
+  status_url: "https://www.sonjapetrovicstats.com/research/publications"
+  metadata_note: "Coauthor reports forthcoming in 2026. No published volume, issue, page range, or journal DOI was located; the year and status remain provisional."
+  metadata_checked: "2026-10-29"
+
+- key: "sorokin_2025_qmcpy"
+  title: "QMCPy: A Python package for randomized low-discrepancy sequences, quasi-Monte Carlo, and fast kernel methods"
+  authors:
+    - "Aleksei G. Sorokin"
+  year: 2025
+  type: "misc"
+  venue: "arXiv preprint arXiv:2502.14256"
+  arxiv: "arXiv:2502.14256"
+  tags: ["qmc", "software", "kernel-methods"]
+  related_projects: ["QMCPy"]
+  featured: false
+  description: "Presents QMCPy as a unified Python framework for randomized low-discrepancy sequences, quasi-Monte Carlo integration, and fast kernel computations."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2025"
+  source_citation: "Aleksei G. Sorokin. \"QMCPy: A Python Software for Randomized Low-Discrepancy Sequences, Quasi-Monte Carlo, and Fast Kernel Methods.\" arXiv preprint arXiv:2502.14256 (2025)."
+  arxiv_url: "https://arxiv.org/abs/2502.14256"
+  metadata_sources: ["https://arxiv.org/abs/2502.14256"]
+  arxiv_version: 3
+  revision_date: "2026-06-25"
+  metadata_note: "Single-author article; no matching formal publication located. The six-author JOSS article DOI 10.21105/joss.09705 is a different work and is not substituted."
+  publication_status: "preprint"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokin_etal_2024_subsurface_surrogates"
+  title: "Computationally efficient and error aware surrogate construction for numerical solutions of subsurface flow through porous media"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Aleksandra Pachalieva"
+    - "Daniel O’Malley"
+    - "James M. Hyman"
+    - "Fred J. Hickernell"
+    - "Nicolas W. Hengartner"
+  year: 2024
+  type: "article"
+  venue: "Advances in Water Resources"
+  volume: 193
+  article_number: "104836"
+  doi: "10.1016/j.advwatres.2024.104836"
+  arxiv: "arXiv:2310.13765"
+  tags: ["surrogate-modeling", "gaussian-processes", "uncertainty-quantification"]
+  related_projects: []
+  featured: false
+  description: "Studies error-aware surrogate construction for numerical simulations of subsurface flow through porous media."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2024"
+  source_citation: "Aleksei G. Sorokin, Aleksandra Pachalieva, Daniel O’Malley, James M. Hyman, Fred J. Hickernell, and Nicolas W. Hengartner. \"Computationally efficient and error aware surrogate construction for numerical solutions of subsurface flow through porous media.\" Advances in Water Resources 193 (2024): 104836."
+  arxiv_url: "https://arxiv.org/abs/2310.13765"
+  doi_url: "https://doi.org/10.1016/j.advwatres.2024.104836"
+  metadata_sources: ["https://doi.org/10.1016/j.advwatres.2024.104836"]
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S0309170824002239"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "shao_etal_2024_rdss"
+  title: "Enhancing Semi-Supervised Learning via Representative and Diverse Sample Selection"
+  authors:
+    - "Qian Shao"
+    - "Jiangrui Kang"
+    - "Qiyuan Chen"
+    - "Zepeng Li"
+    - "Hongxia Xu"
+    - "Yiwen Cao"
+    - "Jiajuan Liang"
+    - "Jian Wu"
+  year: 2024
+  type: "inproceedings"
+  venue: "Advances in Neural Information Processing Systems"
+  volume: 37
+  publisher_url: "https://proceedings.neurips.cc/paper_files/paper/2024/hash/c959bb2cb164d37569a17fa67494d69a-Abstract-Conference.html"
+  tags: ["semi-supervised-learning", "subset-selection", "discrepancy"]
+  related_projects: []
+  featured: false
+  description: "Selects representative and diverse samples for labeling in semi-supervised learning with limited annotation budgets."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2024"
+  source_citation: "Qian Shao, Jiangrui Kang, Qiyuan Chen, Zepeng Li, Hongxia Xu, Yiwen Cao, Jiajuan Liang, and Jian Wu. \"Enhancing Semi-Supervised Learning via Representative and Diverse Sample Selection.\" In The Thirty-eighth Annual Conference on Neural Information Processing Systems."
+  metadata_sources: ["https://proceedings.neurips.cc/paper_files/paper/2024/hash/c959bb2cb164d37569a17fa67494d69a-Abstract-Conference.html", "https://www.proceedings.com/content/079/079017-3531open.pdf"]
+  pages: "111199–111226"
+  doi: "10.52202/079017-3531"
+  doi_url: "https://doi.org/10.52202/079017-3531"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokinluwang_2024_radiation_transfer"
+  title: "A neural surrogate solver for radiation transfer"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Xiaoyi Lu"
+    - "Yi Wang"
+  year: 2024
+  type: "inproceedings"
+  venue: "NeurIPS 2024 Workshop on Data-Driven and Differentiable Simulations, Surrogates, and Solvers"
+  publisher_url: "https://openreview.net/forum?id=SHidR8UMKo"
+  tags: ["scientific-machine-learning", "surrogate-modeling", "radiative-transfer"]
+  related_projects: []
+  featured: false
+  description: "Develops neural surrogate solvers for radiative transfer across varying geometries and boundary conditions."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2024"
+  source_citation: "Aleksei G. Sorokin, Xiaoyi Lu and Yi Wang. \"A neural surrogate solver for radiation transfer.\" In The Thirty-eighth Annual Conference on Neural Information Processing Systems Workshop D3S3."
+  metadata_sources: ["https://openreview.net/pdf?id=SHidR8UMKo", "https://alegresor.github.io/presentations/2024_RTEDeepONet_NeurIPSD3S3.pdf"]
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "emenikehickernellkritzer_2024_tractability"
+  title: "A unified treatment of tractability for approximation problems defined on Hilbert spaces"
+  authors:
+    - "Onyekachi Emenike"
+    - "Fred J. Hickernell"
+    - "Peter Kritzer"
+  year: 2024
+  type: "article"
+  venue: "Journal of Complexity"
+  volume: 84
+  article_number: "101856"
+  doi: "10.1016/j.jco.2024.101856"
+  tags: ["tractability", "approximation-theory", "information-based-complexity"]
+  related_projects: []
+  featured: false
+  description: "Unifies tractability analysis for approximation problems defined on Hilbert spaces."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2023"
+  source_citation: "Onyekachi Emenike, Fred J. Hickernell, and Peter Kritzer. \"A unified treatment of tractability for approximation problems defined on Hilbert spaces.\" Journal of Complexity 84 (2024): 101856."
+  doi_url: "https://doi.org/10.1016/j.jco.2024.101856"
+  metadata_sources: ["https://doi.org/10.1016/j.jco.2024.101856"]
+  publisher_url: "https://www.sciencedirect.com/science/article/abs/pii/S0885064X24000335"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokin_etal_2023_sigopt_mulch"
+  title: "SigOpt Mulch: An intelligent system for AutoML of gradient boosted trees"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Xinran Zhu"
+    - "Eric Hans Lee"
+    - "Bolong Cheng"
+  year: 2023
+  type: "article"
+  venue: "Knowledge-Based Systems"
+  volume: 273
+  article_number: "110604"
+  doi: "10.1016/j.knosys.2023.110604"
+  arxiv: "arXiv:2307.04849"
+  tags: ["automated-machine-learning", "optimization", "gradient-boosting"]
+  related_projects: []
+  featured: false
+  description: "Describes an automated machine learning system for tuning gradient-boosted tree models."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2023"
+  source_citation: "Aleksei G. Sorokin, Xinran Zhu, Eric Hans Lee, Bolong Cheng. \"SigOpt Mulch: An intelligent system for AutoML of gradient boosted trees.\" Knowledge-Based Systems 273 (2023): 110604."
+  arxiv_url: "https://arxiv.org/abs/2307.04849"
+  doi_url: "https://doi.org/10.1016/j.knosys.2023.110604"
+  metadata_sources: ["https://doi.org/10.1016/j.knosys.2023.110604"]
+  publisher_url: "https://www.sciencedirect.com/science/article/abs/pii/S0950705123003544"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokinrao_2023_failure_probability"
+  title: "Credible Intervals for Probability of Failure with Gaussian Processes"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Vishwas Rao"
+  year: 2023
+  type: "misc"
+  venue: "arXiv preprint arXiv:2311.07733"
+  arxiv: "arXiv:2311.07733"
+  tags: ["gaussian-processes", "reliability", "uncertainty-quantification"]
+  related_projects: []
+  featured: false
+  description: "Derives credible intervals for failure probabilities using Gaussian process surrogates and develops batch adaptive sampling for expensive simulations."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2023"
+  source_citation: "Aleksei G. Sorokin and Vishwas Rao. \"Credible Intervals for Probability of Failure with Gaussian Processes.\" arXiv preprint arXiv:2311.07733 (2023)."
+  arxiv_url: "https://arxiv.org/abs/2311.07733"
+  metadata_sources: ["https://arxiv.org/abs/2311.07733"]
+  arxiv_version: 2
+  revision_date: "2026-03-13"
+  metadata_note: "No formal publication located; citation year remains the initial preprint year, while the current revision is dated 2026-03-13."
+  publication_status: "preprint"
+  metadata_checked: "2026-10-29"
+
+- key: "choi_etal_2024_qmc_software_challenges"
+  title: "Challenges in Developing Great Quasi-Monte Carlo Software"
+  authors:
+    - "Sou-Cheng T. Choi"
+    - "Yuhan Ding"
+    - "Fred J. Hickernell"
+    - "Jagadeeswaran Rathinavel"
+    - "Aleksei G. Sorokin"
+  year: 2024
+  type: "incollection"
+  venue: "Monte Carlo and Quasi-Monte Carlo Methods (MCQMC 2022)"
+  series: "Springer Proceedings in Mathematics & Statistics"
+  volume: 460
+  pages: "209–222"
+  doi: "10.1007/978-3-031-59762-6_9"
+  arxiv: "arXiv:2311.06162"
+  tags: ["qmc", "software", "scientific-computing"]
+  related_projects: ["QMCPy"]
+  featured: false
+  description: "Discusses criteria and development practices for reliable, extensible quasi-Monte Carlo software, with QMCPy as an example."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2022"
+  source_citation: "Sou-Cheng T. Choi, Yuhan Ding, Fred J. Hickernell, Jagadeeswaran Rathinavel, and Aleksei G. Sorokin. \"Challenges in Developing Great Quasi-Monte Carlo Software.\" International Conference on Monte Carlo and Quasi-Monte Carlo Methods in Scientific Computing. Cham: Springer International Publishing, 2022."
+  arxiv_url: "https://arxiv.org/abs/2311.06162"
+  doi_url: "https://doi.org/10.1007/978-3-031-59762-6_9"
+  metadata_sources: ["https://doi.org/10.1007/978-3-031-59762-6_9"]
+  publisher_url: "https://link.springer.com/chapter/10.1007/978-3-031-59762-6_9"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokinrathinavel_2024_multiple_expectations"
+  title: "On Bounding and Approximating Functions of Multiple Expectations Using Quasi-Monte Carlo"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Jagadeeswaran Rathinavel"
+  year: 2024
+  type: "incollection"
+  venue: "Monte Carlo and Quasi-Monte Carlo Methods (MCQMC 2022)"
+  series: "Springer Proceedings in Mathematics & Statistics"
+  volume: 460
+  pages: "583–599"
+  doi: "10.1007/978-3-031-59762-6_29"
+  arxiv: "arXiv:2311.07555"
+  tags: ["qmc", "adaptive-integration", "error-estimation"]
+  related_projects: ["QMCPy"]
+  featured: false
+  description: "Develops adaptive Monte Carlo and quasi-Monte Carlo algorithms for functions of multiple expectations, with implementations in QMCPy."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2022"
+  source_citation: "Aleksei G. Sorokin and Jagadeeswaran Rathinavel. \"On Bounding and Approximating Functions of Multiple Expectations Using Quasi-Monte Carlo.\" International Conference on Monte Carlo and Quasi-Monte Carlo Methods in Scientific Computing. Cham: Springer International Publishing, 2022."
+  arxiv_url: "https://arxiv.org/abs/2311.07555"
+  doi_url: "https://doi.org/10.1007/978-3-031-59762-6_29"
+  metadata_sources: ["https://doi.org/10.1007/978-3-031-59762-6_29"]
+  publisher_url: "https://link.springer.com/chapter/10.1007/978-3-031-59762-6_29"
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "sorokin_etal_2021_importance_sampling"
+  title: "(Quasi-)Monte Carlo Importance Sampling with QMCPy"
+  authors:
+    - "Aleksei G. Sorokin"
+    - "Fred J. Hickernell"
+    - "Sou-Cheng T. Choi"
+    - "Michael J. McCourt"
+    - "Jagadeeswaran Rathinavel"
+  year: 2021
+  type: "article"
+  venue: "Illinois Tech Undergraduate Research Journal"
+  volume: 1
+  pages: "49–54"
+  publisher_url: "https://urj.library.iit.edu/index.php/urj/article/view/48"
+  tags: ["qmc", "importance-sampling", "software"]
+  related_projects: ["QMCPy"]
+  featured: false
+  description: "Demonstrates Monte Carlo and quasi-Monte Carlo importance sampling using QMCPy."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2021"
+  source_citation: "Aleksei G. Sorokin, Fred J. Hickernell, Sou-Cheng T. Choi, Michael J. McCourt, and Jagadeeswaran Rathinavel. \"(Quasi-) Monte Carlo Importance Sampling with QMCPy.\" Illinois Tech Undergraduate Research Journal 1. Illinois Institute of Technology, 2021."
+  metadata_sources: ["https://urj.library.iit.edu/index.php/urj/issue/view/1", "https://urj.library.iit.edu/index.php/urj/article/download/48/10/"]
+  issue: 1
+  metadata_note: "Cites the Spring 2021 journal issue. The landing page was posted on 2023-02-03 and contains a title typo; the correctly spelled PDF title is used."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+- key: "choi_etal_2021_grow_scientific_software"
+  title: "Four Ways to Grow Scientific Software"
+  authors:
+    - "Sou-Cheng T. Choi"
+    - "Yuhan Ding"
+    - "Claude Hall, Jr."
+    - "Fred J. Hickernell"
+    - "Aleksei G. Sorokin"
+  year: 2021
+  type: "techreport"
+  venue: "Position Papers for the ASCR Workshop on the Science of Scientific-Software Development and Use"
+  publisher_url: "https://web.cvent.com/event/1b7d7c3a-e9b4-409d-ae2b-284779cfe72f/websitePage:3ceb5d08-06da-4175-8bbf-1c70dfb7d380"
+  metadata_note: "Historical workshop citation retained from the WordPress export; a current standalone publication URL has not been independently verified."
+  tags: ["scientific-software", "software-development"]
+  related_projects: []
+  featured: false
+  description: "Position paper on the development and growth of scientific software."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2021"
+  source_citation: "Sou-Cheng T. Choi, Yuhan Ding, Claude Jr Hall, Fred J. Hickernell, and Aleksei G. Sorokin. \"Four Ways to Grow Scientific Software.\" Position Papers for the ASCR Workshop on the Science of Scientific-Software Development and Use. United States, 2021."
+  metadata_sources: ["https://sites.google.com/iit.edu/fred-j-hickernell/people", "https://qmcpy.org/publications/"]
+  publication_status: "historical-report"
+  metadata_checked: "2026-10-29"
+
+- key: "choi_etal_2022_qmc_software"
+  title: "Quasi-Monte Carlo Software"
+  authors:
+    - "Sou-Cheng T. Choi"
+    - "Fred J. Hickernell"
+    - "Jagadeeswaran Rathinavel"
+    - "Michael J. McCourt"
+    - "Aleksei G. Sorokin"
+  year: 2022
+  type: "incollection"
+  venue: "Monte Carlo and Quasi-Monte Carlo Methods (MCQMC 2020)"
+  series: "Springer Proceedings in Mathematics & Statistics"
+  volume: 387
+  pages: "23–47"
+  doi: "10.1007/978-3-030-98319-2_2"
+  arxiv: "arXiv:2102.07833"
+  tags: ["qmc", "software", "numerical-integration"]
+  related_projects: ["QMCPy"]
+  featured: false
+  description: "Surveys quasi-Monte Carlo software and introduces the interacting sampling, transformation, integrand, and stopping components of QMCPy."
+  source_url: "https://qmcpy.org/publications/"
+  source_snapshot: "2026-05-26"
+  source_year_group: "2020"
+  source_citation: "Sou-Cheng T. Choi, Fred J. Hickernell, Jagadeeswaran Rathinavel, Michael J. McCourt, and Aleksei G. Sorokin. \"Quasi-Monte Carlo software.\" International Conference on Monte Carlo and Quasi-Monte Carlo Methods in Scientific Computing. Cham: Springer International Publishing, 2020."
+  arxiv_url: "https://arxiv.org/abs/2102.07833"
+  doi_url: "https://doi.org/10.1007/978-3-030-98319-2_2"
+  metadata_sources: ["https://doi.org/10.1007/978-3-030-98319-2_2"]
+  publisher_url: "https://link.springer.com/chapter/10.1007/978-3-030-98319-2_2"
+  metadata_note: "Publisher lists the third author as Rathinavel Jagadeeswaran; the author’s modern name Jagadeeswaran Rathinavel is retained consistently with the original catalog."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+
+# Pre-2020 QMC / low-discrepancy papers selected from Fred Hickernell’s Google Scholar profile.
+- key: "hickernell_1998_generalized_discrepancy"
+  title: "A generalized discrepancy and quadrature error bound"
+  authors:
+    - "Fred J. Hickernell"
+  year: 1998
+  type: "article"
+  venue: "Mathematics of Computation"
+  volume: 67
+  issue: 221
+  pages: "299–322"
+  doi: "10.1090/S0025-5718-98-00894-1"
+  doi_url: "https://doi.org/10.1090/S0025-5718-98-00894-1"
+  related_projects: []
+  featured: false
+  description: "Generalizes the Koksma–Hlawka inequality through a variation–discrepancy error bound for multidimensional integration, including nets and lattice rules."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1090/S0025-5718-98-00894-1"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:u5HHmVD_uO8C"
+  scholar_citations: 1058
+  scholar_checked: "2026-10-29"
+  scholar_year: 1998
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "hickernell_1998_lattice_rules"
+  title: "Lattice Rules: How Well Do They Measure Up?"
+  authors:
+    - "Fred J. Hickernell"
+  year: 1998
+  type: "incollection"
+  venue: "Random and Quasi-Random Point Sets"
+  series: "Lecture Notes in Statistics"
+  volume: 138
+  pages: "109–166"
+  editors: ["Peter Hellekalek", "Gerhard Larcher"]
+  publisher_url: "https://link.springer.com/chapter/10.1007/978-1-4612-1702-2_3"
+  doi: "10.1007/978-1-4612-1702-2_3"
+  doi_url: "https://doi.org/10.1007/978-1-4612-1702-2_3"
+  related_projects: []
+  featured: false
+  description: "Examines lattice rules for quasi-Monte Carlo integration and compares measures of point-set uniformity and integration error."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1007/978-1-4612-1702-2_3"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:u-x6o8ySG0sC"
+  scholar_citations: 425
+  scholar_checked: "2026-10-29"
+  scholar_year: 1998
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "wanghickernell_2000_randomized_halton"
+  title: "Randomized Halton sequences"
+  authors:
+    - "Xiaoqun Wang"
+    - "Fred J. Hickernell"
+  year: 2000
+  type: "article"
+  venue: "Mathematical and Computer Modelling"
+  volume: 32
+  issue: "7–8"
+  pages: "887–899"
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S0895717700001783"
+  doi: "10.1016/S0895-7177(00)00178-3"
+  doi_url: "https://doi.org/10.1016/S0895-7177(00)00178-3"
+  related_projects: []
+  featured: false
+  description: "Randomizes the starting point of the Halton sequence to combine low-discrepancy sampling with Monte Carlo error estimation."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1016/S0895-7177(00)00178-3"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:d1gkVwhDpl0C"
+  scholar_citations: 306
+  scholar_checked: "2026-10-29"
+  scholar_year: 2000
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "honghickernell_2003_scrambled_digital_sequences"
+  title: "Algorithm 823: Implementing scrambled digital sequences"
+  authors:
+    - "Hee Sun Hong"
+    - "Fred J. Hickernell"
+  year: 2003
+  type: "article"
+  venue: "ACM Transactions on Mathematical Software"
+  volume: 29
+  issue: 2
+  pages: "95–109"
+  doi: "10.1145/779359.779360"
+  doi_url: "https://doi.org/10.1145/779359.779360"
+  related_projects: []
+  featured: false
+  description: "Implements random scrambling of digital nets and sequences while retaining their low-discrepancy properties, including Sobol’, Faure, Niederreiter, and Niederreiter–Xing constructions."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1145/779359.779360"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:UeHWp8X0CEIC"
+  scholar_citations: 192
+  scholar_checked: "2026-10-29"
+  scholar_year: 2003
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "hickernellliu_2002_uniform_designs"
+  title: "Uniform designs limit aliasing"
+  authors:
+    - "Fred J. Hickernell"
+    - "Min-Qian Liu"
+  year: 2002
+  type: "article"
+  venue: "Biometrika"
+  volume: 89
+  issue: 4
+  pages: "893–904"
+  publisher_url: "https://academic.oup.com/biomet/article/89/4/893/242412"
+  doi: "10.1093/biomet/89.4.893"
+  doi_url: "https://doi.org/10.1093/biomet/89.4.893"
+  related_projects: []
+  featured: false
+  description: "Shows how low-discrepancy experimental designs can control aliasing in linear models through discrepancy-based design criteria."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1093/biomet/89.4.893"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:2osOgNQ5qMEC"
+  scholar_citations: 181
+  scholar_checked: "2026-10-29"
+  scholar_year: 2002
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "hickernell_etal_2000_extensible_lattice_sequences"
+  title: "Extensible Lattice Sequences for Quasi-Monte Carlo Quadrature"
+  authors:
+    - "Fred J. Hickernell"
+    - "Hee Sun Hong"
+    - "Pierre L’Écuyer"
+    - "Christiane Lemieux"
+  year: 2000
+  type: "article"
+  venue: "SIAM Journal on Scientific Computing"
+  volume: 22
+  issue: 3
+  pages: "1117–1138"
+  publisher_url: "https://epubs.siam.org/doi/10.1137/S1064827599356638"
+  doi: "10.1137/S1064827599356638"
+  doi_url: "https://doi.org/10.1137/S1064827599356638"
+  related_projects: []
+  featured: false
+  description: "Develops extensible lattice sequences whose nested initial segments support quasi-Monte Carlo quadrature as the sample size and dimension increase."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1137/S1064827599356638"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:qjMakFHDy7sC"
+  scholar_citations: 167
+  scholar_checked: "2026-10-29"
+  scholar_year: 2001
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+  metadata_note: "Google Scholar and author publication lists use 2001; current SIAM issue metadata and copyright use 2000. Both meet the pre-2020 criterion. Resolve year convention before importing."
+
+- key: "hickernellwozniakowski_2000_arbitrary_dimensions"
+  title: "Integration and approximation in arbitrary dimensions"
+  authors:
+    - "Fred J. Hickernell"
+    - "Henryk Woźniakowski"
+  year: 2000
+  type: "article"
+  venue: "Advances in Computational Mathematics"
+  volume: 12
+  issue: 1
+  pages: "25–58"
+  publisher_url: "https://link.springer.com/article/10.1023/A:1018948631251"
+  doi: "10.1023/A:1018948631251"
+  doi_url: "https://doi.org/10.1023/A:1018948631251"
+  related_projects: []
+  featured: false
+  description: "Establishes dimension-independent integration and approximation bounds in weighted function spaces, including nonconstructive existence results for quasi-Monte Carlo rules with nearly first-order worst-case convergence."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1023/A:1018948631251", "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S1446181112000077"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:9yKSN-GCB0IC"
+  scholar_citations: 156
+  scholar_checked: "2026-10-29"
+  scholar_year: 2000
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+  scope_evidence: "Kuo, Schwab and Sloan (2012), section 1.1 pp.4–5, explicitly attribute improved dimension-independent QMC-point existence bounds to this paper, reference [21]."
+
+- key: "hickernell_1999_goodness_of_fit"
+  title: "Goodness-of-fit statistics, discrepancies and robust designs"
+  authors:
+    - "Fred J. Hickernell"
+  year: 1999
+  type: "article"
+  venue: "Statistics & Probability Letters"
+  volume: 44
+  issue: 1
+  pages: "73–78"
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S0167715298002934"
+  doi: "10.1016/S0167-7152(98)00293-4"
+  doi_url: "https://doi.org/10.1016/S0167-7152(98)00293-4"
+  related_projects: []
+  featured: false
+  description: "Connects goodness-of-fit statistics and discrepancy measures with robust experimental-design criteria, explaining the role of low-discrepancy designs."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1016/S0167-7152(98)00293-4"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:IjCSPb-OGe4C"
+  scholar_citations: 131
+  scholar_checked: "2026-10-29"
+  scholar_year: 1999
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "hickernellniederreiter_2003_extensible_rank1"
+  title: "The existence of good extensible rank-1 lattices"
+  authors:
+    - "Fred J. Hickernell"
+    - "Harald Niederreiter"
+  year: 2003
+  type: "article"
+  venue: "Journal of Complexity"
+  volume: 19
+  issue: 3
+  pages: "286–300"
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S0885064X02000262"
+  doi: "10.1016/S0885-064X(02)00026-2"
+  doi_url: "https://doi.org/10.1016/S0885-064X(02)00026-2"
+  related_projects: []
+  featured: false
+  description: "Proves the existence of extensible rank-1 lattice generating vectors with small discrepancy and related figures of merit across increasing sample sizes and dimensions."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1016/S0885-064X(02)00026-2"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:Y0pCki6q_DkC"
+  scholar_citations: 124
+  scholar_checked: "2026-10-29"
+  scholar_year: 2003
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "hickernell_2002_lattice_convergence"
+  title: "Obtaining $O(N^{-2+\\epsilon})$ Convergence for Lattice Quadrature Rules"
+  authors:
+    - "Fred J. Hickernell"
+  year: 2002
+  type: "incollection"
+  venue: "Monte Carlo and Quasi-Monte Carlo Methods 2000"
+  pages: "274–289"
+  editors: ["Kai-Tai Fang", "Harald Niederreiter", "Fred J. Hickernell"]
+  publisher_url: "https://link.springer.com/chapter/10.1007/978-3-642-56046-0_18"
+  doi: "10.1007/978-3-642-56046-0_18"
+  doi_url: "https://doi.org/10.1007/978-3-642-56046-0_18"
+  related_projects: []
+  featured: false
+  description: "Applies the baker’s transformation to lattice rules to obtain nearly second-order convergence for sufficiently smooth nonperiodic integrands."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1007/978-3-642-56046-0_18"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:_FxGoFyzp5QC"
+  scholar_citations: 121
+  scholar_checked: "2026-10-29"
+  scholar_year: 2002
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "hickernell_1996_quadrature_error_bounds"
+  title: "Quadrature Error Bounds with Applications to Lattice Rules"
+  authors:
+    - "Fred J. Hickernell"
+  year: 1996
+  type: "article"
+  venue: "SIAM Journal on Numerical Analysis"
+  volume: 33
+  issue: 5
+  pages: "1995–2016"
+  publisher_url: "https://epubs.siam.org/doi/abs/10.1137/S0036142994261439"
+  doi: "10.1137/S0036142994261439"
+  doi_url: "https://doi.org/10.1137/S0036142994261439"
+  related_projects: []
+  featured: false
+  description: "Derives reproducing-kernel quadrature error bounds and worst-case integrands, with applications to lattice rules and analysis-of-variance decompositions."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1137/S0036142994261439"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:zYLM7Y9cAGgC"
+  scholar_citations: 121
+  scholar_checked: "2026-10-29"
+  scholar_year: 1996
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+  metadata_note: "1997 corrected printing of sections 3–6: SIAM J. Numer. Anal.34(2),853–866; DOI10.1137/S0036142997974001. Not counted as another paper."
+
+- key: "hickernelllemieuxowen_2005_control_variates"
+  title: "Control variates for quasi-Monte Carlo"
+  authors:
+    - "Fred J. Hickernell"
+    - "Christiane Lemieux"
+    - "Art B. Owen"
+  year: 2005
+  type: "article"
+  venue: "Statistical Science"
+  volume: 20
+  issue: 1
+  pages: "1–18"
+  publisher_url: "https://projecteuclid.org/journals/statistical-science/volume-20/issue-1/Control-Variates-for-Quasi-Monte-Carlo/10.1214/088342304000000468.full"
+  doi: "10.1214/088342304000000468"
+  doi_url: "https://doi.org/10.1214/088342304000000468"
+  related_projects: []
+  featured: false
+  description: "Studies control variates tailored to quasi-Monte Carlo integration, including lattice rules, digital nets, and scrambled nets, and explains why Monte Carlo control coefficients need not be optimal for QMC."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1214/088342304000000468"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:MXK_kJrjxJIC"
+  scholar_citations: 108
+  scholar_checked: "2026-10-29"
+  scholar_year: 2005
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+  metadata_note: "Article-only pages1–18; Scholar pages1–31 includes comments and rejoinder. Citation count is the combined count displayed by Scholar; not split into additional works."
+
+- key: "niu_etal_2011_deterministic_multilevel"
+  title: "Deterministic multi-level algorithms for infinite-dimensional integration on $\\mathbb{R}^{\\mathbb{N}}$"
+  authors:
+    - "Ben Niu"
+    - "Fred J. Hickernell"
+    - "Thomas Müller-Gronbach"
+    - "Klaus Ritter"
+  year: 2011
+  type: "article"
+  venue: "Journal of Complexity"
+  volume: 27
+  issue: "3–4"
+  pages: "331–351"
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S0885064X10000695"
+  doi: "10.1016/j.jco.2010.08.001"
+  doi_url: "https://doi.org/10.1016/j.jco.2010.08.001"
+  related_projects: []
+  featured: false
+  description: "Constructs deterministic multilevel methods for infinite-dimensional integration using rank-1 lattice rules and Niederreiter nets as finite-dimensional building blocks."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1016/j.jco.2010.08.001"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:YsMSGLbcyi4C"
+  scholar_citations: 105
+  scholar_checked: "2026-10-29"
+  scholar_year: 2011
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+
+- key: "hickernell_etal_2010_randomized_multilevel"
+  title: "Multi-level Monte Carlo algorithms for infinite-dimensional integration on $\\mathbb{R}^{\\mathbb{N}}$"
+  authors:
+    - "Fred J. Hickernell"
+    - "Thomas Müller-Gronbach"
+    - "Ben Niu"
+    - "Klaus Ritter"
+  year: 2010
+  type: "article"
+  venue: "Journal of Complexity"
+  volume: 26
+  issue: 3
+  pages: "229–254"
+  publisher_url: "https://www.sciencedirect.com/science/article/pii/S0885064X10000191"
+  doi: "10.1016/j.jco.2010.02.002"
+  doi_url: "https://doi.org/10.1016/j.jco.2010.02.002"
+  related_projects: []
+  featured: false
+  description: "Analyzes randomized multilevel integration for functions of infinitely many variables, including randomized quasi-Monte Carlo rules based on scrambled Niederreiter sequences."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1016/j.jco.2010.02.002", "https://web.maths.unsw.edu.au/~josefdick/MCQMC_Proceedings/MCQMC_Proceedings_2010_Preprints/Baldeaux-final.pdf", "https://doi.org/10.1007/978-3-642-27440-4_11"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:LkGwnXOMwfcC"
+  scholar_citations: 105
+  scholar_checked: "2026-10-29"
+  scholar_year: 2010
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
+  scope_evidence: "Baldeaux (2012), introduction and reference [4], explicitly identifies this 2010 work as using scrambled digital nets / scrambled Niederreiter sequences."
+
+- key: "hickernell_1996_mean_square_discrepancy"
+  title: "The mean square discrepancy of randomized nets"
+  authors:
+    - "Fred J. Hickernell"
+  year: 1996
+  type: "article"
+  venue: "ACM Transactions on Modeling and Computer Simulation"
+  volume: 6
+  issue: 4
+  pages: "274–296"
+  doi: "10.1145/240896.240909"
+  doi_url: "https://doi.org/10.1145/240896.240909"
+  related_projects: []
+  featured: false
+  description: "Derives mean-square L2-discrepancy formulas for randomized nets, quantifying the uniformity of an important family of low-discrepancy point sets."
+  publication_status: "published"
+  metadata_checked: "2026-10-29"
+  metadata_sources: ["https://doi.org/10.1145/240896.240909"]
+  scholar_url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dJbMJG8AAAAJ&citation_for_view=dJbMJG8AAAAJ:Tyk-4Ss8FVUC"
+  scholar_citations: 97
+  scholar_checked: "2026-10-29"
+  scholar_year: 1996
+  selection_rule: "Published before 2020; more than 90 Google Scholar citations; directly related to quasi-Monte Carlo or low-discrepancy sampling/design."
