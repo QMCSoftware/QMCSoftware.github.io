@@ -1,7 +1,7 @@
 ---
 title: "Mixed Distributions in QMCPy: Sampling and Equal-Cost Integration"
 author: "Laasya Priya Vemuri"
-date: 2026-10-16
+date: 2026-11-03
 date-format: "MMMM D, YYYY"
 description: "Introducing QMCPy's Mixture for populations with distinct behaviors and comparing hierarchical sampling with equal-cost component integration."
 categories:
@@ -110,9 +110,7 @@ The methods use the same Gaussian means and covariances. Comparisons are paired 
 
 Gaussian transforms use QMCPy's default PCA covariance factorization. These public-API calculations put $V$ first; the older exploratory demo used another coordinate ordering and covariance factors. Their finite-budget errors can differ even though the target distributions agree.
 
-The numerical source is `demos/mixed_distributions_blog_analysis.ipynb`.
-
-<!-- TODO before publication: add a stable public link to demos/mixed_distributions_blog_analysis.ipynb once it is available in the QMCPy repository. Do not substitute the exploratory demo's outputs. -->
+The numerical experiments, including the evaluation budgets, component parameters, randomization settings, and code used to generate the figures, are documented in the [reproducible analysis notebook](https://github.com/QMCSoftware/QMCSoftware/blob/develop/demos/mixed_distributions_blog_analysis.ipynb) in the QMCPy repository.
 
 ## One-dimensional results
 
