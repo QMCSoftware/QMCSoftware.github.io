@@ -8,6 +8,7 @@
   {
     "listing": "/blogs/index.html",
     "items": [
+      "/blogs/mixed-distributions-in-qmcpy/index.html",
       "/blogs/brownian-bridge/index.html",
       "/blogs/why-add-q-to-mc/index.html",
       "/blogs/iteration-log/index.html",
